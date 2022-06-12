@@ -34,14 +34,14 @@ export class OSEventListener {
      * @returns {string} The event name
      */
     get name() : string {
-        return this.#name;
+    	return this.#name;
     }
 
     /**
      * @returns {Logger} The internal logger
      */
     protected get logger(): Logger {
-        return this.#logger;
+    	return this.#logger;
     }
 
     /**
@@ -49,9 +49,9 @@ export class OSEventListener {
      * @param {EventListenerOptions} [options=DefaultEventListenerOptions] settings
      */
     constructor(name: string, options: EventListenerOptions = DefaultEventListenerOptions){
-        options = OptionsMapper.map(options, DefaultEventListenerOptions);
-        this.#logger = options.logger; 
-        this.#name = name;
+    	options = OptionsMapper.map(options, DefaultEventListenerOptions);
+    	this.#logger = options.logger; 
+    	this.#name = name;
     }
 
     /**
@@ -60,19 +60,19 @@ export class OSEventListener {
      * @returns {boolean} function successfully subscribed
      */
     subscribe(fn: ListenerFunction, options: SubscribeOptions = DefaultSubscribeOptions): boolean {
-        options = OptionsMapper.map(options, DefaultSubscribeOptions);
-        if (!this.#listeners.includes(fn) || options.allowMultipleSubscribeSameFunction){
-            this.#listeners.push(fn);
-            return true;
-        } else {
-            const errorMessage = 'An attempt to subscribe multiple times the same function occurred';
-            if (options.shouldThrowErrors){
-                throw new Error(errorMessage);                
-            } else {
-                this.#logger.warn(errorMessage);
-                return false;
-            }
-        }
+    	options = OptionsMapper.map(options, DefaultSubscribeOptions);
+    	if (!this.#listeners.includes(fn) || options.allowMultipleSubscribeSameFunction){
+    		this.#listeners.push(fn);
+    		return true;
+    	} else {
+    		const errorMessage = 'An attempt to subscribe multiple times the same function occurred';
+    		if (options.shouldThrowErrors){
+    			throw new Error(errorMessage);                
+    		} else {
+    			this.#logger.warn(errorMessage);
+    			return false;
+    		}
+    	}
     }
     
     /**
@@ -82,21 +82,21 @@ export class OSEventListener {
      * @param {UnsubscribeOptions} options settings
      */
     #removeFunctionFromKeyMap(fn: ListenerFunction, options: UnsubscribeOptions){
-        if (typeof (fn._keyedOsEvent) === 'string'){
-            const possibleFns = this.#keyMappedListeners.get(fn._keyedOsEvent);
-            if (possibleFns){
-                let i = -1;
-                do {
-                    i = possibleFns.indexOf(fn);
-                    if (i!== -1){
-                        possibleFns.splice(i, 1);
-                    }   
-                    if (options.removeOnlyFirstOccurrence){
-                        break;
-                    }                             
-                } while (i !== -1);   
-            }             
-        }
+    	if (typeof (fn._keyedOsEvent) === 'string'){
+    		const possibleFns = this.#keyMappedListeners.get(fn._keyedOsEvent);
+    		if (possibleFns){
+    			let i = -1;
+    			do {
+    				i = possibleFns.indexOf(fn);
+    				if (i!== -1){
+    					possibleFns.splice(i, 1);
+    				}   
+    				if (options.removeOnlyFirstOccurrence){
+    					break;
+    				}                             
+    			} while (i !== -1);   
+    		}             
+    	}
     }
 
 
@@ -106,38 +106,38 @@ export class OSEventListener {
      * @returns {boolean} function successfully unsubscribed
      */
     unsubscribe(fn: ListenerFunction, options: UnsubscribeOptions = DefaultUnsubscribeOptions) :boolean {
-        options = OptionsMapper.map(options, DefaultUnsubscribeOptions);
-        let i = -1;
-        let found = false;
-        do {
-            i = this.#listeners.indexOf(fn);
-            if (i !== -1){
-                this.#listeners.splice(i, 1);
-                found = true;
-            }
-            if (options.removeOnlyFirstOccurrence){
-                break;
-            }
-        } while (i !== -1);
-        if (found){
-            this.#removeFunctionFromKeyMap(fn, options);
-            return true;
-        } else {
-            const errorMessage = 'An attempt to unsubscribe a non sunscribed function occurred';
-            if (options.shouldThrowErrors){
-                throw new Error(errorMessage);                
-            } else {
-                this.#logger.warn(errorMessage);
-                return false;
-            }
-        }        
+    	options = OptionsMapper.map(options, DefaultUnsubscribeOptions);
+    	let i = -1;
+    	let found = false;
+    	do {
+    		i = this.#listeners.indexOf(fn);
+    		if (i !== -1){
+    			this.#listeners.splice(i, 1);
+    			found = true;
+    		}
+    		if (options.removeOnlyFirstOccurrence){
+    			break;
+    		}
+    	} while (i !== -1);
+    	if (found){
+    		this.#removeFunctionFromKeyMap(fn, options);
+    		return true;
+    	} else {
+    		const errorMessage = 'An attempt to unsubscribe a non sunscribed function occurred';
+    		if (options.shouldThrowErrors){
+    			throw new Error(errorMessage);                
+    		} else {
+    			this.#logger.warn(errorMessage);
+    			return false;
+    		}
+    	}        
     }
 
     /**
      * Resets the first dispatch status
      */
     resetFirstDispatch(){
-        this.#firstDispatchOccurred = false;
+    	this.#firstDispatchOccurred = false;
     }
 
     /**
@@ -148,18 +148,18 @@ export class OSEventListener {
      * @param {DispatchOptions} [options=DefaultDispatchOptions] settings
      */
     dispatch(sender: unknown, data: unknown, options : DispatchOptions = DefaultDispatchOptions){
-        options = OptionsMapper.map(options, DefaultDispatchOptions);
-        if (options.storeData){
-            this.#latestData = data;
-        }
-        this.#firstDispatchOccurred = true;
-        for (const f of this.#listeners){
-            try {
-                f(sender, data);
-            } catch (ex){
-                this.#logger.error(ex);
-            }
-        }
+    	options = OptionsMapper.map(options, DefaultDispatchOptions);
+    	if (options.storeData){
+    		this.#latestData = data;
+    	}
+    	this.#firstDispatchOccurred = true;
+    	for (const f of this.#listeners){
+    		try {
+    			f(sender, data);
+    		} catch (ex){
+    			this.#logger.error(ex);
+    		}
+    	}
     }
 
     /**
@@ -167,33 +167,33 @@ export class OSEventListener {
      * @returns {Promise<unknown>} payload data
      */
     waitUntilFirstDispatchAsync(options: WaitUntilFirstDispatchOptions = DefaultWaitUntilFirstDispatchOptions) : Promise<unknown> {        
-        const myself = this;
-        options = OptionsMapper.map(options, DefaultWaitUntilFirstDispatchOptions);
-        if (options.resetFirstDispatchBefore){
-            this.resetFirstDispatch();
-        }
-        if (this.#firstDispatchOccurred){
-            if (options.resetFirstDispatchAfter){
-                this.resetFirstDispatch();
-            }
-            return Promise.resolve(this.#latestData);
-        } else {
-            let listener: ListenerFunction;
+    	const myself = this;
+    	options = OptionsMapper.map(options, DefaultWaitUntilFirstDispatchOptions);
+    	if (options.resetFirstDispatchBefore){
+    		this.resetFirstDispatch();
+    	}
+    	if (this.#firstDispatchOccurred){
+    		if (options.resetFirstDispatchAfter){
+    			this.resetFirstDispatch();
+    		}
+    		return Promise.resolve(this.#latestData);
+    	} else {
+    		let listener: ListenerFunction;
             
-            const promise = new Promise<unknown>((resolve, reject) => {
-                listener = (sender, data) => {
-                    myself.unsubscribe(listener);
-                    if (options.resetFirstDispatchAfter){
-                        myself.resetFirstDispatch();
-                    }
-                    resolve(data);
-                };
-                if (!myself.subscribe(listener)){
-                    reject();
-                }                                
-            });
-            return promise;
-        }
+    		const promise = new Promise<unknown>((resolve, reject) => {
+    			listener = (sender, data) => {
+    				myself.unsubscribe(listener);
+    				if (options.resetFirstDispatchAfter){
+    					myself.resetFirstDispatch();
+    				}
+    				resolve(data);
+    			};
+    			if (!myself.subscribe(listener)){
+    				reject();
+    			}                                
+    		});
+    		return promise;
+    	}
     }
 
     /**
@@ -203,22 +203,22 @@ export class OSEventListener {
      * @returns {boolean} if subscribed successfully
      */
     subscribeWithKey(fn: ListenerFunction, key: string, options: SubscribeWithKeyOptions = DefaultSubscribeWithKeyOptions) : boolean{
-        options = OptionsMapper.map(options, DefaultSubscribeWithKeyOptions);
-        const mappedListeners = this.#keyMappedListeners.get(key) || [];
-        if (mappedListeners.length === 0 || options.allowMultipleListernersPerKey){
-            mappedListeners.push(fn);
-        } else {
-            const errorMessage = 'An attempt to add a listener with same key occurred';
-            if (options.shouldThrowErrors){
-                throw Error(errorMessage);
-            } else {
-                this.#logger.error(errorMessage);
-                return false;
-            }
-        }
+    	options = OptionsMapper.map(options, DefaultSubscribeWithKeyOptions);
+    	const mappedListeners = this.#keyMappedListeners.get(key) || [];
+    	if (mappedListeners.length === 0 || options.allowMultipleListernersPerKey){
+    		mappedListeners.push(fn);
+    	} else {
+    		const errorMessage = 'An attempt to add a listener with same key occurred';
+    		if (options.shouldThrowErrors){
+    			throw Error(errorMessage);
+    		} else {
+    			this.#logger.error(errorMessage);
+    			return false;
+    		}
+    	}
 
-        this.#keyMappedListeners.set(key, mappedListeners);
-        return this.subscribe(fn);
+    	this.#keyMappedListeners.set(key, mappedListeners);
+    	return this.subscribe(fn);
     }
 
     /**
@@ -227,23 +227,23 @@ export class OSEventListener {
      * @returns {boolean} if unsubscribed successfully
      */
     unsubscribeWithKey(key: string, options: UnsubscribeWithKeyOptions = DefaultUnsubscribeWithKeyOptions): boolean{
-        const mappedListeners = this.#keyMappedListeners.get(key) || [];
-        let found = false;
-        for (const fn of mappedListeners){            
-            this.unsubscribe(fn, options);
-            found = true;            
-            if (options.removeOnlyFirstKeyedListener){
-                break;   
-            }
-        }     
-        if (!found){
-            const errorMessage = 'An attempt to unsubscribe a non mapped listener occurred';
-            if (options.shouldThrowErrors){
-                throw Error(errorMessage);
-            } else {
-                this.#logger.warn(errorMessage);
-            }
-        }   
-        return found;
+    	const mappedListeners = this.#keyMappedListeners.get(key) || [];
+    	let found = false;
+    	for (const fn of mappedListeners){            
+    		this.unsubscribe(fn, options);
+    		found = true;            
+    		if (options.removeOnlyFirstKeyedListener){
+    			break;   
+    		}
+    	}     
+    	if (!found){
+    		const errorMessage = 'An attempt to unsubscribe a non mapped listener occurred';
+    		if (options.shouldThrowErrors){
+    			throw Error(errorMessage);
+    		} else {
+    			this.#logger.warn(errorMessage);
+    		}
+    	}   
+    	return found;
     }    
 } 

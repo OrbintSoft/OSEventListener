@@ -1,6 +1,6 @@
 import { SubscribeOptions } from './SubscribeOptions';
 
 export const DefaultSubscribeOptions : SubscribeOptions = {
-    shouldThrowErrors: false,
-    allowMultipleSubscribeSameFunction: false
+	shouldThrowErrors: false,
+	allowMultipleSubscribeSameFunction: false
 };

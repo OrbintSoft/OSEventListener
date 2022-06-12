@@ -24,14 +24,32 @@
         }],
         "@typescript-eslint/no-inferrable-types": "warn",
         "@typescript-eslint/no-empty-function": ["off"],
-        "require-jsdoc": ["error", {
+        "jsdoc/require-jsdoc": ["error", {
+            "publicOnly": true,
             "require": {
-                "FunctionDeclaration": true,
-                "MethodDefinition": true,
-                "ClassDeclaration": true,
                 "ArrowFunctionExpression": true,
-                "FunctionExpression": true
-            }
+                "ClassDeclaration": true,
+                "ClassExpression": true,
+                "FunctionDeclaration": true,
+                "FunctionExpression": true,
+                "MethodDefinition": true
+            },
+            "contexts": [
+                "ArrowFunctionExpression",
+                "FunctionDeclaration",
+                "FunctionExpression",
+                "MethodDefinition",
+                "Property",
+                "TSDeclareFunction",
+                "TSEnumDeclaration",
+                "TSInterfaceDeclaration",
+                "TSMethodSignature",
+                "TSPropertySignature",
+                "TSTypeAliasDeclaration",
+                "VariableDeclaration"
+            ],
+            "checkGetters": true,
+            "enableFixer": false
         }]        
     },
     "env": {
