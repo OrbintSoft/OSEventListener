@@ -1,4 +1,4 @@
-import { WaitUntilFirstDispatchOptions } from "./WaitUntilFirstDispatchOptions";
+import { WaitUntilFirstDispatchOptions } from './WaitUntilFirstDispatchOptions';
 
 export const DefaultWaitUntilFirstDispatchOptions: WaitUntilFirstDispatchOptions = {
     resetFirstDispatchBefore: false,

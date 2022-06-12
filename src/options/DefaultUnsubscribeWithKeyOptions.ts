@@ -1,4 +1,4 @@
-import { UnsubscribeWithKeyOptions } from "./UnsubscribeWithKeyOptions";
+import { UnsubscribeWithKeyOptions } from './UnsubscribeWithKeyOptions';
 
 export const DefaultUnsubscribeWithKeyOptions: UnsubscribeWithKeyOptions = {
     removeOnlyFirstKeyedListener: false,

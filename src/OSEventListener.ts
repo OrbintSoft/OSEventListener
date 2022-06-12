@@ -1,20 +1,20 @@
-import { DefaultSubscribeOptions } from "./options/DefaultSubscribeOptions";
-import { SubscribeOptions } from "./options/SubscribeOptions";
-import { ListenerFunction } from "./ListenerFunction";
-import { Logger } from "./utilities/Logger";
-import { EventListenerOptions } from "./options/EventListenerOptions";
-import { DefaultEventListenerOptions } from "./options/DefaultEventListenerOptions";
-import { UnsubscribeOptions } from "./options/UnsubscribeOptions";
-import { DefaultUnsubscribeOptions } from "./options/DefaultUnsubscribeOptions";
-import { NullLogger } from "./utilities/NullLogger";
-import { SubscribeWithKeyOptions } from "./options/SubscribeWithKeyOptions";
-import { OptionsMapper } from "./options/OptionsMapper";
-import { DefaultSubscribeWithKeyOptions } from "./options/DefaultSubscribeWithKeyOptions";
-import { UnsubscribeWithKeyOptions } from "./options/UnsubscribeWithKeyOptions";
-import { DefaultUnsubscribeWithKeyOptions } from "./options/DefaultUnsubscribeWithKeyOptions";
-import { DefaultDispatchOptions } from "./options/DefaultDispatchOptions";
-import { WaitUntilFirstDispatchOptions } from "./options/WaitUntilFirstDispatchOptions";
-import { DefaultWaitUntilFirstDispatchOptions } from "./options/DefaultWaitUntilFirstDispatchOptions";
+import { DefaultSubscribeOptions } from './options/DefaultSubscribeOptions';
+import { SubscribeOptions } from './options/SubscribeOptions';
+import { ListenerFunction } from './ListenerFunction';
+import { Logger } from './utilities/Logger';
+import { EventListenerOptions } from './options/EventListenerOptions';
+import { DefaultEventListenerOptions } from './options/DefaultEventListenerOptions';
+import { UnsubscribeOptions } from './options/UnsubscribeOptions';
+import { DefaultUnsubscribeOptions } from './options/DefaultUnsubscribeOptions';
+import { NullLogger } from './utilities/NullLogger';
+import { SubscribeWithKeyOptions } from './options/SubscribeWithKeyOptions';
+import { OptionsMapper } from './options/OptionsMapper';
+import { DefaultSubscribeWithKeyOptions } from './options/DefaultSubscribeWithKeyOptions';
+import { UnsubscribeWithKeyOptions } from './options/UnsubscribeWithKeyOptions';
+import { DefaultUnsubscribeWithKeyOptions } from './options/DefaultUnsubscribeWithKeyOptions';
+import { DefaultDispatchOptions } from './options/DefaultDispatchOptions';
+import { WaitUntilFirstDispatchOptions } from './options/WaitUntilFirstDispatchOptions';
+import { DefaultWaitUntilFirstDispatchOptions } from './options/DefaultWaitUntilFirstDispatchOptions';
 
 /**
  * @author Stefano Balzarotti
@@ -229,7 +229,7 @@ export class OSEventListener {
             }
         }     
         if (!found){
-            const errorMessage = "An attempt to unsubscribe a non mapped listener occurred";
+            const errorMessage = 'An attempt to unsubscribe a non mapped listener occurred';
             if (options.shouldThrowErrors){
                 throw Error(errorMessage);
             } else {

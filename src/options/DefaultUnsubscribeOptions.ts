@@ -1,4 +1,4 @@
-import { UnsubscribeOptions } from "./UnsubscribeOptions";
+import { UnsubscribeOptions } from './UnsubscribeOptions';
 
 export const DefaultUnsubscribeOptions: UnsubscribeOptions = {
     shouldThrowErrors: false,

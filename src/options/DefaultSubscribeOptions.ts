@@ -1,4 +1,4 @@
-import { SubscribeOptions } from "./SubscribeOptions";
+import { SubscribeOptions } from './SubscribeOptions';
 
 export const DefaultSubscribeOptions : SubscribeOptions = {
     shouldThrowErrors: false,

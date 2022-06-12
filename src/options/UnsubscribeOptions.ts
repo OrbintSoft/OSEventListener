@@ -1,4 +1,4 @@
-import { ErrorThrowable } from "./ErrorThrowable";
+import { ErrorThrowable } from './ErrorThrowable';
 
 export interface UnsubscribeOptions extends ErrorThrowable {
     /**

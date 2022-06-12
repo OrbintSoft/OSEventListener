@@ -1,4 +1,4 @@
-import { Logger } from "./Logger";
+import { Logger } from './Logger';
 
 export const NullLogger: Logger = {
     debug: function (): void {        

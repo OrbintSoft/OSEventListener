@@ -5,7 +5,7 @@ const gulpIf = require('gulp-if')
 
 exports.lint = function() {
     return src(['src/**/*.ts'])
-    .pipe(eslint())
+    .pipe(eslint({fix:true}))
     .pipe(eslint.format())
     .pipe(gulpIf(file => file.eslint != null && file.eslint.fixed, gulp.dest(file => file.base)))
     .pipe(eslint.failAfterError())

@@ -1,5 +1,5 @@
-import { DefaultSubscribeOptions } from "./DefaultSubscribeOptions";
-import { SubscribeWithKeyOptions } from "./SubscribeWithKeyOptions";
+import { DefaultSubscribeOptions } from './DefaultSubscribeOptions';
+import { SubscribeWithKeyOptions } from './SubscribeWithKeyOptions';
 
 export const DefaultSubscribeWithKeyOptions: SubscribeWithKeyOptions = {
     allowMultipleListernersPerKey: true,
