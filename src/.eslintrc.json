@@ -50,7 +50,9 @@
             ],
             "checkGetters": true,
             "enableFixer": false
-        }]        
+        }],
+        "indent": ["off"],      
+        "@typescript-eslint/indent": ["warn", "tab"]
     },
     "env": {
         "node": false

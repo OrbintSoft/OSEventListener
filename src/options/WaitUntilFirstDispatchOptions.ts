@@ -1,4 +1,4 @@
 export interface WaitUntilFirstDispatchOptions {
-    resetFirstDispatchBefore: boolean
-    resetFirstDispatchAfter: boolean
+	resetFirstDispatchBefore: boolean
+	resetFirstDispatchAfter: boolean
 }
