@@ -1,5 +1,8 @@
 import { Logger } from './Logger';
 
+/**
+ * Used to disable logging.
+ */
 export const NullLogger: Logger = {
 	/**
 	 * do nothing
