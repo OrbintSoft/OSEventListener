@@ -10,7 +10,7 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "quotes": ["warn", "single"],
+        "quotes": ["error", "single"],
         "@typescript-eslint/strict-boolean-expressions": [
             "error",
             {
