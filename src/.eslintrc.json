@@ -1,0 +1,40 @@
+{
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:jsdoc/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": { "project": ["./src/tsconfig.json"] },
+    "plugins": [
+        "@typescript-eslint",
+        "jsdoc"
+    ],
+    "rules": {
+        "@typescript-eslint/strict-boolean-expressions": [
+            "error",
+            {
+                "allowString" : false,
+                "allowNumber" : false
+            }
+        ],
+        "@typescript-eslint/no-explicit-any": ["warn"],
+        "@typescript-eslint/no-this-alias":["warn", {
+            "allowedNames": ["myself"]
+        }],
+        "@typescript-eslint/no-inferrable-types": "warn",
+        "@typescript-eslint/no-empty-function": ["off"],
+        "require-jsdoc": ["error", {
+            "require": {
+                "FunctionDeclaration": true,
+                "MethodDefinition": true,
+                "ClassDeclaration": true,
+                "ArrowFunctionExpression": true,
+                "FunctionExpression": true
+            }
+        }]        
+    },
+    "env": {
+        "node": false
+    }  
+}
