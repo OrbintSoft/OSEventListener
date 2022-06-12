@@ -2,12 +2,14 @@
     "root": true,
     "extends": [
         "eslint:recommended",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:@typescript-eslint/recommended",
+        "plugin:jsdoc/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": { "project": ["./src/tsconfig.json"] },
     "plugins": [
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "jsdoc"
     ],
     "rules": {
         "quotes": ["error", "single"],
@@ -18,7 +20,7 @@
                 "allowNumber" : false
             }
         ],
-        "@typescript-eslint/no-explicit-any": ["off"],
+        "@typescript-eslint/no-explicit-any": ["warn"],
         "@typescript-eslint/no-this-alias":["warn", {
             "allowedNames": ["myself"]
         }],

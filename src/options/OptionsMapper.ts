@@ -2,7 +2,7 @@
  * Utility to map default properties
  */
 export class OptionsMapper {
-    static map<T>(options: any, defaultOptions: (T & object)): T{
+    static map<T>(options: Partial<T> & object, defaultOptions: (T & object)): T{
         if (defaultOptions === options){
             return defaultOptions;
         }

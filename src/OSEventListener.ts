@@ -15,6 +15,7 @@ import { DefaultUnsubscribeWithKeyOptions } from './options/DefaultUnsubscribeWi
 import { DefaultDispatchOptions } from './options/DefaultDispatchOptions';
 import { WaitUntilFirstDispatchOptions } from './options/WaitUntilFirstDispatchOptions';
 import { DefaultWaitUntilFirstDispatchOptions } from './options/DefaultWaitUntilFirstDispatchOptions';
+import { DispatchOptions } from './DispatchOptions';
 
 /**
  * @author Stefano Balzarotti
@@ -30,15 +31,14 @@ export class OSEventListener {
     #latestData: unknown = null;
 
     /**
-     * The event name
-     * @returns {string}
+     * @returns {string} The event name
      */
     get name() : string {
         return this.#name;
     }
 
     /**
-     * Gets the internal logger
+     * @returns {Logger} The internal logger
      */
     protected get logger(): Logger {
         return this.#logger;
@@ -46,8 +46,8 @@ export class OSEventListener {
 
     /**
      * @param {string} name the name of the event 
-     * @param {IEventListenerOptions} options
-      */
+     * @param {EventListenerOptions} [options=DefaultEventListenerOptions] settings
+     */
     constructor(name: string, options: EventListenerOptions = DefaultEventListenerOptions){
         options = OptionsMapper.map(options, DefaultEventListenerOptions);
         this.#logger = options.logger; 
@@ -56,7 +56,7 @@ export class OSEventListener {
 
     /**
      * @param {ListenerFunction} fn the function you want subscribe to the event
-     * @param {SubscribeOptions} [options=DefaultSubscribeOptions] 
+     * @param {SubscribeOptions} [options=DefaultSubscribeOptions] settings
      * @returns {boolean} function successfully subscribed
      */
     subscribe(fn: ListenerFunction, options: SubscribeOptions = DefaultSubscribeOptions): boolean {
@@ -97,7 +97,7 @@ export class OSEventListener {
 
     /**
      * @param {ListenerFunction} fn the function you want unsubscribe from the event
-     * @param {UnsubscribeOptions} [options] 
+     * @param {UnsubscribeOptions} [options=DefaultUnsubscribeOptions] settings
      * @returns {boolean} function successfully unsubscribed
      */
     unsubscribe(fn: ListenerFunction, options: UnsubscribeOptions = DefaultUnsubscribeOptions) :boolean {
@@ -137,10 +137,12 @@ export class OSEventListener {
 
     /**
      * Dispatch the event
-     * @param {any} sender 
-     * @param {any} data 
+     *
+     * @param {unknown} sender who is dispatching the event
+     * @param {unknown} data payload
+     * @param {DispatchOptions} [options=DefaultDispatchOptions] settings
      */
-    dispatch(sender: any, data: any, options = DefaultDispatchOptions){
+    dispatch(sender: unknown, data: unknown, options : DispatchOptions = DefaultDispatchOptions){
         options = OptionsMapper.map(options, DefaultDispatchOptions);
         if (options.storeData){
             this.#latestData = data;
@@ -156,7 +158,8 @@ export class OSEventListener {
     }
 
     /**
-     * @returns {Promise<unknown>}
+     * @param {WaitUntilFirstDispatchOptions} options settings
+     * @returns {Promise<unknown>} payload data
      */
     waitUntilFirstDispatchAsync(options: WaitUntilFirstDispatchOptions = DefaultWaitUntilFirstDispatchOptions) : Promise<unknown> {        
         const myself = this;
@@ -191,7 +194,7 @@ export class OSEventListener {
     /**
      * @param {ListenerFunction} fn the function to subscribe
      * @param {string} key the key to be used fir subscribe
-     * @param {SubscribeWithKeyOptions} [options = DefaultSubscribeWithKeyOptions]
+     * @param {SubscribeWithKeyOptions} [options = DefaultSubscribeWithKeyOptions] settings
      * @returns {boolean} if subscribed successfully
      */
     subscribeWithKey(fn: ListenerFunction, key: string, options: SubscribeWithKeyOptions = DefaultSubscribeWithKeyOptions) : boolean{
@@ -215,7 +218,7 @@ export class OSEventListener {
 
     /**
      * @param {string} key the key to use for unsubscribe
-     * @param {UnsubscribeWithKeyOptions} [options = DefaultUnsubscribeWithKeyOptions]
+     * @param {UnsubscribeWithKeyOptions} [options = DefaultUnsubscribeWithKeyOptions] settings
      * @returns {boolean} if unsubscribed successfully
      */
     unsubscribeWithKey(key: string, options: UnsubscribeWithKeyOptions = DefaultUnsubscribeWithKeyOptions): boolean{
