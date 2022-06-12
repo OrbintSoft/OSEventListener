@@ -3,4 +3,4 @@ import { EventListenerOptions } from './EventListenerOptions';
 
 export const DefaultEventListenerOptions: EventListenerOptions = {
     logger: console ?? NullLogger
-}
+};

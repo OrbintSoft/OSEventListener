@@ -1,3 +1,4 @@
+'use es6';
 const eslint = require('gulp-eslint');
 const gulp = require('gulp');
 const src = gulp.src;

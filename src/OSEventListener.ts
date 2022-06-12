@@ -23,10 +23,10 @@ import { DispatchOptions } from './DispatchOptions';
  * Simple event listener.
  */
 export class OSEventListener {    
-    #name : string = '';
+    #name  = '';
     #listeners: ListenerFunction[] = [];
     #logger: Logger = NullLogger;
-    #firstDispatchOccurred: boolean = false;
+    #firstDispatchOccurred = false;
     #keyMappedListeners: Map<string, ListenerFunction[]> = new Map(); 
     #latestData: unknown = null;
 
@@ -75,7 +75,12 @@ export class OSEventListener {
         }
     }
     
-
+    /**
+     * Removes a function from the key map
+     *
+     * @param {ListenerFunction} fn listener
+     * @param {UnsubscribeOptions} options settings
+     */
     #removeFunctionFromKeyMap(fn: ListenerFunction, options: UnsubscribeOptions){
         if (typeof (fn._keyedOsEvent) === 'string'){
             const possibleFns = this.#keyMappedListeners.get(fn._keyedOsEvent);
@@ -182,7 +187,7 @@ export class OSEventListener {
                         myself.resetFirstDispatch();
                     }
                     resolve(data);
-                }
+                };
                 if (!myself.subscribe(listener)){
                     reject();
                 }                                

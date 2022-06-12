@@ -12,8 +12,5 @@
         "sourceMap": true, 
         "moduleResolution": "classic",
         "declaration": true
-    },
-    "files": [
-        "OSEventListener.ts"
-    ]
+    }
 }
