@@ -1,0 +1,27 @@
+{
+    "root": true,
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": { "project": ["./src/tsconfig.json"] },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "quotes": ["warn", "single"],
+        "@typescript-eslint/strict-boolean-expressions": [
+            "error",
+            {
+                "allowString" : false,
+                "allowNumber" : false
+            }
+        ],
+        "@typescript-eslint/no-explicit-any": ["off"],
+        "@typescript-eslint/no-this-alias":["warn", {
+            "allowedNames": ["myself"]
+        }],
+        "@typescript-eslint/no-inferrable-types": "off"
+    }    
+}

@@ -1,0 +1,22 @@
+{
+    "engines": {
+        "node": ">=16"
+    },
+    "scripts": {
+        "lint": "gulp lint",
+        "compileTs": "tsc --project ./src/tsconfig.json",
+        "test": "karma start ./tests/karma.conf.js --single-run --browsers=ChromeHeadless,FirefoxHeadless",
+        "testDebug": "karma start ./tests/karma.conf.js --single-run=false --browsers=Chrome --debug"
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin":"^5.27.1",
+        "@typescript-eslint/parser":"^5.27.1",
+        "eslint": "8.17.0",
+        "gulp":"^4.0.2",
+        "gulp-cli":"^2.3.0",
+        "gulp-eslint":"^6.0.0",
+        "gulp-if": "^3.0.0",
+        "gulp-typescript":"^6.0.0-alpha.1",
+        "typescript":"^4.7.3"
+    }
+}
