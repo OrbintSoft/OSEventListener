@@ -1,5 +1,5 @@
 /**
- * Used to configure if an error must be handled or if it must be thrown.
+ * Used to configure if an error must be handled or if it must be thrown.c
  */
 export interface ErrorThrowable {
 	/**
