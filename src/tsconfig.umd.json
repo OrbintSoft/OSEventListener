@@ -1,8 +1,9 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
-        "target": "ES5",
+        "target": "ES2015",
         "module": "UMD",
-        "outDir": "../dist/js/umd",
+        "outDir": "../dist/umd",
+        "lib": ["ES2019", "DOM"]
     }
 }
