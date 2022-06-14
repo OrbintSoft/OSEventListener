@@ -15,22 +15,23 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./options/DefaultSubscribeOptions", "./options/DefaultEventListenerOptions", "./options/DefaultUnsubscribeOptions", "./utilities/NullLogger", "./options/OptionsMapper", "./options/DefaultSubscribeWithKeyOptions", "./options/DefaultUnsubscribeWithKeyOptions", "./options/DefaultDispatchOptions", "./options/DefaultWaitUntilFirstDispatchOptions"], factory);
+        define("OSEventListener", ["require", "exports", "DefaultSubscribeOptions", "DefaultEventListenerOptions", "DefaultUnsubscribeOptions", "NullLogger", "OptionsMapper", "./options/DefaultSubscribeWithKeyOptions", "./options/DefaultUnsubscribeWithKeyOptions", "DefaultDispatchOptions", "DefaultWaitUntilFirstDispatchOptions"], factory);
     }
 })(function (require, exports) {
     "use strict";
     var _OSEventListener_instances, _OSEventListener_name, _OSEventListener_listeners, _OSEventListener_logger, _OSEventListener_firstDispatchOccurred, _OSEventListener_keyMappedListeners, _OSEventListener_latestData, _OSEventListener_removeFunctionFromKeyMap;
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.OSEventListener = void 0;
-    const DefaultSubscribeOptions_1 = require("./options/DefaultSubscribeOptions");
-    const DefaultEventListenerOptions_1 = require("./options/DefaultEventListenerOptions");
-    const DefaultUnsubscribeOptions_1 = require("./options/DefaultUnsubscribeOptions");
-    const NullLogger_1 = require("./utilities/NullLogger");
-    const OptionsMapper_1 = require("./options/OptionsMapper");
+    /// <amd-module name="OSEventListener"/>
+    const DefaultSubscribeOptions_1 = require("DefaultSubscribeOptions");
+    const DefaultEventListenerOptions_1 = require("DefaultEventListenerOptions");
+    const DefaultUnsubscribeOptions_1 = require("DefaultUnsubscribeOptions");
+    const NullLogger_1 = require("NullLogger");
+    const OptionsMapper_1 = require("OptionsMapper");
     const DefaultSubscribeWithKeyOptions_1 = require("./options/DefaultSubscribeWithKeyOptions");
     const DefaultUnsubscribeWithKeyOptions_1 = require("./options/DefaultUnsubscribeWithKeyOptions");
-    const DefaultDispatchOptions_1 = require("./options/DefaultDispatchOptions");
-    const DefaultWaitUntilFirstDispatchOptions_1 = require("./options/DefaultWaitUntilFirstDispatchOptions");
+    const DefaultDispatchOptions_1 = require("DefaultDispatchOptions");
+    const DefaultWaitUntilFirstDispatchOptions_1 = require("DefaultWaitUntilFirstDispatchOptions");
     /**
      * @author Stefano Balzarotti
      * @copyright OrbintSoft
@@ -253,3 +254,4 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
         }
     };
 });
+//# sourceMappingURL=OSEventListener.js.map

@@ -4,7 +4,7 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
+        define("DefaultSubscribeOptions", ["require", "exports"], factory);
     }
 })(function (require, exports) {
     "use strict";
@@ -24,3 +24,4 @@
         allowMultipleSubscribeSameFunction: false
     };
 });
+//# sourceMappingURL=DefaultSubscribeOptions.js.map

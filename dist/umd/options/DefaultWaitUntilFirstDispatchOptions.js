@@ -4,7 +4,7 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
+        define("DefaultWaitUntilFirstDispatchOptions", ["require", "exports"], factory);
     }
 })(function (require, exports) {
     "use strict";
@@ -24,3 +24,4 @@
         resetFirstDispatchAfter: false
     };
 });
+//# sourceMappingURL=DefaultWaitUntilFirstDispatchOptions.js.map

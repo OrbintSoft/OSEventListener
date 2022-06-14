@@ -1,3 +1,4 @@
+/// <amd-module name="DispatchOptions"/>
 /**
  * Options for dispatch
  */

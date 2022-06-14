@@ -4,13 +4,13 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./DefaultSubscribeOptions"], factory);
+        define(["require", "exports", "DefaultSubscribeOptions"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.DefaultSubscribeWithKeyOptions = void 0;
-    const DefaultSubscribeOptions_1 = require("./DefaultSubscribeOptions");
+    const DefaultSubscribeOptions_1 = require("DefaultSubscribeOptions");
     /**
      * Default options for subscribe with key options.
      */
@@ -29,3 +29,4 @@
         allowMultipleSubscribeSameFunction: DefaultSubscribeOptions_1.DefaultSubscribeOptions.allowMultipleSubscribeSameFunction
     };
 });
+//# sourceMappingURL=DefaultSubscribeWithKeyOptions.js.map

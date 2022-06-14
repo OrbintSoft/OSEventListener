@@ -1,3 +1,4 @@
+/// <amd-module name="EventListenerOptions"/>
 import { Logger } from '../utilities/Logger';
 
 /**

@@ -1,3 +1,4 @@
+/// <amd-module name="UnsubscribeOptions"/>
 import { ErrorThrowable } from './ErrorThrowable';
 
 /**

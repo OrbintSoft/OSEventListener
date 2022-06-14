@@ -1,3 +1,4 @@
+/// <amd-module name="DefaultDispatchOptions"/>
 import { DispatchOptions } from '../DispatchOptions';
 
 /**

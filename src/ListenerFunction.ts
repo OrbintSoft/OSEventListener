@@ -1,3 +1,4 @@
+/// <amd-module name="ListenerFunction"/>
 /**
  * The function that is listening for an event
  */

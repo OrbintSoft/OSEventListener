@@ -1,3 +1,4 @@
+/// <amd-module name="OSEventListener"/>
 import { DefaultSubscribeOptions } from './options/DefaultSubscribeOptions';
 import { SubscribeOptions } from './options/SubscribeOptions';
 import { ListenerFunction } from './ListenerFunction';

@@ -1,3 +1,4 @@
+/// <amd-module name="DefaultWaitUntilFirstDispatchOptions"/>
 import { WaitUntilFirstDispatchOptions } from './WaitUntilFirstDispatchOptions';
 
 /**

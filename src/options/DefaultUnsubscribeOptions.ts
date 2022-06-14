@@ -1,3 +1,4 @@
+/// <amd-module name="DefaultUnsubscribeOptions"/>
 import { UnsubscribeOptions } from './UnsubscribeOptions';
 
 /**

@@ -7,7 +7,8 @@
         "quotes": ["error", "single"],
         "semi": ["error", "always"],
         "no-empty-function": ["off"],
-        "indent": ["warn", "tab"]
+        "indent": ["warn", "tab"],
+        "no-unused-vars": ["warn"]
     },
     "parserOptions": {
         "ecmaVersion": 2020

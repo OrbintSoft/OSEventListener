@@ -1,3 +1,4 @@
+/// <amd-module name="SubscribeOptions"/>
 import { ErrorThrowable } from './ErrorThrowable';
 
 /**

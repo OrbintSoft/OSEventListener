@@ -1,3 +1,4 @@
+/// <amd-module name="Logger"/>
 /**
  * An interface to log messages
  */

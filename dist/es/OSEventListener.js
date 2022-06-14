@@ -10,6 +10,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _OSEventListener_instances, _OSEventListener_name, _OSEventListener_listeners, _OSEventListener_logger, _OSEventListener_firstDispatchOccurred, _OSEventListener_keyMappedListeners, _OSEventListener_latestData, _OSEventListener_removeFunctionFromKeyMap;
+/// <amd-module name="OSEventListener"/>
 import { DefaultSubscribeOptions } from './options/DefaultSubscribeOptions';
 import { DefaultEventListenerOptions } from './options/DefaultEventListenerOptions';
 import { DefaultUnsubscribeOptions } from './options/DefaultUnsubscribeOptions';
