@@ -1,1 +1,0 @@
-{"version":3,"file":"DefaultSubscribeWithKeyOptions.js","sourceRoot":"src/","sources":["options/DefaultSubscribeWithKeyOptions.ts"],"names":[],"mappings":";;;;;;;;;;;;IAAA,uDAAuD;IACvD,qEAAoE;IAGpE;;OAEG;IACU,QAAA,8BAA8B,GAA4B;QACtE;;WAEG;QACH,6BAA6B,EAAE,IAAI;QACnC;;WAEG;QACH,iBAAiB,EAAE,iDAAuB,CAAC,iBAAiB;QAC5D;;WAEG;QACH,kCAAkC,EAAE,iDAAuB,CAAC,kCAAkC;KAC9F,CAAC"}
