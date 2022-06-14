@@ -11,6 +11,7 @@
         "outDir": "../dist/es",
         "sourceMap": true, 
         "moduleResolution": "classic",
-        "declaration": true
+        "declaration": true,
+        "sourceRoot": "src"
     }
 }

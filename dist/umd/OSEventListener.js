@@ -15,7 +15,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define("OSEventListener", ["require", "exports", "DefaultSubscribeOptions", "DefaultEventListenerOptions", "DefaultUnsubscribeOptions", "NullLogger", "OptionsMapper", "./options/DefaultSubscribeWithKeyOptions", "./options/DefaultUnsubscribeWithKeyOptions", "DefaultDispatchOptions", "DefaultWaitUntilFirstDispatchOptions"], factory);
+        define("OSEventListener", ["require", "exports", "DefaultSubscribeOptions", "DefaultEventListenerOptions", "DefaultUnsubscribeOptions", "NullLogger", "OptionsMapper", "DefaultSubscribeWithKeyOptions", "DefaultUnsubscribeWithKeyOptions", "DefaultDispatchOptions", "DefaultWaitUntilFirstDispatchOptions"], factory);
     }
 })(function (require, exports) {
     "use strict";
@@ -28,8 +28,8 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     const DefaultUnsubscribeOptions_1 = require("DefaultUnsubscribeOptions");
     const NullLogger_1 = require("NullLogger");
     const OptionsMapper_1 = require("OptionsMapper");
-    const DefaultSubscribeWithKeyOptions_1 = require("./options/DefaultSubscribeWithKeyOptions");
-    const DefaultUnsubscribeWithKeyOptions_1 = require("./options/DefaultUnsubscribeWithKeyOptions");
+    const DefaultSubscribeWithKeyOptions_1 = require("DefaultSubscribeWithKeyOptions");
+    const DefaultUnsubscribeWithKeyOptions_1 = require("DefaultUnsubscribeWithKeyOptions");
     const DefaultDispatchOptions_1 = require("DefaultDispatchOptions");
     const DefaultWaitUntilFirstDispatchOptions_1 = require("DefaultWaitUntilFirstDispatchOptions");
     /**

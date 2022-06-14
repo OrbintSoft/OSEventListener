@@ -4,6 +4,7 @@ const src = gulp.src;
 const gulpIf = require('gulp-if');
 const spawn = require('child_process').spawn;
 const fse = require('fs-extra');
+const glob = require('glob-promise');
 
 function lint(){
 	return src(['src/**/*.ts'])
@@ -31,12 +32,24 @@ async function clean(){
 	await fse.emptyDir('dist/umd');
 }
 
+async function copySrc(dest){
+	const files = await glob('src/**/*.ts');
+	for (const file of files){
+		const f =  dest + file.substring(4);
+		await fse.copy(file, f);
+	}
+}
+
 async function compileEs(){
 	await compileTypescript('src/tsconfig.json');
+	await fse.copyFile('LICENSE', 'dist/es/LICENSE');
+	await copySrc('dist/es/src/');
 }
 
 async function compileUmd(){
 	await compileTypescript('src/tsconfig.umd.json');
+	await fse.copyFile('LICENSE', 'dist/umd/LICENSE');
+	await copySrc('dist/umd/src/');
 }
 
 

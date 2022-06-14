@@ -1,1 +1,1 @@
-{"version":3,"file":"DefaultSubscribeOptions.js","sourceRoot":"","sources":["../../../src/options/DefaultSubscribeOptions.ts"],"names":[],"mappings":"AAGA;;GAEG;AACH,MAAM,CAAC,MAAM,uBAAuB,GAAsB;IACzD;;OAEG;IACH,iBAAiB,EAAE,KAAK;IACxB;;OAEG;IACH,kCAAkC,EAAE,KAAK;CACzC,CAAC"}
+{"version":3,"file":"DefaultSubscribeOptions.js","sourceRoot":"src/","sources":["options/DefaultSubscribeOptions.ts"],"names":[],"mappings":"AAGA;;GAEG;AACH,MAAM,CAAC,MAAM,uBAAuB,GAAsB;IACzD;;OAEG;IACH,iBAAiB,EAAE,KAAK;IACxB;;OAEG;IACH,kCAAkC,EAAE,KAAK;CACzC,CAAC"}

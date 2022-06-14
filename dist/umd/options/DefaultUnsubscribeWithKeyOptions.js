@@ -4,7 +4,7 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
+        define("DefaultUnsubscribeWithKeyOptions", ["require", "exports"], factory);
     }
 })(function (require, exports) {
     "use strict";
