@@ -1,4 +1,4 @@
-/// <amd-module name="DefaultUnsubscribeWithKeyOptions"/>
+/// <amd-module name="options/DefaultUnsubscribeWithKeyOptions"/>
 import { UnsubscribeWithKeyOptions } from './UnsubscribeWithKeyOptions';
 
 /**

@@ -1,4 +1,4 @@
-/// <amd-module name="DefaultSubscribeOptions"/>
+/// <amd-module name="options/DefaultSubscribeOptions"/>
 import { SubscribeOptions } from './SubscribeOptions';
 
 /**

@@ -1,4 +1,4 @@
-/// <amd-module name="NullLogger"/>
+/// <amd-module name="utilities/NullLogger"/>
 import { Logger } from './Logger';
 
 /**

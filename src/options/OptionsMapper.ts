@@ -1,4 +1,4 @@
-/// <amd-module name="OptionsMapper"/>
+/// <amd-module name="options/OptionsMapper"/>
 /**
  * Utility to map default properties
  */

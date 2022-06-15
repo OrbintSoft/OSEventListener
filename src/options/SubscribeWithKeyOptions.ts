@@ -1,4 +1,4 @@
-/// <amd-module name="SubscribeWithKeyOptions"/>
+/// <amd-module name="options/SubscribeWithKeyOptions"/>
 import { SubscribeOptions } from './SubscribeOptions';
 
 /**

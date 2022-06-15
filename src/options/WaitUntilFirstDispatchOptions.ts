@@ -1,4 +1,4 @@
-/// <amd-module name="WaitUntilFirstDispatchOptions"/>
+/// <amd-module name="options/WaitUntilFirstDispatchOptions"/>
 /**
  * Option settings for Wait until first dispatch. 
  */

@@ -5,6 +5,7 @@ const gulpIf = require('gulp-if');
 const spawn = require('child_process').spawn;
 const fse = require('fs-extra');
 const glob = require('glob-promise');
+const path = require('path');
 
 function lint(){
 	return src(['src/**/*.ts'])
@@ -28,8 +29,7 @@ function compileTypescript(tsconfig){
 }
 
 async function clean(){
-	await fse.emptyDir('dist/es');
-	await fse.emptyDir('dist/umd');
+	await fse.emptyDir('dist');
 }
 
 async function copySrc(dest){
@@ -44,12 +44,54 @@ async function compileEs(){
 	await compileTypescript('src/tsconfig.json');
 	await fse.copyFile('LICENSE', 'dist/es/LICENSE');
 	await copySrc('dist/es/src/');
+	const files = await glob('dist/es/**/*.d.ts');
+	for (const file of files){
+		const f =  'dist/type_definitions/' + file.substring(8);
+		await fse.copy(file, f);
+	}
+	await minify('es');	
 }
 
 async function compileUmd(){
 	await compileTypescript('src/tsconfig.umd.json');
 	await fse.copyFile('LICENSE', 'dist/umd/LICENSE');
 	await copySrc('dist/umd/src/');
+	await minify('umd');	
+}
+
+async function minify(type) {
+	const files = await glob(`dist/${type}/**/*.js`);
+	for (const input of files) {
+		const dest = `dist/min/${type}/` + input.substring(`dist/${type}/`.length, input.length - 3) + '.min.js';
+		const folder = path.dirname(dest);
+		if (!await fse.pathExists(folder)) {
+			await fse.mkdirp(folder);
+		}
+		const sourceMap = input.substring(0, input.length -3) + '.js.map';
+		const promise = new Promise((resolve, reject) => {
+			const process = spawn('npx', ['terser', input, '--output', dest, '--source-map', `content="${sourceMap}"`],  {stdio: 'inherit'});
+			process.on('close', (status) => {
+				resolve(status);
+			});
+			process.on('error', (error) => {
+				reject(error);
+			});
+		});
+		await promise;
+	}	
+}
+
+function startSampleServer(){
+	const promise = new Promise((resolve, reject) => {
+		const process = spawn('npx', ['http-server', './', '-p', '38541', '--mimetypes', 'mime.types', '-e', 'js'],  {stdio: 'inherit'});
+		process.on('close', (status) => {
+			resolve(status);
+		});
+		process.on('error', (error) => {
+			reject(error);
+		});
+	});
+	return promise;	
 }
 
 
@@ -60,3 +102,4 @@ exports.compile = async function() {
 	await compileEs();
 	await compileUmd();
 };
+exports.startSampleServer = startSampleServer;

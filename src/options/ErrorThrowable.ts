@@ -1,4 +1,4 @@
-/// <amd-module name="ErrorThrowable"/>
+/// <amd-module name="options/ErrorThrowable"/>
 /**
  * Used to configure if an error must be handled or if it must be thrown.c
  */
