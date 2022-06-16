@@ -52,7 +52,7 @@ async function compileUmd(){
 async function minify(type) {
 	const files = await glob(`dist/${type}/**/*.js`);
 	for (const input of files) {
-		const dest = `dist/min/${type}/` + input.substring(`dist/${type}/`.length, input.length - 3) + '.min.js';
+		const dest = `dist/min/${type}/` + input.substring(`dist/${type}/`.length);
 		const folder = path.dirname(dest);
 		const sourceMapName = path.basename(dest) + '.map';
 		if (!await fse.pathExists(folder)) {
@@ -74,7 +74,7 @@ async function minify(type) {
 
 function startSampleServer(){
 	const promise = new Promise((resolve, reject) => {
-		const process = spawn('npx', ['http-server', './', '-p', '38541', '--mimetypes', 'mime.types', '-e', 'min.js'],  {stdio: 'inherit'});
+		const process = spawn('npx', ['http-server', './', '-p', '38541', '--mimetypes', 'mime.types', '-e', 'js'],  {stdio: 'inherit'});
 		process.on('close', (status) => {
 			resolve(status);
 		});
