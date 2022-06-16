@@ -32,18 +32,9 @@ async function clean(){
 	await fse.emptyDir('dist');
 }
 
-async function copySrc(dest){
-	const files = await glob('src/**/*.ts');
-	for (const file of files){
-		const f =  dest + file.substring(4);
-		await fse.copy(file, f);
-	}
-}
-
 async function compileEs(){
 	await compileTypescript('src/tsconfig.json');
 	await fse.copyFile('LICENSE', 'dist/es/LICENSE');
-	await copySrc('dist/es/src/');
 	const files = await glob('dist/es/**/*.d.ts');
 	for (const file of files){
 		const f =  'dist/type_definitions/' + file.substring(8);
@@ -55,7 +46,6 @@ async function compileEs(){
 async function compileUmd(){
 	await compileTypescript('src/tsconfig.umd.json');
 	await fse.copyFile('LICENSE', 'dist/umd/LICENSE');
-	await copySrc('dist/umd/src/');
 	await minify('umd');	
 }
 
@@ -64,12 +54,13 @@ async function minify(type) {
 	for (const input of files) {
 		const dest = `dist/min/${type}/` + input.substring(`dist/${type}/`.length, input.length - 3) + '.min.js';
 		const folder = path.dirname(dest);
+		const sourceMapName = path.basename(dest) + '.map';
 		if (!await fse.pathExists(folder)) {
 			await fse.mkdirp(folder);
 		}
 		const sourceMap = input.substring(0, input.length -3) + '.js.map';
 		const promise = new Promise((resolve, reject) => {
-			const process = spawn('npx', ['terser', input, '--output', dest, '--source-map', `content="${sourceMap}"`],  {stdio: 'inherit'});
+			const process = spawn('npx', ['terser', input, '--output', dest, '--source-map', `includeSources,url='${sourceMapName}',content='${sourceMap}'`],  {stdio: 'inherit'});
 			process.on('close', (status) => {
 				resolve(status);
 			});
@@ -83,7 +74,7 @@ async function minify(type) {
 
 function startSampleServer(){
 	const promise = new Promise((resolve, reject) => {
-		const process = spawn('npx', ['http-server', './', '-p', '38541', '--mimetypes', 'mime.types', '-e', 'js'],  {stdio: 'inherit'});
+		const process = spawn('npx', ['http-server', './', '-p', '38541', '--mimetypes', 'mime.types', '-e', 'min.js'],  {stdio: 'inherit'});
 		process.on('close', (status) => {
 			resolve(status);
 		});

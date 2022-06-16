@@ -12,6 +12,6 @@
         "sourceMap": true, 
         "moduleResolution": "classic",
         "declaration": true,
-        "sourceRoot": "src"
+        "inlineSources": true
     }
 }
