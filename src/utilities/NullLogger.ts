@@ -4,7 +4,7 @@ import Logger from './Logger';
 /**
  * Used to disable logging.
  */
-export const NullLogger: Logger = {
+const NullLogger: Logger = {
 	/**
 	 * do nothing
 	 */
@@ -36,3 +36,5 @@ export const NullLogger: Logger = {
 	warn: function (): void {
 	}
 };
+
+export default NullLogger;

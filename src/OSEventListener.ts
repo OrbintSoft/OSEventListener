@@ -7,7 +7,7 @@ import EventListenerOptions from './options/EventListenerOptions';
 import DefaultEventListenerOptions from './options/DefaultEventListenerOptions';
 import UnsubscribeOptions from './options/UnsubscribeOptions';
 import DefaultUnsubscribeOptions from './options/DefaultUnsubscribeOptions';
-import { NullLogger } from './utilities/NullLogger';
+import NullLogger from './utilities/NullLogger';
 import SubscribeWithKeyOptions from './options/SubscribeWithKeyOptions';
 import OptionsMapper from './options/OptionsMapper';
 import DefaultSubscribeWithKeyOptions from './options/DefaultSubscribeWithKeyOptions';

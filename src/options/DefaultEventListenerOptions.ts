@@ -1,5 +1,5 @@
 /// <amd-module name="options/DefaultEventListenerOptions"/>
-import { NullLogger } from '../utilities/NullLogger';
+import NullLogger from '../utilities/NullLogger';
 import EventListenerOptions from './EventListenerOptions';
 
 /**
