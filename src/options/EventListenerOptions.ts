@@ -1,10 +1,10 @@
 /// <amd-module name="options/EventListenerOptions"/>
-import { Logger } from '../utilities/Logger';
+import Logger from '../utilities/Logger';
 
 /**
  * Event listener options
  */
-export interface EventListenerOptions {
+export default interface EventListenerOptions {
 	/**
 	 * A logger
 	 */

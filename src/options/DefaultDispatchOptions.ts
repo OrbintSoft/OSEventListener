@@ -1,12 +1,14 @@
 /// <amd-module name="options/DefaultDispatchOptions"/>
-import { DispatchOptions } from '../DispatchOptions';
+import DispatchOptions from '../DispatchOptions';
 
 /**
  * Default settings for dispatch options
  */
-export const DefaultDispatchOptions : DispatchOptions = {
+const DefaultDispatchOptions : DispatchOptions = {
 	/**
 	 * data is not stored as defaultclear
 	 */
 	storeData: false
 };
+
+export default DefaultDispatchOptions;

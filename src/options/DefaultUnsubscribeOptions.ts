@@ -1,10 +1,10 @@
 /// <amd-module name="options/DefaultUnsubscribeOptions"/>
-import { UnsubscribeOptions } from './UnsubscribeOptions';
+import UnsubscribeOptions from './UnsubscribeOptions';
 
 /**
  * Default Unsubscribe options.
  */
-export const DefaultUnsubscribeOptions: UnsubscribeOptions = {
+const DefaultUnsubscribeOptions: UnsubscribeOptions = {
 	/**
 	 * Per default unsubscribe cannot throw errors.
 	 */
@@ -14,3 +14,5 @@ export const DefaultUnsubscribeOptions: UnsubscribeOptions = {
 	 */
 	removeOnlyFirstOccurrence: true
 };
+
+export default DefaultUnsubscribeOptions;

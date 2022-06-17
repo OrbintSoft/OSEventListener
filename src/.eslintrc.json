@@ -10,7 +10,15 @@
         "@typescript-eslint",
         "jsdoc"
     ],
-    "rules": {
+    "rules": {        
+        "@typescript-eslint/no-explicit-any": ["warn"],
+        "@typescript-eslint/no-this-alias":["warn", {
+            "allowedNames": ["myself"]
+        }],
+        "@typescript-eslint/no-inferrable-types": "warn",
+        "@typescript-eslint/no-empty-function": ["off"],
+        "@typescript-eslint/indent": ["warn", "tab"],
+        "@typescript-eslint/semi": ["error", "always"],
         "@typescript-eslint/strict-boolean-expressions": [
             "error",
             {
@@ -18,12 +26,7 @@
                 "allowNumber" : false
             }
         ],
-        "@typescript-eslint/no-explicit-any": ["warn"],
-        "@typescript-eslint/no-this-alias":["warn", {
-            "allowedNames": ["myself"]
-        }],
-        "@typescript-eslint/no-inferrable-types": "warn",
-        "@typescript-eslint/no-empty-function": ["off"],
+        "indent": ["off"],    
         "jsdoc/require-jsdoc": ["error", {
             "publicOnly": true,
             "require": {
@@ -50,9 +53,8 @@
             ],
             "checkGetters": true,
             "enableFixer": false
-        }],
-        "indent": ["off"],      
-        "@typescript-eslint/indent": ["warn", "tab"]
+        }],          
+        "semi": ["off"]
     },
     "env": {
         "node": false

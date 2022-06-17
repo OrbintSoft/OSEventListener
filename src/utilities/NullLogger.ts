@@ -1,5 +1,5 @@
 /// <amd-module name="utilities/NullLogger"/>
-import { Logger } from './Logger';
+import Logger from './Logger';
 
 /**
  * Used to disable logging.

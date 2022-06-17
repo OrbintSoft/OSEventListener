@@ -1,10 +1,10 @@
 /// <amd-module name="options/DefaultUnsubscribeWithKeyOptions"/>
-import { UnsubscribeWithKeyOptions } from './UnsubscribeWithKeyOptions';
+import UnsubscribeWithKeyOptions from './UnsubscribeWithKeyOptions';
 
 /**
  * Default options for unsubscribe with key.
  */
-export const DefaultUnsubscribeWithKeyOptions: UnsubscribeWithKeyOptions = {
+const DefaultUnsubscribeWithKeyOptions: UnsubscribeWithKeyOptions = {
 	/**
 	 * Per default all listeners with same key are unsubscribed.
 	 */
@@ -18,3 +18,5 @@ export const DefaultUnsubscribeWithKeyOptions: UnsubscribeWithKeyOptions = {
 	 */
 	shouldThrowErrors: false
 };
+
+export default DefaultUnsubscribeWithKeyOptions;

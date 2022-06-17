@@ -1,29 +1,29 @@
 /// <amd-module name="OSEventListener"/>
-import { DefaultSubscribeOptions } from './options/DefaultSubscribeOptions';
-import { SubscribeOptions } from './options/SubscribeOptions';
-import { ListenerFunction } from './ListenerFunction';
-import { Logger } from './utilities/Logger';
-import { EventListenerOptions } from './options/EventListenerOptions';
-import { DefaultEventListenerOptions } from './options/DefaultEventListenerOptions';
-import { UnsubscribeOptions } from './options/UnsubscribeOptions';
-import { DefaultUnsubscribeOptions } from './options/DefaultUnsubscribeOptions';
+import DefaultSubscribeOptions from './options/DefaultSubscribeOptions';
+import SubscribeOptions from './options/SubscribeOptions';
+import ListenerFunction from './ListenerFunction';
+import Logger from './utilities/Logger';
+import EventListenerOptions from './options/EventListenerOptions';
+import DefaultEventListenerOptions from './options/DefaultEventListenerOptions';
+import UnsubscribeOptions from './options/UnsubscribeOptions';
+import DefaultUnsubscribeOptions from './options/DefaultUnsubscribeOptions';
 import { NullLogger } from './utilities/NullLogger';
-import { SubscribeWithKeyOptions } from './options/SubscribeWithKeyOptions';
-import { OptionsMapper } from './options/OptionsMapper';
-import { DefaultSubscribeWithKeyOptions } from './options/DefaultSubscribeWithKeyOptions';
-import { UnsubscribeWithKeyOptions } from './options/UnsubscribeWithKeyOptions';
-import { DefaultUnsubscribeWithKeyOptions } from './options/DefaultUnsubscribeWithKeyOptions';
-import { DefaultDispatchOptions } from './options/DefaultDispatchOptions';
-import { WaitUntilFirstDispatchOptions } from './options/WaitUntilFirstDispatchOptions';
-import { DefaultWaitUntilFirstDispatchOptions } from './options/DefaultWaitUntilFirstDispatchOptions';
-import { DispatchOptions } from './DispatchOptions';
+import SubscribeWithKeyOptions from './options/SubscribeWithKeyOptions';
+import OptionsMapper from './options/OptionsMapper';
+import DefaultSubscribeWithKeyOptions from './options/DefaultSubscribeWithKeyOptions';
+import UnsubscribeWithKeyOptions from './options/UnsubscribeWithKeyOptions';
+import DefaultUnsubscribeWithKeyOptions from './options/DefaultUnsubscribeWithKeyOptions';
+import DefaultDispatchOptions from './options/DefaultDispatchOptions';
+import WaitUntilFirstDispatchOptions from './options/WaitUntilFirstDispatchOptions';
+import DefaultWaitUntilFirstDispatchOptions from './options/DefaultWaitUntilFirstDispatchOptions';
+import DispatchOptions from './DispatchOptions';
 
 /**
  * @author Stefano Balzarotti
  * @copyright OrbintSoft
  * Simple event listener.
  */
-export class OSEventListener {    
+export default class OSEventListener {    
 	#name  = '';
 	#listeners: ListenerFunction[] = [];
 	#logger: Logger = NullLogger;

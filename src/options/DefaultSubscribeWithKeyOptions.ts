@@ -1,11 +1,11 @@
 /// <amd-module name="options/DefaultSubscribeWithKeyOptions"/>
-import { DefaultSubscribeOptions } from './DefaultSubscribeOptions';
-import { SubscribeWithKeyOptions } from './SubscribeWithKeyOptions';
+import DefaultSubscribeOptions from './DefaultSubscribeOptions';
+import SubscribeWithKeyOptions from './SubscribeWithKeyOptions';
 
 /**
  * Default options for subscribe with key options.
  */
-export const DefaultSubscribeWithKeyOptions: SubscribeWithKeyOptions = {
+const DefaultSubscribeWithKeyOptions: SubscribeWithKeyOptions = {
 	/**
 	 * Multiple listeners per single key are allowed per default.
 	 */
@@ -19,3 +19,5 @@ export const DefaultSubscribeWithKeyOptions: SubscribeWithKeyOptions = {
 	 */
 	allowMultipleSubscribeSameFunction: DefaultSubscribeOptions.allowMultipleSubscribeSameFunction
 };
+
+export default DefaultSubscribeWithKeyOptions;

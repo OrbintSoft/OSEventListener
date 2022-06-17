@@ -72,6 +72,10 @@ async function minify(type) {
 	}	
 }
 
+async function createBundle(){
+	
+}
+
 function startSampleServer(){
 	const promise = new Promise((resolve, reject) => {
 		const process = spawn('npx', ['http-server', './', '-p', '38541', '--mimetypes', 'mime.types', '-e', 'js'],  {stdio: 'inherit'});
@@ -88,9 +92,11 @@ function startSampleServer(){
 
 exports.lint = lint;
 exports.clean = clean;
+exports.bundle = createBundle;
 exports.compile = async function() { 
 	await clean();
 	await compileEs();
 	await compileUmd();
+	await createBundle();
 };
 exports.startSampleServer = startSampleServer;

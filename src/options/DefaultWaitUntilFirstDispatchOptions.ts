@@ -1,10 +1,10 @@
 /// <amd-module name="options/DefaultWaitUntilFirstDispatchOptions"/>
-import { WaitUntilFirstDispatchOptions } from './WaitUntilFirstDispatchOptions';
+import WaitUntilFirstDispatchOptions from './WaitUntilFirstDispatchOptions';
 
 /**
  * Default options for wait until first dispatch.
  */
-export const DefaultWaitUntilFirstDispatchOptions: WaitUntilFirstDispatchOptions = {
+const DefaultWaitUntilFirstDispatchOptions: WaitUntilFirstDispatchOptions = {
 	/**
 	 * Per default when called, it doesn't reset the state, so if the event is already fired it returns the state without waiting.
 	 */
@@ -14,3 +14,5 @@ export const DefaultWaitUntilFirstDispatchOptions: WaitUntilFirstDispatchOptions
 	 */
 	resetFirstDispatchAfter: false
 };
+
+export default DefaultWaitUntilFirstDispatchOptions;

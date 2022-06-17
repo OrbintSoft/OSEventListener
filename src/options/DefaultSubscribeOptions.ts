@@ -1,10 +1,10 @@
 /// <amd-module name="options/DefaultSubscribeOptions"/>
-import { SubscribeOptions } from './SubscribeOptions';
+import SubscribeOptions from './SubscribeOptions';
 
 /**
  * Default settings for subscribe options
  */
-export const DefaultSubscribeOptions : SubscribeOptions = {
+const DefaultSubscribeOptions : SubscribeOptions = {
 	/**
 	 * as default doesn't throw errors
 	 */
@@ -14,3 +14,5 @@ export const DefaultSubscribeOptions : SubscribeOptions = {
 	 */
 	allowMultipleSubscribeSameFunction: false
 };
+
+export default DefaultSubscribeOptions;

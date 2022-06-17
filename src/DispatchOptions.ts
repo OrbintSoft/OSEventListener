@@ -2,7 +2,7 @@
 /**
  * Options for dispatch
  */
-export interface DispatchOptions {
+export default interface DispatchOptions {
 	/**
 	 * if store the dispatched data for later use
 	 */

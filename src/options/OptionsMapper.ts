@@ -2,7 +2,7 @@
 /**
  * Utility to map default properties
  */
-export class OptionsMapper {
+export default class OptionsMapper {
 	/**
 	 * Used to merge new options to default options
 	 *

@@ -2,7 +2,7 @@
 /**
  * Option settings for Wait until first dispatch. 
  */
-export interface WaitUntilFirstDispatchOptions {
+export default interface WaitUntilFirstDispatchOptions {
 	/**
 	 * If enabled it resets the state everythime it's called, so at each call it waits until a new event is dispatched.
 	 */

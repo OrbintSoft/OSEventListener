@@ -1,10 +1,10 @@
 /// <amd-module name="options/UnsubscribeOptions"/>
-import { ErrorThrowable } from './ErrorThrowable';
+import ErrorThrowable from './ErrorThrowable';
 
 /**
  * Option settings for unsubscribe.
  */
-export interface UnsubscribeOptions extends ErrorThrowable {
+export default interface UnsubscribeOptions extends ErrorThrowable {
 	/**
 	 * if enabled during the unsubscribe only the first occurence will be removed otherwise all occurrences of same subscribed function.
 	 */

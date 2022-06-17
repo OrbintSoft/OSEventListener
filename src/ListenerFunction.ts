@@ -2,7 +2,7 @@
 /**
  * The function that is listening for an event
  */
-export type ListenerFunction = (
+type ListenerFunction = (
 /**
  * @param {unknown} sender who dispatched the event
  * @param {unknown} data the payload
@@ -14,3 +14,5 @@ export type ListenerFunction = (
 	 */
 	_keyedOsEvent?: string
 };
+
+export default ListenerFunction;

@@ -2,7 +2,7 @@
 /**
  * An interface to log messages
  */
-export interface Logger {
+export default interface Logger {
 	/**
 	 * Used to log debug messages
 	 *
