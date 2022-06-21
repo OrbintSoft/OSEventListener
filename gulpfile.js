@@ -73,7 +73,16 @@ async function minify(type) {
 }
 
 async function createBundle(){
-	
+	const promise = new Promise((resolve, reject) => {
+		const process = spawn('rollup', ['-c'],  {stdio: 'inherit', cwd: './rollup'});
+		process.on('close', (status) => {
+			resolve(status);
+		});
+		process.on('error', (error) => {
+			reject(error);
+		});
+	});
+	return promise;	
 }
 
 function startSampleServer(){

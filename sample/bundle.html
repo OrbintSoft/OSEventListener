@@ -1,0 +1,16 @@
+<html>
+	<head>
+		<title>Test correct load of minified es module</title>
+		<script type="text/javascript" src="../dist/bundle/OSEventListener.js"></script>
+		<script type="text/javascript">
+			const l = new OSEventListener('myEvent');
+			l.subscribeWithKey((message) => {
+				console.log(message);
+				l.unsubscribeWithKey('e');
+			}, 'e');
+			l.dispatch('IT WORKS');
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
