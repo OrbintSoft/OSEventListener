@@ -4,6 +4,7 @@
         "target": "ES2015",
         "module": "UMD",
         "outDir": "../dist/umd",
-        "lib": ["ES2019", "DOM"]
+        "lib": ["ES2019", "DOM"],
+        "esModuleInterop": true
     }
 }

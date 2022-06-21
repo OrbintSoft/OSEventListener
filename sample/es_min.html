@@ -1,7 +1,15 @@
 <html>
 	<head>
 		<title>Test correct load of es module</title>
-		<script type="module" src="../dist/min/es/OSEventListener.js"></script>
+		<script type="module">
+			import OSEventListener from '../dist/min/es/OSEventListener.js';
+			const l = new OSEventListener('myEvent');
+			l.subscribeWithKey((message) => {
+				console.log(message);
+				l.unsubscribeWithKey('e');
+			}, 'e');
+			l.dispatch('IT WORKS');
+		</script>
 	</head>
 	<body>
 	</body>

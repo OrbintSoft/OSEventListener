@@ -1,7 +1,21 @@
 <html>
 	<head>
 		<title>Test correct load of minified UMD module</title>
-		<script data-main="../dist/min/umd/OSEventListener.js" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.js"></script>
+		<script type="text/javascript">
+			requirejs.config({
+    			baseUrl: '../dist/min/umd',
+			});
+			requirejs(['OSEventListener'], (OSEventListenerModule) => {			
+				const OSEventListener = OSEventListenerModule.default;	
+				const l = new OSEventListener('myEvent');
+				l.subscribeWithKey((message) => {
+					console.log(message);
+					l.unsubscribeWithKey('e');
+				}, 'e');
+				l.dispatch('IT WORKS');
+			});
+		</script>
 	</head>
 	<body>
 	</body>
