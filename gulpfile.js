@@ -6,6 +6,7 @@ const spawn = require('child_process').spawn;
 const fse = require('fs-extra');
 const glob = require('glob-promise');
 const path = require('path');
+const babel = require('@babel/core');
 
 function lint(){
 	return src(['src/**/*.ts'])
@@ -85,6 +86,11 @@ async function createBundle(){
 	return promise;	
 }
 
+async function convertToEs5(){
+	const result = await babel.transformFileAsync('dist/bundle/OSEventListener.js');
+	fse.writeFile('dist/bundle/OSEventListener.es5.js', result.code);	
+}
+
 function startSampleServer(){
 	const promise = new Promise((resolve, reject) => {
 		const process = spawn('npx', ['http-server', './', '-p', '38541', '--mimetypes', 'mime.types', '-e', 'js'],  {stdio: 'inherit'});
@@ -107,5 +113,6 @@ exports.compile = async function() {
 	await compileEs();
 	await compileUmd();
 	await createBundle();
+	await convertToEs5();
 };
 exports.startSampleServer = startSampleServer;

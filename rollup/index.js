@@ -1,2 +1,2 @@
-import OSEventListener from "../dist/es/min/OSEventListener";
+import OSEventListener from "../dist/min/es//OSEventListener";
 window['OSEventListener'] = OSEventListener

@@ -1,12 +1,15 @@
+import sourcemaps from 'rollup-plugin-sourcemaps';
 export default [{
 	input: ['index.js'],
+	plugins: [sourcemaps()],
 	output: {
 		file: '../dist/bundle/OSEventListener.js',
 		format: 'iife',
-		name: 'OSEventListener', // this is the name of the global object
+		name: 'OSEventListener',
 		esModule: false,
 		exports: 'named',
-		sourcemap: true	
+		sourcemap: true,
+
 	},
 	context: 'window'
 }];
