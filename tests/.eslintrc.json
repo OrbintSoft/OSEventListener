@@ -1,0 +1,34 @@
+{
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": { "project": ["./tests/tsconfig.json"] },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {        
+        "@typescript-eslint/no-explicit-any": ["warn"],
+        "@typescript-eslint/no-this-alias":["warn", {
+            "allowedNames": ["myself"]
+        }],
+        "@typescript-eslint/no-inferrable-types": "warn",
+        "@typescript-eslint/no-empty-function": ["off"],
+        "@typescript-eslint/indent": ["warn", "tab"],
+        "@typescript-eslint/semi": ["error", "always"],
+        "@typescript-eslint/strict-boolean-expressions": [
+            "error",
+            {
+                "allowString" : false,
+                "allowNumber" : false
+            }
+        ],
+        "@typescript-eslint/type-annotation-spacing": ["error"],
+        "indent": ["off"],                    
+        "semi": ["off"]
+    },
+    "env": {
+        "node": false
+    }  
+}
