@@ -1,5 +1,3 @@
-/// <amd-module name="OSEventListener"/>
-
 import DefaultSubscribeOptions from './options/DefaultSubscribeOptions';
 import SubscribeOptions from './options/SubscribeOptions';
 import ListenerFunction from './ListenerFunction';
@@ -19,6 +17,7 @@ import WaitUntilFirstDispatchOptions from './options/WaitUntilFirstDispatchOptio
 import DefaultWaitUntilFirstDispatchOptions from './options/DefaultWaitUntilFirstDispatchOptions';
 import DispatchOptions from './DispatchOptions';
 
+/// <amd-module name="OSEventListener"/>
 /**
  * @author Stefano Balzarotti
  * @copyright OrbintSoft

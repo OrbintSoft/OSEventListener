@@ -1,6 +1,5 @@
-/// <amd-module name="utilities/NullLogger"/>
 import Logger from './Logger';
-
+/// <amd-module name="utilities/NullLogger"/>
 /**
  * Used to disable logging.
  */

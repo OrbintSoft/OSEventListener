@@ -1,6 +1,5 @@
-/// <amd-module name="options/UnsubscribeOptions"/>
 import ErrorThrowable from './ErrorThrowable';
-
+/// <amd-module name="options/UnsubscribeOptions"/>
 /**
  * Option settings for unsubscribe.
  */

@@ -1,6 +1,5 @@
-/// <amd-module name="options/DefaultSubscribeOptions"/>
 import SubscribeOptions from './SubscribeOptions';
-
+/// <amd-module name="options/DefaultSubscribeOptions"/>
 /**
  * Default settings for subscribe options
  */

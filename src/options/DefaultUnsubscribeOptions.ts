@@ -1,6 +1,5 @@
-/// <amd-module name="options/DefaultUnsubscribeOptions"/>
 import UnsubscribeOptions from './UnsubscribeOptions';
-
+/// <amd-module name="options/DefaultUnsubscribeOptions"/>
 /**
  * Default Unsubscribe options.
  */

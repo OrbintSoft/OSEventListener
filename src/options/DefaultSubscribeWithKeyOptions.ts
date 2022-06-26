@@ -1,7 +1,6 @@
-/// <amd-module name="options/DefaultSubscribeWithKeyOptions"/>
 import DefaultSubscribeOptions from './DefaultSubscribeOptions';
 import SubscribeWithKeyOptions from './SubscribeWithKeyOptions';
-
+/// <amd-module name="options/DefaultSubscribeWithKeyOptions"/>
 /**
  * Default options for subscribe with key options.
  */

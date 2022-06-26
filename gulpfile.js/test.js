@@ -14,7 +14,7 @@ function startSampleServer() {
 
 function runTests() {
 	const promise = new Promise((resolve, reject) => {
-		const process = spawn('mocha', [],  {stdio: 'inherit', cwd: 'tests'});
+		const process = spawn('mocha', ['--config', '.mocharc.json'],  {stdio: 'inherit', cwd: './tests' });
 		process.on('close', (status) => {
 			resolve(status);
 		});

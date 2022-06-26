@@ -1,6 +1,5 @@
-/// <amd-module name="options/DefaultDispatchOptions"/>
 import DispatchOptions from '../DispatchOptions';
-
+/// <amd-module name="options/DefaultDispatchOptions"/>
 /**
  * Default settings for dispatch options
  */
