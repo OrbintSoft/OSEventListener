@@ -8,7 +8,9 @@
         "semi": ["error", "always"],
         "no-empty-function": ["off"],
         "indent": ["warn", "tab"],
-        "no-unused-vars": ["warn"]
+        "no-unused-vars": ["warn"],
+        "keyword-spacing": ["warn"],
+        "brace-style": ["warn", "1tbs"]
     },
     "parserOptions": {
         "ecmaVersion": 2020,

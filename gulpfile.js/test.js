@@ -11,4 +11,19 @@ function startSampleServer() {
 	});
 	return promise;	
 }
+
+function runTests() {
+	const promise = new Promise((resolve, reject) => {
+		const process = spawn('mocha', [],  {stdio: 'inherit', cwd: 'tests'});
+		process.on('close', (status) => {
+			resolve(status);
+		});
+		process.on('error', (error) => {
+			reject(error);
+		});
+	});
+	return promise;	
+}
+
 exports.startSampleServer = startSampleServer;
+exports.runTests = runTests;

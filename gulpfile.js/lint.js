@@ -12,10 +12,10 @@ function lint(paths) {
 }
 
 function lintSrc(){
-	lint(['src/**/*.ts']);
+	return lint(['src/**/*.ts']);
 }
 function lintTests(){
-	lint(['tests/**/*.ts']);
+	return lint(['tests/**/*.ts']);
 }
 
 exports.src = lintSrc;
