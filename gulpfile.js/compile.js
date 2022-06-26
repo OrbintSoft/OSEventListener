@@ -1,19 +1,8 @@
-const eslint = require('gulp-eslint');
-const gulp = require('gulp');
-const src = gulp.src;
-const gulpIf = require('gulp-if');
+
 const spawn = require('child_process').spawn;
 const fse = require('fs-extra');
 const glob = require('glob-promise');
 const path = require('path');
-
-function lint(){
-	return src(['src/**/*.ts'])
-		.pipe(eslint({fix:true}))
-		.pipe(eslint.format())
-		.pipe(gulpIf(file => file.eslint != null && file.eslint.fixed, gulp.dest(file => file.base)))
-		.pipe(eslint.failAfterError());
-}
 
 function compileTypescript(tsconfig){
 	const promise = new Promise((resolve, reject) => {
@@ -26,10 +15,6 @@ function compileTypescript(tsconfig){
 		});
 	});
 	return promise;
-}
-
-async function clean(){
-	await fse.emptyDir('dist');
 }
 
 async function compileEs(){
@@ -85,27 +70,7 @@ async function createBundle(){
 	return promise;	
 }
 
-function startSampleServer(){
-	const promise = new Promise((resolve, reject) => {
-		const process = spawn('npx', ['http-server', './', '-p', '38541', '--mimetypes', 'mime.types', '-e', 'js'],  {stdio: 'inherit'});
-		process.on('close', (status) => {
-			resolve(status);
-		});
-		process.on('error', (error) => {
-			reject(error);
-		});
-	});
-	return promise;	
-}
-
-
-exports.lint = lint;
-exports.clean = clean;
-exports.bundle = createBundle;
-exports.compile = async function() { 
-	await clean();
-	await compileEs();
-	await compileUmd();
-	await createBundle();
-};
-exports.startSampleServer = startSampleServer;
+exports.compileEs = compileEs;
+exports.compileUmd = compileUmd;
+exports.minify = minify;
+exports.createBundle = createBundle;
