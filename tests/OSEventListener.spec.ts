@@ -79,12 +79,12 @@ describe('OSEventListener', function () {
 		assert.equal(f1Called, 1);
 		assert.equal(f2Called, 1);
 		assert.equal(f3Called, 1);
-		event.unsubscribe(f2)
+		event.unsubscribe(f2);
 		event.dispatch('sender', 'data');
 		assert.equal(f1Called, 2);
 		assert.equal(f2Called, 1);
 		assert.equal(f3Called, 2);
-		event.unsubscribe(f1)
+		event.unsubscribe(f1);
 		event.dispatch('sender', 'data');
 		assert.equal(f1Called, 2);
 		assert.equal(f2Called, 1);
