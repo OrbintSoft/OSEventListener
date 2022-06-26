@@ -26,6 +26,7 @@
                 "allowNumber" : false
             }
         ],
+        "@typescript-eslint/type-annotation-spacing": ["error"],
         "indent": ["off"],    
         "jsdoc/require-jsdoc": ["error", {
             "publicOnly": true,

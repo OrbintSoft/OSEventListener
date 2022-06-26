@@ -15,9 +15,8 @@ import DefaultUnsubscribeWithKeyOptions from './options/DefaultUnsubscribeWithKe
 import DefaultDispatchOptions from './options/DefaultDispatchOptions';
 import WaitUntilFirstDispatchOptions from './options/WaitUntilFirstDispatchOptions';
 import DefaultWaitUntilFirstDispatchOptions from './options/DefaultWaitUntilFirstDispatchOptions';
-import DispatchOptions from './DispatchOptions';
+import DispatchOptions from './options/DispatchOptions';
 
-/// <amd-module name="OSEventListener"/>
 /**
  * @author Stefano Balzarotti
  * @copyright OrbintSoft
@@ -34,7 +33,7 @@ export default class OSEventListener {
 	/**
 	 * @returns {string} The event name
 	 */
-	get name() : string {
+	get name(): string {
 		return this.#name;
 	}
 
@@ -106,17 +105,17 @@ export default class OSEventListener {
 	 * @param {UnsubscribeOptions} [options=DefaultUnsubscribeOptions] settings
 	 * @returns {boolean} function successfully unsubscribed
 	 */
-	unsubscribe(fn: ListenerFunction, options: UnsubscribeOptions = DefaultUnsubscribeOptions) :boolean {
+	unsubscribe(fn: ListenerFunction, options: UnsubscribeOptions = DefaultUnsubscribeOptions): boolean {
 		options = OptionsMapper.map(options, DefaultUnsubscribeOptions);
 		let i = -1;
 		let found = false;
 		do {
 			i = this.#listeners.indexOf(fn);
-			if (i !== -1){
+			if (i !== -1) {
 				this.#listeners.splice(i, 1);
 				found = true;
 			}
-			if (options.removeOnlyFirstOccurrence){
+			if (options.removeOnlyFirstOccurrence) {
 				break;
 			}
 		} while (i !== -1);
@@ -124,7 +123,7 @@ export default class OSEventListener {
 			this.#removeFunctionFromKeyMap(fn, options);
 			return true;
 		} else {
-			const errorMessage = 'An attempt to unsubscribe a non sunscribed function occurred';
+			const errorMessage = 'An attempt to unsubscribe a non subscribed function occurred';
 			if (options.shouldThrowErrors){
 				throw new Error(errorMessage);                
 			} else {
@@ -148,7 +147,7 @@ export default class OSEventListener {
 	 * @param {unknown} data payload
 	 * @param {DispatchOptions} [options=DefaultDispatchOptions] settings
 	 */
-	dispatch(sender: unknown, data: unknown, options : DispatchOptions = DefaultDispatchOptions){
+	dispatch(sender: unknown, data: unknown, options: DispatchOptions = DefaultDispatchOptions){
 		options = OptionsMapper.map(options, DefaultDispatchOptions);
 		if (options.storeData){
 			this.#latestData = data;
@@ -156,7 +155,14 @@ export default class OSEventListener {
 		this.#firstDispatchOccurred = true;
 		for (const f of this.#listeners){
 			try {
-				f(sender, data);
+				if (options.defer){
+					setTimeout(() => {
+						f(sender, data);
+					}, 0);
+				} else {
+					f(sender, data);
+				}
+				
 			} catch (ex){
 				this.#logger.error(ex);
 			}
@@ -167,7 +173,7 @@ export default class OSEventListener {
 	 * @param {WaitUntilFirstDispatchOptions} options settings
 	 * @returns {Promise<unknown>} payload data
 	 */
-	waitUntilFirstDispatchAsync(options: WaitUntilFirstDispatchOptions = DefaultWaitUntilFirstDispatchOptions) : Promise<unknown> {        
+	waitUntilFirstDispatchAsync(options: WaitUntilFirstDispatchOptions = DefaultWaitUntilFirstDispatchOptions): Promise<unknown> {        
 		const myself = this;
 		options = OptionsMapper.map(options, DefaultWaitUntilFirstDispatchOptions);
 		if (options.resetFirstDispatchBefore){
@@ -203,7 +209,7 @@ export default class OSEventListener {
 	 * @param {SubscribeWithKeyOptions} [options = DefaultSubscribeWithKeyOptions] settings
 	 * @returns {boolean} if subscribed successfully
 	 */
-	subscribeWithKey(fn: ListenerFunction, key: string, options: SubscribeWithKeyOptions = DefaultSubscribeWithKeyOptions) : boolean{
+	subscribeWithKey(fn: ListenerFunction, key: string, options: SubscribeWithKeyOptions = DefaultSubscribeWithKeyOptions): boolean{
 		options = OptionsMapper.map(options, DefaultSubscribeWithKeyOptions);
 		const mappedListeners = this.#keyMappedListeners.get(key) || [];
 		if (mappedListeners.length === 0 || options.allowMultipleListernersPerKey){

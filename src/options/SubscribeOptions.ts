@@ -1,5 +1,4 @@
 import ErrorThrowable from './ErrorThrowable';
-/// <amd-module name="options/SubscribeOptions"/>
 /**
  * Sets the options settings for subscribe.
  */

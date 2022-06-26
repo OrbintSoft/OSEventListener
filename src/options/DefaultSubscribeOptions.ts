@@ -1,9 +1,8 @@
 import SubscribeOptions from './SubscribeOptions';
-/// <amd-module name="options/DefaultSubscribeOptions"/>
 /**
  * Default settings for subscribe options
  */
-const DefaultSubscribeOptions : SubscribeOptions = {
+const DefaultSubscribeOptions: SubscribeOptions = {
 	/**
 	 * as default doesn't throw errors
 	 */

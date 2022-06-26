@@ -4,6 +4,7 @@
         "eslint:recommended"
     ],
     "rules": {
+        "eqeqeq": ["error"],
         "quotes": ["error", "single"],
         "semi": ["error", "always"],
         "no-empty-function": ["off"],

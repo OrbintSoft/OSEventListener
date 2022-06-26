@@ -1,5 +1,4 @@
 import WaitUntilFirstDispatchOptions from './WaitUntilFirstDispatchOptions';
-/// <amd-module name="options/DefaultWaitUntilFirstDispatchOptions"/>
 /**
  * Default options for wait until first dispatch.
  */
