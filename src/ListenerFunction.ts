@@ -12,6 +12,10 @@ type ListenerFunction = (
 	 * @member {string} _keyedOsEvent for internal use, association with key event
 	 */
 	_keyedOsEvent?: string
+	/**
+	 * @member {number} _priority for internal use, it tracks the priority
+	 */
+	_priority?: number
 };
 
 export default ListenerFunction;

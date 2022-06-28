@@ -59,14 +59,20 @@ export default class OSEventListener {
 	 * @param {SubscribeOptions} [options=DefaultSubscribeOptions] settings
 	 * @returns {boolean} function successfully subscribed
 	 */
-	subscribe(fn: ListenerFunction, options: SubscribeOptions = DefaultSubscribeOptions): boolean {
-		options = OptionsMapper.map(options, DefaultSubscribeOptions);
-		if (!this.#listeners.includes(fn) || options.allowMultipleSubscribeSameFunction){
+	subscribe(fn: ListenerFunction, options: Partial<SubscribeOptions> = DefaultSubscribeOptions): boolean {
+		const newOptions = OptionsMapper.map(options, DefaultSubscribeOptions);
+		if (!this.#listeners.includes(fn) || newOptions.allowMultipleSubscribeSameFunction){
 			this.#listeners.push(fn);
+			if (typeof(options.priority) === 'number') {
+				fn._priority = options.priority;				
+			}
+			if (typeof(this.#listeners[0]._priority) === 'number' || typeof(this.#listeners[this.#listeners.length - 1]._priority) === 'number') {
+				this.#listeners.sort((a, b) => (b._priority === undefined ? 0 : b._priority) - (a._priority === undefined ? 0 : a._priority));
+			}
 			return true;
 		} else {
 			const errorMessage = 'An attempt to subscribe multiple times the same function occurred';
-			if (options.shouldThrowErrors){
+			if (newOptions.shouldThrowErrors){
 				throw new Error(errorMessage);                
 			} else {
 				this.#logger.warn(errorMessage);
