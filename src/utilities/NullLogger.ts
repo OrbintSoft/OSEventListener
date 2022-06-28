@@ -6,32 +6,32 @@ const NullLogger: Logger = {
 	/**
 	 * do nothing
 	 */
-	debug: function (): void {        
+	debug: function(): void {        
 	},
 	/**
 	 * do nothing
 	 */
-	error: function (): void {
+	error: function(): void {
 	},
 	/**
 	 * do nothing
 	 */
-	info: function (): void {
+	info: function(): void {
 	},
 	/**
 	 * do nothing
 	 */
-	log: function (): void {
+	log: function(): void {
 	},
 	/**
 	 * do nothing
 	 */
-	trace: function (): void {
+	trace: function(): void {
 	},
 	/**
 	 * do nothing
 	 */
-	warn: function (): void {
+	warn: function(): void {
 	}
 };
 

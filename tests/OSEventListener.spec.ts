@@ -2,14 +2,14 @@ import { assert } from 'chai';
 import { describe, it } from 'mocha';
 import OSEventListener from '../src/OSEventListener';
 
-describe('OSEventListener test basics', function () {
-	it('sets name', function () {
+describe('OSEventListener basic tests', function() {
+	it('sets name', function() {
 		const name = 'myEvent';
 		const event = new OSEventListener(name);
 		assert.equal(event.name, name);
 	});
 
-	it('dispatch', function () {
+	it('dispatch', function() {
 		const event = new OSEventListener('myEvent');
 		const sender1 = { a: 'sender' };
 		const data1 = { b: 'data' };
@@ -31,7 +31,7 @@ describe('OSEventListener test basics', function () {
 		assert.equal(ok, true);
 	});
 
-	it('subscribe', function () {
+	it('subscribe', function() {
 		const event = new OSEventListener('myEvent');
 		let f1Called = 0;
 		let f2Called = 0;
@@ -66,7 +66,7 @@ describe('OSEventListener test basics', function () {
 		assert.equal(ok, true);
 	});
 
-	it('unsubscribe', function () {
+	it('unsubscribe', function() {
 		const event = new OSEventListener('myEvent');
 		let f1Called = 0;
 		let f2Called = 0;
@@ -112,7 +112,7 @@ describe('OSEventListener test basics', function () {
 		assert.equal(ok, true);
 	});
 
-	it('subscribe with key', function () {
+	it('subscribe with key', function() {
 		const event = new OSEventListener('myEvent');
 		let f1Called = 0;
 		let f2Called = 0;
@@ -147,7 +147,7 @@ describe('OSEventListener test basics', function () {
 		assert.equal(ok, true);
 	});
 
-	it('unsubscribe with key', function () {
+	it('unsubscribe with key', function() {
 		const event = new OSEventListener('myEvent');
 		let f1Called = 0;
 		let f2Called = 0;
@@ -188,7 +188,7 @@ describe('OSEventListener test basics', function () {
 		assert.equal(f3Called, 3);
 	});
 
-	it('waits until first dispatch, not dispatched yet', function(done){
+	it('waits until first dispatch, not dispatched yet', function(done) {
 		const event1 = new OSEventListener('myEvent');
 		let called1 = 0;
 		event1.waitUntilFirstDispatchAsync().then((data) => {
@@ -221,7 +221,7 @@ describe('OSEventListener test basics', function () {
 		}, 20);
 	});
 
-	it('waits until first dispatch, already dispatched', function(done){
+	it('waits until first dispatch, already dispatched', function(done) {
 		const event1 = new OSEventListener('myEvent');
 		let called1 = 0;
 		event1.dispatch('sender', 'data1');

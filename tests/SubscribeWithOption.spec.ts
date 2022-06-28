@@ -2,8 +2,8 @@ import { assert } from 'chai';
 import OSEventListener from '../src/OSEventListener';
 import MemoryLogger from './mocks/MemoryLogger';
 
-describe('OSEventListener test subscribe', function () {
-	it('does not subscribe same function multiple times', function(){
+describe('OSEventListener test subscribe', function() {
+	it('does not subscribe same function multiple times', function() {
 		const logger = new MemoryLogger();
 		const event = new OSEventListener('myevent', { logger: logger });
 		let count = 0;
@@ -30,7 +30,7 @@ describe('OSEventListener test subscribe', function () {
 		assert.equal(warnings[0], 'An attempt to subscribe multiple times the same function occurred');
 	});
 
-	it('does subscribe same function multiple times', function(){
+	it('does subscribe same function multiple times', function() {
 		const logger = new MemoryLogger();
 		const event = new OSEventListener('myevent', { logger: logger });
 		let count = 0;
@@ -54,7 +54,7 @@ describe('OSEventListener test subscribe', function () {
 		assert.lengthOf(logger.warnMessages, 0);
 	});
 
-	it('listeners are executed in correct order', function(){
+	it('listeners are executed in correct order', function() {
 		const logger = new MemoryLogger();
 		const event = new OSEventListener('myevent', { logger: logger });
 		const executionOrder: number[] = [];	

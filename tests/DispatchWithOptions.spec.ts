@@ -3,7 +3,7 @@ import { describe, it } from 'mocha';
 import OSEventListener from '../src/OSEventListener';
 import MemoryLogger from './mocks/MemoryLogger';
 
-describe('OSEventListener test dispatch', function () {
+describe('OSEventListener test dispatch', function() {
 	it('dispatch is not deferred', () => {
 		const logger = new MemoryLogger();
 		const event = new OSEventListener('myevent', { logger: logger });
