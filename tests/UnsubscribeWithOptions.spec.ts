@@ -89,10 +89,10 @@ describe('OSEventListener test unsubscribe with options', function() {
 		assert.throw(() => event.unsubscribe(() => {}, { shouldThrowErrors: true }), errorMessage);
 		const ok2 = event.subscribe(fn);
 		assert.equal(ok2, true);
-		assert.throw(() => event.unsubscribe(() => {}, { shouldThrowErrors: true }),errorMessage);
+		assert.throw(() => event.unsubscribe(() => {}, { shouldThrowErrors: true }), errorMessage);
 		const ok4 = event.unsubscribe(fn, { shouldThrowErrors: true });
 		assert.equal(ok4, true);
 		assert.throw(() => event.unsubscribe(fn, { shouldThrowErrors: true }));
-		assert.throw(() => event.unsubscribe(() => {}, { shouldThrowErrors: true }),errorMessage);		
+		assert.throw(() => event.unsubscribe(() => {}, { shouldThrowErrors: true }), errorMessage);		
 	});
 });
