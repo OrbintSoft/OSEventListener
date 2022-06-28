@@ -4,13 +4,17 @@ import DispatchOptions from './DispatchOptions';
  */
 const DefaultDispatchOptions: DispatchOptions = {
 	/**
-	 * data is not stored as defaultclear
+	 * data is not stored as default
 	 */
 	storeData: false,
 	/**
 	 * the event is not deferred as default
 	 */
-	defer: false
+	defer: false,
+	/**
+	 * if a subscribed function throws extecption is catched per default
+	 */
+	shouldThrowErrors: false
 };
 
 export default DefaultDispatchOptions;

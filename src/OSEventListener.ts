@@ -147,15 +147,15 @@ export default class OSEventListener {
 	 * @param {unknown} data payload
 	 * @param {DispatchOptions} [options=DefaultDispatchOptions] settings
 	 */
-	dispatch(sender: unknown, data: unknown, options: DispatchOptions = DefaultDispatchOptions){
-		options = OptionsMapper.map(options, DefaultDispatchOptions);
-		if (options.storeData){
+	dispatch(sender: unknown, data: unknown, options: Partial<DispatchOptions> = DefaultDispatchOptions){
+		const newOptions = OptionsMapper.map(options, DefaultDispatchOptions);
+		if (newOptions.storeData){
 			this.#latestData = data;
 		}
 		this.#firstDispatchOccurred = true;
 		for (const f of this.#listeners){
 			try {
-				if (options.defer){
+				if (newOptions.defer){
 					setTimeout(() => {
 						f(sender, data);
 					}, 0);
@@ -164,7 +164,11 @@ export default class OSEventListener {
 				}
 				
 			} catch (ex){
-				this.#logger.error(ex);
+				if (newOptions.shouldThrowErrors) {
+					throw ex;
+				} else {
+					this.#logger.error(ex);
+				}				
 			}
 		}
 	}

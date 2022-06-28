@@ -1,7 +1,8 @@
+import ErrorThrowable from './ErrorThrowable';
 /**
  * Options for dispatch
  */
-export default interface DispatchOptions {
+export default interface DispatchOptions extends ErrorThrowable {
 	/**
 	 * if store the dispatched data for later use
 	 */
