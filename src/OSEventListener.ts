@@ -219,14 +219,14 @@ export default class OSEventListener {
 	 * @param {SubscribeWithKeyOptions} [options = DefaultSubscribeWithKeyOptions] settings
 	 * @returns {boolean} if subscribed successfully
 	 */
-	subscribeWithKey(fn: ListenerFunction, key: string, options: SubscribeWithKeyOptions = DefaultSubscribeWithKeyOptions): boolean {
-		options = OptionsMapper.map(options, DefaultSubscribeWithKeyOptions);
+	subscribeWithKey(fn: ListenerFunction, key: string, options: Partial<SubscribeWithKeyOptions> = DefaultSubscribeWithKeyOptions): boolean {
+		const newOptions = OptionsMapper.map(options, DefaultSubscribeWithKeyOptions);
 		const mappedListeners = this.#keyMappedListeners.get(key) || [];
-		if (mappedListeners.length === 0 || options.allowMultipleListernersPerKey) {
+		if (mappedListeners.length === 0 || newOptions.allowMultipleListernersPerKey) {
 			mappedListeners.push(fn);
 		} else {
 			const errorMessage = 'An attempt to add a listener with same key occurred';
-			if (options.shouldThrowErrors) {
+			if (newOptions.shouldThrowErrors) {
 				throw Error(errorMessage);
 			} else {
 				this.#logger.error(errorMessage);
@@ -235,7 +235,7 @@ export default class OSEventListener {
 		}
 
 		this.#keyMappedListeners.set(key, mappedListeners);
-		return this.subscribe(fn);
+		return this.subscribe(fn, newOptions);
 	}
 
 	/**

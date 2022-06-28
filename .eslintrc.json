@@ -6,14 +6,15 @@
     "rules": {
         "block-spacing": ["warn"],
         "eqeqeq": ["error"],
-        "quotes": ["error", "single"],
-        "semi": ["error", "always"],
         "no-empty-function": ["off"],
+        "quotes": ["error", "single"],
+        "semi": ["error", "always"],       
         "indent": ["warn", "tab"],
         "no-unused-vars": ["warn"],
         "key-spacing": ["warn", { "beforeColon": false }],
         "keyword-spacing": ["warn"],
         "brace-style": ["warn", "1tbs"],
+        "object-curly-spacing": ["off", "always"], 
         "space-before-blocks": ["warn", "always"],
         "space-before-function-paren": ["error", "never"]
     },

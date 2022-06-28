@@ -17,6 +17,7 @@
         "@typescript-eslint/no-empty-function": ["off"],
         "@typescript-eslint/indent": ["warn", "tab"],
         "@typescript-eslint/semi": ["error", "always"],
+        "@typescript-eslint/object-curly-spacing": ["warn", "always"],
         "@typescript-eslint/strict-boolean-expressions": [
             "error",
             {
@@ -25,7 +26,8 @@
             }
         ],
         "@typescript-eslint/type-annotation-spacing": ["error"],
-        "indent": ["off"],                    
+        "indent": ["off"],      
+        "object-curly-spacing": ["off"],              
         "semi": ["off"]
     },
     "env": {

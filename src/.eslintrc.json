@@ -19,6 +19,7 @@
         "@typescript-eslint/no-empty-function": ["off"],
         "@typescript-eslint/indent": ["warn", "tab"],
         "@typescript-eslint/semi": ["error", "always"],
+        "@typescript-eslint/object-curly-spacing": ["warn", "always"],
         "@typescript-eslint/strict-boolean-expressions": [
             "error",
             {
@@ -54,7 +55,8 @@
             ],
             "checkGetters": true,
             "enableFixer": false
-        }],          
+        }],         
+        "object-curly-spacing": ["off"], 
         "semi": ["off"]
     },
     "env": {

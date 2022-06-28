@@ -22,7 +22,7 @@ describe('OSEventListener test dispatch', function() {
 
 	it('dispatch is deferred', (done) => {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger});
+		const event = new OSEventListener('myevent', { logger: logger });
 		let count = 0;
 		const ok = event.subscribe((s, d) => {
 			assert.equal(s, 'sender');
@@ -42,7 +42,7 @@ describe('OSEventListener test dispatch', function() {
 
 	it('dispatch does not throw errors', () => {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger});
+		const event = new OSEventListener('myevent', { logger: logger });
 		let count = 0;
 		const error = Error('second subscribe thwrow an error');
 		let ok = event.subscribe((s, d) => {
@@ -74,7 +74,7 @@ describe('OSEventListener test dispatch', function() {
 
 	it('dispatch throws errors', () => {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger});
+		const event = new OSEventListener('myevent', { logger: logger });
 		let count = 0;
 		const error = Error('second subscribe thwrow an error');
 		let ok = event.subscribe((s, d) => {
