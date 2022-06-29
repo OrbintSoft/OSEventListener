@@ -9,15 +9,16 @@
         "eqeqeq": ["error"],
         "indent": ["warn", "tab"],
         "no-empty-function": ["off"],
-        "quotes": ["error", "single"],
-        "semi": ["error", "always"],              
         "no-unused-vars": ["warn"],
+        "quotes": ["error", "single"],
+        "semi": ["error", "always"],                      
         "key-spacing": ["warn", { "beforeColon": false }],
         "keyword-spacing": ["warn"],
         "brace-style": ["warn", "1tbs"],
         "object-curly-spacing": ["off", "always"], 
         "space-before-blocks": ["warn", "always"],
-        "space-before-function-paren": ["error", "never"]
+        "space-before-function-paren": ["error", "never"],
+        "space-infix-ops": ["warn"]
     },
     "parserOptions": {
         "ecmaVersion": 2020,

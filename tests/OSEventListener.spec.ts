@@ -88,23 +88,23 @@ describe('OSEventListener basic tests', function() {
 			assert.equal(d, 'data');
 		};
 		ok &&= event.subscribe(f1);
-		ok &&=event.subscribe(f2);
-		ok &&=event.subscribe(f3);
+		ok &&= event.subscribe(f2);
+		ok &&= event.subscribe(f3);
 		event.dispatch('sender', 'data');
 		assert.equal(f1Called, 1);
 		assert.equal(f2Called, 1);
 		assert.equal(f3Called, 1);
-		ok &&=event.unsubscribe(f2);
+		ok &&= event.unsubscribe(f2);
 		event.dispatch('sender', 'data');
 		assert.equal(f1Called, 2);
 		assert.equal(f2Called, 1);
 		assert.equal(f3Called, 2);
-		ok &&=event.unsubscribe(f1);
+		ok &&= event.unsubscribe(f1);
 		event.dispatch('sender', 'data');
 		assert.equal(f1Called, 2);
 		assert.equal(f2Called, 1);
 		assert.equal(f3Called, 3);
-		ok &&=event.unsubscribe(f3);
+		ok &&= event.unsubscribe(f3);
 		event.dispatch('sender', 'data');
 		assert.equal(f1Called, 2);
 		assert.equal(f2Called, 1);
@@ -210,7 +210,7 @@ describe('OSEventListener basic tests', function() {
 				});
 				event1.dispatch('sender', 'data2');
 				event1.dispatch('sender', 'data3');
-				setTimeout((data) => {
+				setTimeout((data: unknown) => {
 					assert.equal(data, undefined); //promise is already resolved
 					assert.equal(called1, 2);
 				}, 0);

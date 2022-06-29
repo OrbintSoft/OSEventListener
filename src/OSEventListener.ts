@@ -16,6 +16,7 @@ import DefaultDispatchOptions from './options/DefaultDispatchOptions';
 import WaitUntilFirstDispatchOptions from './options/WaitUntilFirstDispatchOptions';
 import DefaultWaitUntilFirstDispatchOptions from './options/DefaultWaitUntilFirstDispatchOptions';
 import DispatchOptions from './options/DispatchOptions';
+import ListenerWrapper from './ListenerWrapper';
 
 /**
  * @author Stefano Balzarotti
@@ -24,10 +25,10 @@ import DispatchOptions from './options/DispatchOptions';
  */
 export default class OSEventListener {    
 	#name  = '';
-	#listeners: ListenerFunction[] = [];
+	#listeners: ListenerWrapper[] = [];
 	#logger: Logger = NullLogger;
 	#firstDispatchOccurred = false;
-	#keyMappedListeners: Map<string, ListenerFunction[]> = new Map(); 
+	#keyMappedListeners: Map<string, ListenerWrapper[]> = new Map(); 
 	#latestData: unknown = null;
 
 	/**
@@ -55,19 +56,16 @@ export default class OSEventListener {
 	}
 
 	/**
-	 * @param {ListenerFunction} fn the function you want subscribe to the event
+	 * @param {ListenerWrapper} wrapper the function you want subscribe to the event with options
 	 * @param {SubscribeOptions} [options=DefaultSubscribeOptions] settings
 	 * @returns {boolean} function successfully subscribed
 	 */
-	subscribe(fn: ListenerFunction, options: Partial<SubscribeOptions> = DefaultSubscribeOptions): boolean {
+	#subscribe(wrapper: ListenerWrapper, options: SubscribeOptions): boolean {
 		const newOptions = OptionsMapper.map(options, DefaultSubscribeOptions);
-		if (!this.#listeners.includes(fn) || newOptions.allowMultipleSubscribeSameFunction) {
-			this.#listeners.push(fn);
-			if (typeof(options.priority) === 'number') {
-				fn._priority = options.priority;				
-			}
-			if (typeof(this.#listeners[0]._priority) === 'number' || typeof(this.#listeners[this.#listeners.length - 1]._priority) === 'number') {
-				this.#listeners.sort((a, b) => (b._priority === undefined ? 0 : b._priority) - (a._priority === undefined ? 0 : a._priority));
+		if (!this.#listeners.some((w) => w.fn === wrapper.fn) || newOptions.allowMultipleSubscribeSameFunction) {
+			this.#listeners.push(wrapper);			
+			if (this.#listeners[0].priority !== null || this.#listeners[this.#listeners.length - 1].priority !== null) {
+				this.#listeners.sort((a, b) => (b.priority === null ? 0 : b.priority) - (a.priority === null ? 0 : a.priority));
 			}
 			return true;
 		} else {
@@ -82,19 +80,30 @@ export default class OSEventListener {
 	}
 
 	/**
+	 * @param {ListenerFunction} fn the function you want subscribe to the event
+	 * @param {SubscribeOptions} [options=DefaultSubscribeOptions] settings
+	 * @returns {boolean} function successfully subscribed
+	 */
+	subscribe(fn: ListenerFunction, options: Partial<SubscribeOptions> = DefaultSubscribeOptions): boolean {
+		const newOptions = OptionsMapper.map(options, DefaultSubscribeOptions);
+		const wrapper = new ListenerWrapper(fn, null, options.priority);
+		return this.#subscribe(wrapper, newOptions);
+	}
+
+	/**
 	 * Removes a function from the key map
 	 *
-	 * @param {ListenerFunction} fn listener
+	 * @param {ListenerWrapper} wrapper listener wrapper
 	 * @param {UnsubscribeOptions} options settings
 	 */
-	#removeFunctionFromKeyMap(fn: ListenerFunction, options: UnsubscribeOptions) {
-		if (typeof (fn._keyedOsEvent) === 'string') {
-			const possibleFns = this.#keyMappedListeners.get(fn._keyedOsEvent);
+	#removeFunctionFromKeyMap(wrapper: ListenerWrapper, options: UnsubscribeOptions) {
+		if (wrapper.keyedEvent !== null) {
+			const possibleFns = this.#keyMappedListeners.get(wrapper.keyedEvent);
 			if (possibleFns) {
 				let i = -1;
 				do {
-					i = possibleFns.indexOf(fn);
-					if (i!== -1) {
+					i = possibleFns.findIndex(w => w.fn === wrapper.fn);
+					if (i !== -1) {
 						possibleFns.splice(i, 1);
 					}   
 					if (options.removeOnlyFirstOccurrence) {
@@ -116,7 +125,7 @@ export default class OSEventListener {
 		let i = -1;
 		let found = false;
 		do {
-			i = this.#listeners.indexOf(fn);
+			i = this.#listeners.findIndex(w => w.fn === fn);
 			if (i !== -1) {
 				this.#listeners.splice(i, 1);
 				found = true;
@@ -126,7 +135,7 @@ export default class OSEventListener {
 			}
 		} while (i !== -1);
 		if (found) {
-			this.#removeFunctionFromKeyMap(fn, newOptions);
+			this.#removeFunctionFromKeyMap(new ListenerWrapper(fn), newOptions);
 			return true;
 		} else {
 			const errorMessage = 'An attempt to unsubscribe a non subscribed function occurred';
@@ -159,14 +168,14 @@ export default class OSEventListener {
 			this.#latestData = data;
 		}
 		this.#firstDispatchOccurred = true;
-		for (const f of this.#listeners) {
+		for (const w of this.#listeners) {
 			try {
 				if (newOptions.defer) {
 					setTimeout(() => {
-						f(sender, data);
+						w.fn(sender, data);
 					}, 0);
 				} else {
-					f(sender, data);
+					w.fn(sender, data);
 				}
 				
 			} catch (ex) {
@@ -223,7 +232,7 @@ export default class OSEventListener {
 		const newOptions = OptionsMapper.map(options, DefaultSubscribeWithKeyOptions);
 		const mappedListeners = this.#keyMappedListeners.get(key) || [];
 		if (mappedListeners.length === 0 || newOptions.allowMultipleListernersPerKey) {
-			mappedListeners.push(fn);
+			mappedListeners.push(new ListenerWrapper(fn, key, options.priority));
 		} else {
 			const errorMessage = 'An attempt to add a listener with same key occurred';
 			if (newOptions.shouldThrowErrors) {
@@ -243,24 +252,29 @@ export default class OSEventListener {
 	 * @param {UnsubscribeWithKeyOptions} [options = DefaultUnsubscribeWithKeyOptions] settings
 	 * @returns {boolean} if unsubscribed successfully
 	 */
-	unsubscribeWithKey(key: string, options: UnsubscribeWithKeyOptions = DefaultUnsubscribeWithKeyOptions): boolean {
+	unsubscribeWithKey(key: string, options: Partial<UnsubscribeWithKeyOptions> = DefaultUnsubscribeWithKeyOptions): boolean {
+		const newOptions = OptionsMapper.map(options, DefaultUnsubscribeWithKeyOptions);
 		const mappedListeners = this.#keyMappedListeners.get(key) || [];
 		let found = false;
-		for (const fn of mappedListeners) {            
-			this.unsubscribe(fn, options);
+		while (mappedListeners.length > 0) {
+			const w = mappedListeners.pop() as ListenerWrapper;
+			if (!this.unsubscribe(w.fn, newOptions)) {
+				this.#logger.warn('Failed to unsubscribe a registered function, probably it was already unsubscribed');
+			}
 			found = true;            
-			if (options.removeOnlyFirstKeyedListener) {
+			if (newOptions.removeOnlyFirstKeyedListener) {
 				break;   
 			}
-		}     
+		}  
 		if (!found) {
 			const errorMessage = 'An attempt to unsubscribe a non mapped listener occurred';
-			if (options.shouldThrowErrors) {
+			if (newOptions.shouldThrowErrors) {
 				throw Error(errorMessage);
 			} else {
 				this.#logger.warn(errorMessage);
 			}
 		}   
+		this.#keyMappedListeners.set(key, mappedListeners);
 		return found;
 	}    
 }

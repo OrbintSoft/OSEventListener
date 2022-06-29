@@ -24,7 +24,7 @@ describe('OSEventListener test unsubscribe with options', function() {
 		assert.equal(count, 0);
 		event.dispatch('sender', 'data');
 		assert.equal(count, 2);
-		const ok3= event.unsubscribe(fn, { removeOnlyFirstOccurrence: true });
+		const ok3 = event.unsubscribe(fn, { removeOnlyFirstOccurrence: true });
 		assert.equal(ok3, true);
 		event.dispatch('sender', 'data');		
 		assert.equal(count, 3);
@@ -55,7 +55,7 @@ describe('OSEventListener test unsubscribe with options', function() {
 		assert.equal(count, 0);
 		event.dispatch('sender', 'data');
 		assert.equal(count, 2);
-		const ok3= event.unsubscribe(fn, { removeOnlyFirstOccurrence: false });
+		const ok3 = event.unsubscribe(fn, { removeOnlyFirstOccurrence: false });
 		assert.equal(ok3, true);
 		event.dispatch('sender', 'data');		
 		assert.equal(count, 2);
