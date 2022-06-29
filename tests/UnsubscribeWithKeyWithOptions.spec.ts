@@ -109,9 +109,42 @@ describe('OSEventListener test unsubscribe with key with options', function() {
 		assert.equal(ok3, true);
 		event.dispatch('sender', 'data');		
 		assert.equal(count, 2);
-		const ok4 = event.unsubscribeWithKey('key2', { removeOnlyFirstOccurrence: true });
+		const ok4 = event.unsubscribeWithKey('key2', { removeOnlyFirstOccurrence: false });
 		assert.equal(ok4, true);
-		//event.dispatch('sender', 'data');		
-		//assert.equal(count, 3);
+		event.dispatch('sender', 'data');		
+		assert.equal(count, 2);
+	});
+
+	it('does not throw errors', function() {
+		const logger = new MemoryLogger();
+		const event = new OSEventListener('myevent', { logger: logger });
+		const fn = () => {};
+		const ok1 = event.unsubscribeWithKey('key1', { shouldThrowErrors: false });
+		assert.equal(ok1, false);
+		const ok2 = event.subscribeWithKey(fn, 'key1');
+		assert.equal(ok2, true);
+		const ok3 = event.unsubscribeWithKey('key2', { shouldThrowErrors: false });
+		assert.equal(ok3, false);
+		const ok4 = event.unsubscribeWithKey('key1', { shouldThrowErrors: false });
+		assert.equal(ok4, true);
+		const ok5 = event.unsubscribeWithKey('key1', { shouldThrowErrors: false });
+		assert.equal(ok5, false);
+		const ok6 = event.unsubscribeWithKey('key2', { shouldThrowErrors: false });
+		assert.equal(ok6, false);
+	});
+
+	it('does throws errors', function() {
+		const logger = new MemoryLogger();
+		const errorMessage = 'An attempt to unsubscribe a non mapped listener occurred';
+		const event = new OSEventListener('myevent', { logger: logger });
+		const fn = () => {};
+		assert.throw(() => event.unsubscribeWithKey('key1', { shouldThrowErrors: true }), errorMessage);
+		const ok2 = event.subscribeWithKey(fn, 'key1');
+		assert.equal(ok2, true);
+		assert.throw(() => event.unsubscribeWithKey('key2', { shouldThrowErrors: true }), errorMessage);
+		const ok4 = event.unsubscribeWithKey('key1', { shouldThrowErrors: true });
+		assert.equal(ok4, true);
+		assert.throw(() => event.unsubscribeWithKey('key1', { shouldThrowErrors: true }));
+		assert.throw(() => event.unsubscribeWithKey('key2', { shouldThrowErrors: true }), errorMessage);		
 	});
 });
