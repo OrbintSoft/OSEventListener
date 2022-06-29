@@ -18,7 +18,7 @@ describe('OSEventListener test unsubscribe with options', function() {
 		});
 		const ok2 = event.subscribe(fn, {
 			allowMultipleSubscribeSameFunction: true
-		});		
+		});
 		assert.equal(ok1, true);
 		assert.equal(ok2, true);
 		assert.equal(count, 0);
@@ -26,11 +26,11 @@ describe('OSEventListener test unsubscribe with options', function() {
 		assert.equal(count, 2);
 		const ok3 = event.unsubscribe(fn, { removeOnlyFirstOccurrence: true });
 		assert.equal(ok3, true);
-		event.dispatch('sender', 'data');		
+		event.dispatch('sender', 'data');
 		assert.equal(count, 3);
 		const ok4 = event.unsubscribe(fn, { removeOnlyFirstOccurrence: true });
 		assert.equal(ok4, true);
-		event.dispatch('sender', 'data');		
+		event.dispatch('sender', 'data');
 		assert.equal(count, 3);
 	});
 
@@ -49,7 +49,7 @@ describe('OSEventListener test unsubscribe with options', function() {
 		});
 		const ok2 = event.subscribe(fn, {
 			allowMultipleSubscribeSameFunction: true
-		});		
+		});
 		assert.equal(ok1, true);
 		assert.equal(ok2, true);
 		assert.equal(count, 0);
@@ -57,7 +57,7 @@ describe('OSEventListener test unsubscribe with options', function() {
 		assert.equal(count, 2);
 		const ok3 = event.unsubscribe(fn, { removeOnlyFirstOccurrence: false });
 		assert.equal(ok3, true);
-		event.dispatch('sender', 'data');		
+		event.dispatch('sender', 'data');
 		assert.equal(count, 2);
 		const ok4 = event.unsubscribe(fn, { removeOnlyFirstOccurrence: true });
 		assert.equal(ok4, false);
@@ -93,6 +93,6 @@ describe('OSEventListener test unsubscribe with options', function() {
 		const ok4 = event.unsubscribe(fn, { shouldThrowErrors: true });
 		assert.equal(ok4, true);
 		assert.throw(() => event.unsubscribe(fn, { shouldThrowErrors: true }));
-		assert.throw(() => event.unsubscribe(() => {}, { shouldThrowErrors: true }), errorMessage);		
+		assert.throw(() => event.unsubscribe(() => {}, { shouldThrowErrors: true }), errorMessage);
 	});
 });

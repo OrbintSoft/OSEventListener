@@ -57,31 +57,31 @@ describe('OSEventListener test subscribe', function() {
 	it('listeners are executed in correct order', function() {
 		const logger = new MemoryLogger();
 		const event = new OSEventListener('myevent', { logger: logger });
-		const executionOrder: number[] = [];	
+		const executionOrder: number[] = [];
 		let ok = event.subscribe(() => {
 			executionOrder.push(1);
 		}, {
-			priority: null	
+			priority: null
 		});
 		ok &&= event.subscribe(() => {
 			executionOrder.push(2);
 		}, {
-			priority: 5	
+			priority: 5
 		});
 		ok &&= event.subscribe(() => {
 			executionOrder.push(3);
 		}, {
-			priority: -3	
+			priority: -3
 		});
 		ok &&= event.subscribe(() => {
 			executionOrder.push(4);
 		}, {
-			priority: null	
+			priority: null
 		});
 		ok &&= event.subscribe(() => {
 			executionOrder.push(5);
 		}, {
-			priority: 8	
+			priority: 8
 		});
 		assert.equal(ok, true);
 		event.dispatch('sender', 'data');
@@ -116,7 +116,7 @@ describe('OSEventListener test subscribe', function() {
 		assert.equal(ok, true);
 		assert.Throw(() => {
 			event.subscribe(fn, {
-				shouldThrowErrors: true				
+				shouldThrowErrors: true
 			});
 		}, 'An attempt to subscribe multiple times the same function occurred');
 	});

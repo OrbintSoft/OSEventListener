@@ -114,31 +114,31 @@ describe('OSEventListener test subscribe with key with options', function() {
 	it('listeners are executed in correct order', function() {
 		const logger = new MemoryLogger();
 		const event = new OSEventListener('myevent', { logger: logger });
-		const executionOrder: number[] = [];	
+		const executionOrder: number[] = [];
 		let ok = event.subscribeWithKey(() => {
 			executionOrder.push(1);
 		}, 'key1', {
-			priority: null	
+			priority: null
 		});
 		ok &&= event.subscribeWithKey(() => {
 			executionOrder.push(2);
 		}, 'key2', {
-			priority: 5	
+			priority: 5
 		});
 		ok &&= event.subscribeWithKey(() => {
 			executionOrder.push(3);
 		}, 'key3', {
-			priority: -3	
+			priority: -3
 		});
 		ok &&= event.subscribeWithKey(() => {
 			executionOrder.push(4);
 		}, 'key4', {
-			priority: null	
+			priority: null
 		});
 		ok &&= event.subscribeWithKey(() => {
 			executionOrder.push(5);
 		}, 'key5', {
-			priority: 8	
+			priority: 8
 		});
 		assert.equal(ok, true);
 		event.dispatch('sender', 'data');

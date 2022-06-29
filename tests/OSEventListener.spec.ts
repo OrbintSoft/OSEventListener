@@ -24,7 +24,7 @@ describe('OSEventListener basic tests', function() {
 				assert.equal(s, sender2);
 				assert.equal(d, data2);
 			}
-			count++;			
+			count++;
 		});
 		event.dispatch(sender1, data1);
 		event.dispatch(sender2, data2);
@@ -248,7 +248,7 @@ describe('OSEventListener basic tests', function() {
 		}, 0);
 		setTimeout(() => {
 			done();
-		}, 20);		
+		}, 20);
 	});
 
 	it('it resets first dispatch, not dispatched yet', function(done) {
@@ -262,10 +262,10 @@ describe('OSEventListener basic tests', function() {
 		});
 		setTimeout(() => {
 			assert.equal(called1, 0);
-			event1.dispatch('sender', 'data1');			
-			setTimeout(() => {				
+			event1.dispatch('sender', 'data1');
+			setTimeout(() => {
 				assert.equal(called1, 1);
-				event1.resetFirstDispatch();	
+				event1.resetFirstDispatch();
 				event1.waitUntilFirstDispatchAsync().then((data) => {
 					assert.equal(data, 'data2');
 					called1++;
@@ -281,11 +281,11 @@ describe('OSEventListener basic tests', function() {
 					}).catch((error) => {
 						throw error;
 					});
-					event1.dispatch('sender', 'data3');	
+					event1.dispatch('sender', 'data3');
 					setTimeout(() => {
 						assert.equal(called1, 3);
-					}, 0);				
-				}, 0);							
+					}, 0);
+				}, 0);
 			}, 0);
 		}, 0);
 		setTimeout(() => {

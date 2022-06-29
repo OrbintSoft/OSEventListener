@@ -1,5 +1,5 @@
 /**
- * Option settings for Wait until first dispatch. 
+ * Option settings for Wait until first dispatch.
  */
 export default interface WaitUntilFirstDispatchOptions {
 	/**

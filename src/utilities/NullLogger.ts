@@ -6,7 +6,7 @@ const NullLogger: Logger = {
 	/**
 	 * do nothing
 	 */
-	debug: function(): void {        
+	debug: function(): void {
 	},
 	/**
 	 * do nothing

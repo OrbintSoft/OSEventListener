@@ -17,7 +17,7 @@ describe('OSEventListener test unsubscribe with key with options', function() {
 			assert.equal(s, 'sender');
 			assert.equal(d, 'data');
 			count++;
-		}, 'key1');		
+		}, 'key1');
 		event.dispatch('sender', 'data');
 		assert.equal(count, 2);
 		ok &&= event.unsubscribeWithKey('key1', { removeOnlyFirstKeyedListener: false });
@@ -40,7 +40,7 @@ describe('OSEventListener test unsubscribe with key with options', function() {
 			assert.equal(s, 'sender');
 			assert.equal(d, 'data');
 			count++;
-		}, 'key1');		
+		}, 'key1');
 		event.dispatch('sender', 'data');
 		assert.equal(count, 2);
 		ok &&= event.unsubscribeWithKey('key1', { removeOnlyFirstKeyedListener: true });
@@ -68,7 +68,7 @@ describe('OSEventListener test unsubscribe with key with options', function() {
 		});
 		const ok2 = event.subscribeWithKey(fn, 'key2', {
 			allowMultipleSubscribeSameFunction: true
-		});		
+		});
 		assert.equal(ok1, true);
 		assert.equal(ok2, true);
 		assert.equal(count, 0);
@@ -76,11 +76,11 @@ describe('OSEventListener test unsubscribe with key with options', function() {
 		assert.equal(count, 2);
 		const ok3 = event.unsubscribeWithKey('key1', { removeOnlyFirstOccurrence: true });
 		assert.equal(ok3, true);
-		event.dispatch('sender', 'data');		
+		event.dispatch('sender', 'data');
 		assert.equal(count, 3);
 		const ok4 = event.unsubscribeWithKey('key2', { removeOnlyFirstOccurrence: true });
 		assert.equal(ok4, true);
-		event.dispatch('sender', 'data');		
+		event.dispatch('sender', 'data');
 		assert.equal(count, 3);
 	});
 
@@ -99,7 +99,7 @@ describe('OSEventListener test unsubscribe with key with options', function() {
 		});
 		const ok2 = event.subscribeWithKey(fn, 'key2', {
 			allowMultipleSubscribeSameFunction: true
-		});		
+		});
 		assert.equal(ok1, true);
 		assert.equal(ok2, true);
 		assert.equal(count, 0);
@@ -107,11 +107,11 @@ describe('OSEventListener test unsubscribe with key with options', function() {
 		assert.equal(count, 2);
 		const ok3 = event.unsubscribeWithKey('key1', { removeOnlyFirstOccurrence: false });
 		assert.equal(ok3, true);
-		event.dispatch('sender', 'data');		
+		event.dispatch('sender', 'data');
 		assert.equal(count, 2);
 		const ok4 = event.unsubscribeWithKey('key2', { removeOnlyFirstOccurrence: false });
 		assert.equal(ok4, true);
-		event.dispatch('sender', 'data');		
+		event.dispatch('sender', 'data');
 		assert.equal(count, 2);
 	});
 
@@ -145,6 +145,6 @@ describe('OSEventListener test unsubscribe with key with options', function() {
 		const ok4 = event.unsubscribeWithKey('key1', { shouldThrowErrors: true });
 		assert.equal(ok4, true);
 		assert.throw(() => event.unsubscribeWithKey('key1', { shouldThrowErrors: true }));
-		assert.throw(() => event.unsubscribeWithKey('key2', { shouldThrowErrors: true }), errorMessage);		
+		assert.throw(() => event.unsubscribeWithKey('key2', { shouldThrowErrors: true }), errorMessage);
 	});
 });

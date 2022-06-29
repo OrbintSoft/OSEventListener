@@ -20,7 +20,7 @@ class OptionsMapper {
 					options[p] = defaultOptions[p];
 				}
 			}
-		}   
+		}
 		return options as T;
 	}
 }

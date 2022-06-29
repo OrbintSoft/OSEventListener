@@ -120,7 +120,7 @@ describe('OSEventListener test dispatch', function() {
 		const logger = new MemoryLogger();
 		let count = 0;
 		const event = new OSEventListener('myevent', { logger: logger });
-		event.dispatch('sender', 'data1', { storeData: true });		
+		event.dispatch('sender', 'data1', { storeData: true });
 		event.waitUntilFirstDispatchAsync().then(data => {
 			assert.equal(data, 'data1');
 			count++;

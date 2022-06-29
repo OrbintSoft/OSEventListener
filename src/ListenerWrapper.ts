@@ -9,7 +9,7 @@ export default class ListenerWrapper {
 	priority: number|null;
 
 	/**
-	 * @param {ListenerFunction} fn The listener function 
+	 * @param {ListenerFunction} fn The listener function
 	 * @param {string|null} keyedEvent The key associated with this event
 	 * @param {number|null} prority The priority
 	 */
@@ -18,4 +18,4 @@ export default class ListenerWrapper {
 		this.keyedEvent = keyedEvent;
 		this.priority = prority;
 	}
-} 
+}
