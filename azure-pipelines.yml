@@ -34,3 +34,14 @@ steps:
 - script: |
     npm run test
   displayName: 'Run Tests'
+
+- task: PublishTestResults@2
+  displayName: 'Publish Unit Test Results'
+  condition: succeededOrFailed()
+  inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: 'tests/TEST-RESULT.xml'
+      mergeTestResults: true
+      failTaskOnFailedTests: true
+      testRunTitle: 'Unit tests'
+
