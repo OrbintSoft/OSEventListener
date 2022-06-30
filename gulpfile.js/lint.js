@@ -5,19 +5,18 @@ const gulpIf = require('gulp-if');
 
 function lint(paths) {
 	return src(paths)
-		.pipe(eslint({fix:true}))
+		.pipe(eslint({fix: true}))
 		.pipe(eslint.format())
-		.pipe(gulpIf(file => file.eslint != null && file.eslint.fixed, gulp.dest(file => file.base)))
+		.pipe(gulpIf(file => file.eslint !== null && file.eslint.fixed, gulp.dest(file => file.base)))
 		.pipe(eslint.failAfterError());
 }
 
-function lintSrc(){
+function lintSrc() {
 	return lint(['src/**/*.ts']);
 }
-function lintTests(){
+function lintTests() {
 	return lint(['tests/**/*.ts']);
 }
 
 exports.src = lintSrc;
 exports.tests = lintTests;
-

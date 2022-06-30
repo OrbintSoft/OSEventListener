@@ -1,7 +1,12 @@
 {
+	"$schema": "https://json.schemastore.org/mocharc",
 	"require": "ts-node/register",
 	"extensions": ["ts"],
 	"spec": [
 	  "**/*.spec.*"
+	],
+	"reporter": "mocha-junit-reporter",
+	"reporter-option": [
+		"mochaFile=./TEST-RESULT.xml"
 	]
   }

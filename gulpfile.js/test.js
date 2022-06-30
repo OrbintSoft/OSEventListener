@@ -9,7 +9,7 @@ function startSampleServer() {
 			reject(error);
 		});
 	});
-	return promise;	
+	return promise;
 }
 
 function runTests() {
@@ -22,7 +22,7 @@ function runTests() {
 			reject(error);
 		});
 	});
-	return promise;	
+	return promise;
 }
 
 exports.startSampleServer = startSampleServer;
