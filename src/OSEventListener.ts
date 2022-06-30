@@ -205,13 +205,14 @@ export default class OSEventListener {
 			return Promise.resolve(this.#latestData);
 		} else {
 			let listener: ListenerFunction;
-
 			const promise = new Promise<unknown>((resolve, reject) => {
 				listener = (sender, data) => {
 					myself.unsubscribe(listener);
-					if (options.resetFirstDispatchAfter) {
-						myself.resetFirstDispatch();
-					}
+					promise.then(() => {
+						if (options.resetFirstDispatchAfter) {
+							myself.resetFirstDispatch();
+						}
+					});
 					resolve(data);
 				};
 				if (!myself.subscribe(listener)) {
