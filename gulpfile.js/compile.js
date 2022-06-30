@@ -43,7 +43,7 @@ async function minify(type) {
 		if (!await fse.pathExists(folder)) {
 			await fse.mkdirp(folder);
 		}
-		const sourceMap = input.substring(0, input.length -3) + '.js.map';
+		const sourceMap = input.substring(0, input.length - 3) + '.js.map';
 		const promise = new Promise((resolve, reject) => {
 			const process = spawn('npx', ['terser', input, '--output', dest, '--source-map', `includeSources,url='${sourceMapName}',content='${sourceMap}'`],  {stdio: 'inherit'});
 			process.on('close', (status) => {
