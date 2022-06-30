@@ -2,3 +2,4 @@ node_modules
 coverage
 dist
 tests/TEST-RESULT.xml
+oseventlistener*.tgz

@@ -35,6 +35,10 @@ steps:
     npm run test
   displayName: 'Run Tests'
 
+- script: |
+    npm pack
+  displayName: 'Npm pack'
+
 - task: PublishTestResults@2
   displayName: 'Publish Unit Test Results'
   condition: succeededOrFailed()

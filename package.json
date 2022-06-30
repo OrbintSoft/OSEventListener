@@ -1,4 +1,5 @@
 {
+    "name": "oseventlistener",
     "author": {
         "name": "Stefano Balzarotti",
         "email": "stefano.balzarotti@orbintsoft.net"
@@ -8,6 +9,13 @@
     "engines": {
         "node": ">=16"
     },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/OrbintSoft/OSEventListener.git"
+    },
+    "type": "module",
+    "main": "dist/es/OSEventListener.js",
+    "types": "dist/type_definitions/OSEventListener.ts",
     "scripts": {
         "lint": "gulp lint",
         "clean": "gulp clean",
