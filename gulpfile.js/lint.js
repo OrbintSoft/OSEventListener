@@ -1,7 +1,7 @@
 const eslint = require('gulp-eslint');
 const gulp = require('gulp');
-const src = gulp.src;
 const gulpIf = require('gulp-if');
+const src = gulp.src;
 
 function lint(paths) {
 	return src(paths)
@@ -18,5 +18,6 @@ function lintTests() {
 	return lint(['tests/**/*.ts']);
 }
 
-exports.src = lintSrc;
-exports.tests = lintTests;
+exports.lint = lint;
+exports.lintSrc = lintSrc;
+exports.lintTests = lintTests;

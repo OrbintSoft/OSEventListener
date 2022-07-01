@@ -1,8 +1,8 @@
 
-const spawn = require('child_process').spawn;
-const fse = require('fs-extra');
+const { spawn } = require('child_process');
+const { copyFile, copy, pathExists, mkdirp } = require('fs-extra');
 const glob = require('glob-promise');
-const path = require('path');
+const { dirname, basename } = require('path');
 
 function compileTypescript(tsconfig) {
 	const promise = new Promise((resolve, reject) => {
@@ -19,29 +19,46 @@ function compileTypescript(tsconfig) {
 
 async function compileEs() {
 	await compileTypescript('src/tsconfig.json');
-	await fse.copyFile('LICENSE', 'dist/es/LICENSE');
+	await copyFile('LICENSE', 'dist/es/LICENSE');
 	const files = await glob('dist/es/**/*.d.ts');
 	for (const file of files) {
 		const f =  'dist/type_definitions/' + file.substring(8);
-		await fse.copy(file, f);
+		await copy(file, f);
 	}
 	await minify('es');
 }
 
 async function compileUmd() {
 	await compileTypescript('src/tsconfig.umd.json');
-	await fse.copyFile('LICENSE', 'dist/umd/LICENSE');
+	await copyFile('LICENSE', 'dist/umd/LICENSE');
 	await minify('umd');
+}
+
+async function compileCommonJs() {
+	await compileTypescript('src/tsconfig.cjs.json');
+	await copyFile('LICENSE', 'dist/cjs/LICENSE');
+}
+
+async function compileAmd() {
+	await compileTypescript('src/tsconfig.amd.json');
+	await copyFile('LICENSE', 'dist/amd/LICENSE');
+	await minify('amd');
+}
+
+async function compileSystem() {
+	await compileTypescript('src/tsconfig.system.json');
+	await copyFile('LICENSE', 'dist/system/LICENSE');
+	await minify('system');
 }
 
 async function minify(type) {
 	const files = await glob(`dist/${type}/**/*.js`);
 	for (const input of files) {
 		const dest = `dist/min/${type}/` + input.substring(`dist/${type}/`.length);
-		const folder = path.dirname(dest);
-		const sourceMapName = path.basename(dest) + '.map';
-		if (!await fse.pathExists(folder)) {
-			await fse.mkdirp(folder);
+		const folder = dirname(dest);
+		const sourceMapName = basename(dest) + '.map';
+		if (!await pathExists(folder)) {
+			await mkdirp(folder);
 		}
 		const sourceMap = input.substring(0, input.length - 3) + '.js.map';
 		const promise = new Promise((resolve, reject) => {
@@ -72,5 +89,7 @@ async function createBundle() {
 
 exports.compileEs = compileEs;
 exports.compileUmd = compileUmd;
-exports.minify = minify;
+exports.compileCommonJs = compileCommonJs;
+exports.compileAmd = compileAmd;
+exports.compileSystem = compileSystem;
 exports.createBundle = createBundle;

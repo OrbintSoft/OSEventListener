@@ -1,5 +1,6 @@
-const fse = require('fs-extra');
+const emptyDir = require('fs-extra');
 async function cleanDist() {
-	await fse.emptyDir('dist');
+	await emptyDir('dist');
 }
-exports.dist = cleanDist;
+
+exports.clean = cleanDist;
