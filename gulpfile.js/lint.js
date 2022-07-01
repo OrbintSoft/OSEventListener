@@ -18,6 +18,10 @@ function lintTests() {
 	return lint(['tests/**/*.ts']);
 }
 
-exports.lint = lint;
-exports.lintSrc = lintSrc;
-exports.lintTests = lintTests;
+function lintGulp() {
+	return lint(['gulpfile.js/**/*.js']);
+}
+
+exports.src = lintSrc;
+exports.tests = lintTests;
+exports.gulp = lintGulp;

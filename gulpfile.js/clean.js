@@ -1,6 +1,21 @@
-const emptyDir = require('fs-extra');
+const fse = require('fs-extra');
+const glob = require('glob-promise');
 async function cleanDist() {
-	await emptyDir('dist');
+	await fse.emptyDir('dist');
 }
 
-exports.clean = cleanDist;
+async function cleanPacks() {
+	const files = await glob('oseventlistener-*.tgz');
+	for (const f of files) {
+		await fse.rm(f);
+	}
+}
+
+
+async function cleanTestResults() {
+	fse.remove('tests/TEST-RESULT.xml');
+}
+
+exports.dist = cleanDist;
+exports.packs = cleanPacks;
+exports.testResults = cleanTestResults;

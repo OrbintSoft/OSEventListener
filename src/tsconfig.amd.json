@@ -1,0 +1,10 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "target": "ES2015",
+        "module": "AMD",
+        "outDir": "../dist/amd",
+        "lib": ["ES2019", "DOM"],
+        "esModuleInterop": true
+    }
+}

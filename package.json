@@ -14,8 +14,8 @@
         "url": "git+https://github.com/OrbintSoft/OSEventListener.git"
     },
     "type": "commonjs",
-    "main": "dist/es/OSEventListener.js",
-    "types": "dist/type_definitions/OSEventListener.ts",
+    "main": "./dist/umd/OSEventListener.js",
+    "types": "./dist/type_definitions/OSEventListener.ts",
     "keywords": ["event", "listener", "simple", "dispatch", "events"],
     "scripts": {
         "lint": "gulp lint",
@@ -46,5 +46,9 @@
         "terser": "^5.14.1",
         "ts-node": "^10.8.1",
         "typescript": "^4.7.4"
+    },
+    "exports": {
+        "import": "./dist/cjs/OSEventListener.js",
+        "require": "./dist/es/OSEventListener.js"
     }
 }
