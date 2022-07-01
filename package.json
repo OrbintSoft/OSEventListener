@@ -1,11 +1,12 @@
 {
     "name": "oseventlistener",
+    "description": "A simple modern a strong typed javascript library to subscribe, manage and dispatch events",
     "author": {
         "name": "Stefano Balzarotti",
         "email": "stefano.balzarotti@orbintsoft.net"
     },
     "license": "BSD-3-Clause",
-    "version": "1.0.0-alpha.2",
+    "version": "1.0.0-alpha.3",
     "engines": {
         "node": ">=16"
     },
