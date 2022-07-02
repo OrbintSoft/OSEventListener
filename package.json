@@ -6,7 +6,7 @@
         "email": "stefano.balzarotti@orbintsoft.net"
     },
     "license": "BSD-3-Clause",
-    "version": "1.0.0-alpha.5",
+    "version": "1.0.0-alpha.6",
     "engines": {
         "node": ">=16"
     },
@@ -15,7 +15,8 @@
         "url": "git+https://github.com/OrbintSoft/OSEventListener.git"
     },
     "type": "commonjs",
-    "types": "./dist/type_definitions/OSEventListener.ts",
+    "types": "./main/index.d.ts",
+    "main": "./main/index.cjs",
     "keywords": ["event", "listener", "simple", "dispatch", "events"],
     "scripts": {
         "lint": "gulp lint",
@@ -48,7 +49,7 @@
         "typescript": "^4.7.4"
     },
     "exports": {
-        "import": "./dist/es/OSEventListener.js",
-        "require": "./dist/cjs/OSEventListener.js"
+        "import": "./main/OSEventListener.mjs",
+        "require": "./main/OSEventListener.cjs"
     }
 }
