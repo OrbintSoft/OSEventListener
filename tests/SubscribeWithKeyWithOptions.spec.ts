@@ -1,11 +1,11 @@
 import { assert } from 'chai';
-import OSEventListener from '../src/OSEventListener';
+import EventListener from '../src/EventListener';
 import MemoryLogger from './mocks/MemoryLogger';
 
-describe('OSEventListener test subscribe with key with options', function() {
+describe('EventListener test subscribe with key with options', function() {
 	it('does not subscribe same function multiple times', function() {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		let count = 0;
 		const fn = (s: unknown, d: unknown) => {
 			assert.equal(s, 'sender');
@@ -32,7 +32,7 @@ describe('OSEventListener test subscribe with key with options', function() {
 
 	it('does subscribe same function multiple times', function() {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		let count = 0;
 		const fn = (s: unknown, d: unknown) => {
 			assert.equal(s, 'sender');
@@ -56,7 +56,7 @@ describe('OSEventListener test subscribe with key with options', function() {
 
 	it('does not subscribe multiple listeners with same key', function() {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		let count = 0;
 
 		const ok = event.subscribeWithKey((s: unknown, d: unknown) => {
@@ -86,7 +86,7 @@ describe('OSEventListener test subscribe with key with options', function() {
 
 	it('does subscribe multiple listeners with same key', function() {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		let count = 0;
 
 		const ok1 = event.subscribeWithKey((s: unknown, d: unknown) => {
@@ -113,7 +113,7 @@ describe('OSEventListener test subscribe with key with options', function() {
 
 	it('listeners are executed in correct order', function() {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		const executionOrder: number[] = [];
 		let ok = event.subscribeWithKey(() => {
 			executionOrder.push(1);
@@ -147,7 +147,7 @@ describe('OSEventListener test subscribe with key with options', function() {
 
 	it('does not throw errors', function() {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		const fn = () => {};
 		const ok = event.subscribeWithKey(fn, 'key1', {
 			shouldThrowErrors: false
@@ -173,7 +173,7 @@ describe('OSEventListener test subscribe with key with options', function() {
 
 	it('throws errors', function() {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		const fn = () => {};
 		const ok = event.subscribeWithKey(fn, 'key1', {
 			shouldThrowErrors: false

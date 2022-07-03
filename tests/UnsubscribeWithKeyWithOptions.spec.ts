@@ -1,11 +1,11 @@
 import { assert } from 'chai';
-import OSEventListener from '../src/OSEventListener';
+import EventListener from '../src/EventListener';
 import MemoryLogger from './mocks/MemoryLogger';
 
-describe('OSEventListener test unsubscribe with key with options', function() {
+describe('EventListener test unsubscribe with key with options', function() {
 	it('it does unsubscribe all listeners when a key has multiple subscribed listeners', function() {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		let count = 0;
 
 		let ok = event.subscribeWithKey((s: unknown, d: unknown) => {
@@ -28,7 +28,7 @@ describe('OSEventListener test unsubscribe with key with options', function() {
 
 	it('it does unsubscribe only last listener when a key has multiple subscribed listeners', function() {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		let count = 0;
 
 		let ok = event.subscribeWithKey((s: unknown, d: unknown) => {
@@ -55,7 +55,7 @@ describe('OSEventListener test unsubscribe with key with options', function() {
 
 	it('unsubscribe only the first function', function() {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		let count = 0;
 		const fn = (s: unknown, d: unknown) => {
 			assert.equal(s, 'sender');
@@ -86,7 +86,7 @@ describe('OSEventListener test unsubscribe with key with options', function() {
 
 	it('unsubscribe all listeners with same function', function() {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		let count = 0;
 		const fn = (s: unknown, d: unknown) => {
 			assert.equal(s, 'sender');
@@ -117,7 +117,7 @@ describe('OSEventListener test unsubscribe with key with options', function() {
 
 	it('does not throw errors', function() {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		const fn = () => {};
 		const ok1 = event.unsubscribeWithKey('key1', { shouldThrowErrors: false });
 		assert.equal(ok1, false);
@@ -136,7 +136,7 @@ describe('OSEventListener test unsubscribe with key with options', function() {
 	it('does throws errors', function() {
 		const logger = new MemoryLogger();
 		const errorMessage = 'An attempt to unsubscribe a non mapped listener occurred';
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		const fn = () => {};
 		assert.throw(() => event.unsubscribeWithKey('key1', { shouldThrowErrors: true }), errorMessage);
 		const ok2 = event.subscribeWithKey(fn, 'key1');

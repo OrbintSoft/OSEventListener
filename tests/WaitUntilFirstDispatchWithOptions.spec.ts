@@ -1,11 +1,11 @@
 import { assert } from 'chai';
-import OSEventListener from '../src/OSEventListener';
+import EventListener from '../src/EventListener';
 import MemoryLogger from './mocks/MemoryLogger';
 
-describe('OSEventListener wait until first dispatch with options', function() {
+describe('EventListener wait until first dispatch with options', function() {
 	it('does not reset current status', function(done) {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		let count = 0;
 		let countDispatch = 0;
 		event.waitUntilFirstDispatchAsync({
@@ -64,7 +64,7 @@ describe('OSEventListener wait until first dispatch with options', function() {
 
 	it('resets status before wait', function(done) {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		let count = 0;
 		let countDispatch = 0;
 		event.waitUntilFirstDispatchAsync({
@@ -132,7 +132,7 @@ describe('OSEventListener wait until first dispatch with options', function() {
 
 	it('resets status after dispatch', function(done) {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		let count = 0;
 		let countDispatch = 0;
 		event.waitUntilFirstDispatchAsync({

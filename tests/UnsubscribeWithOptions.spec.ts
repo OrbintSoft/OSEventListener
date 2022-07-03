@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import OSEventListener from '../src/OSEventListener';
 import MemoryLogger from './mocks/MemoryLogger';
 
-describe('OSEventListener test unsubscribe with options', function() {
+describe('EventListener test unsubscribe with options', function() {
 	it('unsubscribe only the first function', function() {
 		const logger = new MemoryLogger();
 		const event = new OSEventListener('myevent', { logger: logger });

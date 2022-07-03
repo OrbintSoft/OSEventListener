@@ -1,12 +1,12 @@
 import { assert } from 'chai';
 import { describe, it } from 'mocha';
-import OSEventListener from '../src/OSEventListener';
+import EventListener from '../src/EventListener';
 import MemoryLogger from './mocks/MemoryLogger';
 
-describe('OSEventListener test dispatch', function() {
+describe('EventListener test dispatch', function() {
 	it('dispatch is not deferred', () => {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		let count = 0;
 		const ok = event.subscribe((s, d) => {
 			assert.equal(s, 'sender');
@@ -22,7 +22,7 @@ describe('OSEventListener test dispatch', function() {
 
 	it('dispatch is deferred', (done) => {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		let count = 0;
 		const ok = event.subscribe((s, d) => {
 			assert.equal(s, 'sender');
@@ -42,7 +42,7 @@ describe('OSEventListener test dispatch', function() {
 
 	it('dispatch does not throw errors', () => {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		let count = 0;
 		const error = Error('second subscribe thwrow an error');
 		let ok = event.subscribe((s, d) => {
@@ -74,7 +74,7 @@ describe('OSEventListener test dispatch', function() {
 
 	it('dispatch throws errors', () => {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		let count = 0;
 		const error = Error('second subscribe thwrow an error');
 		let ok = event.subscribe((s, d) => {
@@ -104,7 +104,7 @@ describe('OSEventListener test dispatch', function() {
 
 	it('dispatch does not store data', (done) => {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		event.dispatch('sender', 'data1', { storeData: false });
 		event.waitUntilFirstDispatchAsync().then(data => {
 			assert.equal(data, undefined);
@@ -119,7 +119,7 @@ describe('OSEventListener test dispatch', function() {
 	it('dispatch stores data', (done) => {
 		const logger = new MemoryLogger();
 		let count = 0;
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		event.dispatch('sender', 'data1', { storeData: true });
 		event.waitUntilFirstDispatchAsync().then(data => {
 			assert.equal(data, 'data1');

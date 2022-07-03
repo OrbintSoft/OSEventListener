@@ -1,11 +1,11 @@
 import { assert } from 'chai';
-import OSEventListener from '../src/OSEventListener';
+import EventListener from '../src/EventListener';
 import MemoryLogger from './mocks/MemoryLogger';
 
-describe('OSEventListener test subscribe', function() {
+describe('EventListener test subscribe', function() {
 	it('does not subscribe same function multiple times', function() {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		let count = 0;
 		const fn = (s: unknown, d: unknown) => {
 			assert.equal(s, 'sender');
@@ -32,7 +32,7 @@ describe('OSEventListener test subscribe', function() {
 
 	it('does subscribe same function multiple times', function() {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		let count = 0;
 		const fn = (s: unknown, d: unknown) => {
 			assert.equal(s, 'sender');
@@ -56,7 +56,7 @@ describe('OSEventListener test subscribe', function() {
 
 	it('listeners are executed in correct order', function() {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		const executionOrder: number[] = [];
 		let ok = event.subscribe(() => {
 			executionOrder.push(1);
@@ -90,7 +90,7 @@ describe('OSEventListener test subscribe', function() {
 
 	it('does not throw errors', function() {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		const fn = () => {};
 		const ok = event.subscribe(fn, {
 			shouldThrowErrors: false
@@ -108,7 +108,7 @@ describe('OSEventListener test subscribe', function() {
 
 	it('throws errors', function() {
 		const logger = new MemoryLogger();
-		const event = new OSEventListener('myevent', { logger: logger });
+		const event = new EventListener('myevent', { logger: logger });
 		const fn = () => {};
 		const ok = event.subscribe(fn, {
 			shouldThrowErrors: true
