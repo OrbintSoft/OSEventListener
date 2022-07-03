@@ -6,7 +6,7 @@
         "email": "stefano.balzarotti@orbintsoft.net"
     },
     "license": "BSD-3-Clause",
-    "version": "1.0.0-alpha.11",
+    "version": "1.0.0-alpha.12",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/OrbintSoft/OSEventListener.git"

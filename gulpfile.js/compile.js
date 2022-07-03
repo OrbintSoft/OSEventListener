@@ -22,6 +22,7 @@ async function addExtensionToEsModules() {
 	for (const f of files) {
 		let newContent = await fse.readFile(f, 'utf-8');
 		newContent = newContent.replace(/^(import[^\S\r\n].+?[^\S\r\n]from[^\S\r\n]*(["']))((?:(?!(?:\.js)?\2)[\S\s])+)(\2\s*;)/mg, '$1$3.js$4');
+		newContent = newContent.replace(/export {};/g, 'export default {};');
 		await fse.remove(f);
 		await fse.writeFile(f, newContent);
 	}

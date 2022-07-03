@@ -1,7 +1,7 @@
 /**
  * Utility to map default properties
  */
-class OptionsMapper {
+export default class OptionsMapper {
 	/**
 	 * Used to merge new options to default options
 	 *
@@ -24,5 +24,3 @@ class OptionsMapper {
 		return options as T;
 	}
 }
-/// <amd-module name="options/OptionsMapper"/>
-export default OptionsMapper;
