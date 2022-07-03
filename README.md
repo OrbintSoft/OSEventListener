@@ -23,7 +23,7 @@ https://github.com/OrbintSoft/OSEventListener/blob/master/sample
 
 if you checkout the git project you can run **npm run server**, to start a simple server and test the varius module loading.
 
-**Below the supported module loading system**
+**Below the supported module loading systems**
 
 AMD: https://github.com/OrbintSoft/OSEventListener/blob/master/sample/amd.html
 
