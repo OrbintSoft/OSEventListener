@@ -1,11 +1,11 @@
-exports.OSEventListener = require('../dist/cjs/OSEventListener');
-exports.ListenerFunction = require('../dist/cjs/ListenerFunction');
+exports.OSEventListener = require('../dist/cjs/OSEventListener').default;
+exports.ListenerFunction = require('../dist/cjs/ListenerFunction').default;
 exports.options = {
-	DispatchOptions : require('../dist/cjs/options/DispatchOptions'),
-	EventListenerOptions : require('../dist/cjs/options/EventListenerOptions'),
-	SubscribeOptions : require('../dist/cjs/options/SubscribeOptions'),
-	SubscribeWithKeyOptions : require('../dist/cjs/options/SubscribeWithKeyOptions'),
-	UnsubscribeOptions : require('../dist/cjs/options/UnsubscribeOptions'),
-	UnsubscribeWithKeyOptions : require('../dist/cjs/options/UnsubscribeWithKeyOptions'),
-	WaitUntilFirstDispatchOptions : require('../dist/cjs/options/WaitUntilFirstDispatchOptions')	
+	DispatchOptions : require('../dist/cjs/options/DispatchOptions').default,
+	EventListenerOptions : require('../dist/cjs/options/EventListenerOptions').default,
+	SubscribeOptions : require('../dist/cjs/options/SubscribeOptions').default,
+	SubscribeWithKeyOptions : require('../dist/cjs/options/SubscribeWithKeyOptions').default,
+	UnsubscribeOptions : require('../dist/cjs/options/UnsubscribeOptions').default,
+	UnsubscribeWithKeyOptions : require('../dist/cjs/options/UnsubscribeWithKeyOptions').default,
+	WaitUntilFirstDispatchOptions : require('../dist/cjs/options/WaitUntilFirstDispatchOptions').default	
 };
