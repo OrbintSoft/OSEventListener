@@ -1,0 +1,12 @@
+gulpfile.js
+rollup
+sample
+src
+tests
+.eslintignore
+.eslintrc
+.gitattributes
+azure-pipelines.yml
+mime.types
+oseventlistener*.tgz
+launch.json
