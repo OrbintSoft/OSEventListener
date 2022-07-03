@@ -1,5 +1,5 @@
 
-import OSEventListener from '../dist/es/OSEventListener.js';
+import EventListener from '../dist/es/EventListener.js';
 import ListenerFunction from '../dist/es/ListenerFunction.js';
 
 import DispatchOptions from '../dist/es/options/DispatchOptions.js';
@@ -22,7 +22,7 @@ const options = {
 	WaitUntilFirstDispatchOptions
 }
 export {
-	OSEventListener,
+	EventListener,
 	ListenerFunction,
 	options
 }

@@ -7,13 +7,13 @@
     			baseUrl: '../dist/umd',
 			});
 			requirejs(['OSEventListener'], (OSEventListenerModule) => {			
-				const OSEventListener = OSEventListenerModule.default;	
-				const l = new OSEventListener('myEvent');
-				l.subscribeWithKey((message) => {
+				const EventListener = OSEventListenerModule.default;	
+				const event = new EventListener('myEvent');
+				event.subscribeWithKey((message) => {
 					console.log(message);
-					l.unsubscribeWithKey('e');
+					event.unsubscribeWithKey('e');
 				}, 'e');
-				l.dispatch('IT WORKS');
+				event.dispatch('IT WORKS');
 			});
 		</script>
 	</head>

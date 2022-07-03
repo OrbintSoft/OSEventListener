@@ -14,7 +14,7 @@
     "type": "commonjs",
     "types": "./main/index.d.ts",
     "main": "./main/index.cjs",
-    "keywords": ["event", "listener", "simple", "dispatch", "events"],
+    "keywords": ["event", "listener", "simple", "dispatch", "events", "emitter", "dispatcher", "subscribe", "priority"],
     "scripts": {
         "lint": "gulp lint",
         "clean": "gulp clean",

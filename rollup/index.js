@@ -1,2 +1,6 @@
-import OSEventListener from "../dist/min/es//OSEventListener";
-window['OSEventListener'] = OSEventListener
+import EventListener from "../dist/min/es/EventListener";
+let OS = {};
+if (!('OS' in window)){
+	window['OS'] = OS;
+}
+OS.EventListener = EventListener

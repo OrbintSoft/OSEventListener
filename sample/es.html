@@ -3,12 +3,12 @@
 		<title>Test correct load of minified es module</title>
 		<script type="module">
 			import OSEventListener from '../dist/es/OSEventListener.js';
-			const l = new OSEventListener('myEvent');	
-			l.subscribeWithKey((message) => {
+			const event = new EventListener('myEvent');	
+			event.subscribeWithKey((message) => {
 				console.log(message);
-				l.unsubscribeWithKey('e');
+				event.unsubscribeWithKey('e');
 			}, 'e');
-			l.dispatch('IT WORKS');
+			event.dispatch('IT WORKS');
 		</script>
 	</head>
 	<body>

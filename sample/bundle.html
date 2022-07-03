@@ -3,12 +3,12 @@
 		<title>Test correct load of browser bundled library</title>
 		<script type="text/javascript" src="../dist/bundle/OSEventListener.js"></script>
 		<script type="text/javascript">
-			const l = new OSEventListener('myEvent');
-			l.subscribeWithKey((message) => {
+			const event = new OS.EventListener('myEvent');
+			event.subscribeWithKey((message) => {
 				console.log(message);
-				l.unsubscribeWithKey('e');
+				event.unsubscribeWithKey('e');
 			}, 'e');
-			l.dispatch('IT WORKS');
+			event.dispatch('IT WORKS');
 		</script>
 	</head>
 	<body>

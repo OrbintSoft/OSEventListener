@@ -3,14 +3,14 @@
 		<title>Test correct load of System.js module</title>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.12.1/system.js"></script>
 		<script type="text/javascript">		
-			System.import('/dist/min/system/OSEventListener.js').then(OSEventListenerModule => {
-				const OSEventListener = OSEventListenerModule.default;
-				const l = new OSEventListener('myEvent');
-				l.subscribeWithKey((message) => {
+			System.import('/dist/min/system/EventListener.js').then(OSEventListenerModule => {
+				const EventListener = OSEventListenerModule.default;
+				const event = new EventListener('myEvent');
+				event.subscribeWithKey((message) => {
 					console.log(message);
-					l.unsubscribeWithKey('e');
+					event.unsubscribeWithKey('e');
 				}, 'e');
-				l.dispatch('IT WORKS');	
+				event.dispatch('IT WORKS');	
 			});					
 		</script>
 	</head>

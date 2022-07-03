@@ -1,4 +1,4 @@
-exports.OSEventListener = require('../dist/cjs/OSEventListener').default;
+exports.EventListener = require('../dist/cjs/EventListener').default;
 exports.ListenerFunction = require('../dist/cjs/ListenerFunction').default;
 exports.options = {
 	DispatchOptions : require('../dist/cjs/options/DispatchOptions').default,

@@ -2,13 +2,13 @@
 	<head>
 		<title>Test correct load of es module</title>
 		<script type="module">
-			import OSEventListener from '../dist/min/es/OSEventListener.js';
-			const l = new OSEventListener('myEvent');
-			l.subscribeWithKey((message) => {
+			import OSEventListener from '../dist/min/es/EventListener.js';
+			const event = new EventListener('myEvent');
+			event.subscribeWithKey((message) => {
 				console.log(message);
 				l.unsubscribeWithKey('e');
 			}, 'e');
-			l.dispatch('IT WORKS');
+			event.dispatch('IT WORKS');
 		</script>
 	</head>
 	<body>
