@@ -6,7 +6,7 @@
 			requirejs.config({
     			baseUrl: '../dist/umd',
 			});
-			requirejs(['OSEventListener'], (OSEventListenerModule) => {			
+			requirejs(['EventListener'], (OSEventListenerModule) => {			
 				const EventListener = OSEventListenerModule.default;	
 				const event = new EventListener('myEvent');
 				event.subscribeWithKey((message) => {

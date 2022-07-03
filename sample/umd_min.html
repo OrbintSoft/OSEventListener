@@ -11,7 +11,7 @@
 				const event = new EventListener('myEvent');
 				event.subscribeWithKey((message) => {
 					console.log(message);
-					l.unsubscribeWithKey('e');
+					event.unsubscribeWithKey('e');
 				}, 'e');
 				event.dispatch('IT WORKS');
 			});

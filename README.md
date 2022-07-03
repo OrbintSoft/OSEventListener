@@ -1,4 +1,6 @@
 [![Build Status](https://dev.azure.com/orbintsoft/OSEventListener/_apis/build/status/OrbintSoft.OSEventListener?branchName=master)](https://dev.azure.com/orbintsoft/OSEventListener/_build/latest?definitionId=6&branchName=master)
+[![npm version](https://badge.fury.io/js/oseventlistener.svg)](https://badge.fury.io/js/oseventlistener)
+[![Donations via PayPal](https://img.shields.io/badge/Donations-via%20Paypal-blue.svg)](https://www.paypal.me/OrbintSoft)
 
 # OSEventListener
 A simple Typescript/VanillaJS Event Listener
@@ -34,3 +36,38 @@ Browser / IIFE Bundle: https://github.com/OrbintSoft/OSEventListener/blob/master
 ES6: https://github.com/OrbintSoft/OSEventListener/blob/master/sample/es.html
 
 ## How to use:
+
+**Create an Event**
+```
+const event = new EventListener('name');
+```
+
+**Subscribe to an event**
+```
+const fn = (sender, data) => {
+	console.log(data);
+};
+event.subscribe(fn);
+```
+
+**Subscribe with key**
+```
+event.subscribeWithKey((sender, data) => {
+	console.log(data);
+}, 'logdata');
+```
+
+**Unsubscribe to an event**
+```
+event.unsubscribe(fn);
+```
+
+**Unsubscribe with key**
+```
+event.unsubscribeWithKey('logdata');
+```
+
+**Dispatch an event**
+```
+event.dispatch(this, 'my data');
+```
