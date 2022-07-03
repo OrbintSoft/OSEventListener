@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<title>Test correct load of minified AMD module</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.js"></script>
+		<script type="text/javascript">
+			requirejs.config({
+    			baseUrl: '../dist/min/amd',
+			});
+			requirejs(['OSEventListener'], (OSEventListenerModule) => {			
+				const OSEventListener = OSEventListenerModule.default;	
+				const l = new OSEventListener('myEvent');
+				l.subscribeWithKey((message) => {
+					console.log(message);
+					l.unsubscribeWithKey('e');
+				}, 'e');
+				l.dispatch('IT WORKS');
+			});
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

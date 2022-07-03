@@ -1,0 +1,19 @@
+<html>
+	<head>
+		<title>Test correct load of System.js module</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.12.1/system.js"></script>
+		<script type="text/javascript">		
+			System.import('/dist/system/OSEventListener.js').then(OSEventListenerModule => {
+				const OSEventListener = OSEventListenerModule.default;
+				const l = new OSEventListener('myEvent');
+				l.subscribeWithKey((message) => {
+					console.log(message);
+					l.unsubscribeWithKey('e');
+				}, 'e');
+				l.dispatch('IT WORKS');	
+			});					
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
