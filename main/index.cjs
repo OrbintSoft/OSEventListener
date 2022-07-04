@@ -7,5 +7,6 @@ exports.options = {
 	SubscribeWithKeyOptions : require('../dist/cjs/options/SubscribeWithKeyOptions').default,
 	UnsubscribeOptions : require('../dist/cjs/options/UnsubscribeOptions').default,
 	UnsubscribeWithKeyOptions : require('../dist/cjs/options/UnsubscribeWithKeyOptions').default,
-	WaitUntilFirstDispatchOptions : require('../dist/cjs/options/WaitUntilFirstDispatchOptions').default	
+	WaitUntilFirstDispatchOptions : require('../dist/cjs/options/WaitUntilFirstDispatchOptions').default,
+	BindingType : require('../dist/cjs/options/BindingType').default
 };

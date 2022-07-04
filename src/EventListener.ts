@@ -30,6 +30,7 @@ export default class EventListener {
 	#firstDispatchOccurred = false;
 	#keyMappedListeners: Map<string, ListenerWrapper[]> = new Map();
 	#latestData: unknown = null;
+	#bindedEvents: Map<EventListener, ListenerFunction> = new Map();
 
 	/**
 	 * @returns {string} The event name
@@ -47,11 +48,11 @@ export default class EventListener {
 
 	/**
 	 * @param {string} name the name of the event
-	 * @param {EventListenerOptions} [options=DefaultEventListenerOptions] settings
+	 * @param {Partial<EventListenerOptions>} [options=DefaultEventListenerOptions] settings
 	 */
-	constructor(name: string, options: EventListenerOptions = DefaultEventListenerOptions) {
-		options = OptionsMapper.map(options, DefaultEventListenerOptions);
-		this.#logger = options.logger;
+	constructor(name: string, options: Partial<EventListenerOptions> = DefaultEventListenerOptions) {
+		const newOptions = OptionsMapper.map(options, DefaultEventListenerOptions);
+		this.#logger = newOptions.logger;
 		this.#name = name;
 	}
 
@@ -277,5 +278,40 @@ export default class EventListener {
 		}
 		this.#keyMappedListeners.set(key, mappedListeners);
 		return found;
+	}
+
+	/**
+	 * @param {EventListener} event the event you want to bind.
+	 * @returns {boolean} true if binded successfully.
+	 */
+	bindToEvent(event: EventListener): boolean {
+		if (this.#bindedEvents.has(event)) {
+			return false;
+		} else {
+			const fn = (sender: unknown, data: unknown) => {
+				this.dispatch({
+					actual: this,
+					original: sender
+				}, data);
+			};
+			event.subscribe(fn);
+			this.#bindedEvents.set(event, fn);
+		}
+		return true;
+	}
+
+	/**
+	 * @param {EventListener} event the event you want to unbind.
+	 * @returns {boolean} true if unbinded successfully.
+	 */
+	unbindFromEvent(event: EventListener) {
+		const fn = this.#bindedEvents.get(event);
+		if (fn) {
+			event.unsubscribe(fn);
+			this.#bindedEvents.delete(event);
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

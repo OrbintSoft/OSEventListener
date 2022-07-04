@@ -9,17 +9,17 @@ import SubscribeWithKeyOptions from '../dist/es/options/SubscribeWithKeyOptions.
 import UnsubscribeOptions from '../dist/es/options/UnsubscribeOptions.js';
 import UnsubscribeWithKeyOptions from '../dist/es/options/UnsubscribeWithKeyOptions.js';
 import WaitUntilFirstDispatchOptions from '../dist/es/options/WaitUntilFirstDispatchOptions.js';	
+import BindingType from '../dist/es/options/BindingType.js';	
 
 const options = {
 	DispatchOptions,
 	EventListenerOptions,
 	SubscribeOptions,
 	SubscribeWithKeyOptions,
-	SubscribeWithKeyOptions,
-	UnsubscribeOptions,
 	UnsubscribeOptions,
 	UnsubscribeWithKeyOptions,
-	WaitUntilFirstDispatchOptions
+	WaitUntilFirstDispatchOptions,
+	BindingType
 }
 export {
 	EventListener,

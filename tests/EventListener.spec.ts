@@ -292,4 +292,35 @@ describe('EventListener basic tests', function() {
 			done();
 		}, 20);
 	});
+
+	it('it binds to another event', function() {
+		let called = false;
+		const event1 = new EventListener('A');
+		const event2 = new EventListener('B');
+		event1.bindToEvent(event2);
+		event1.subscribe((sender, data) => {
+			assert.deepEqual(sender, { original: 'sender', actual: event2 });
+			assert.equal(data, 'data');
+			called = true;
+		});
+		event2.dispatch('sender', 'data');
+		assert.equal(called, true);
+	});
+
+	it('it unbinds to another event', function() {
+		let called = 0;
+		const event1 = new EventListener('A');
+		const event2 = new EventListener('B');
+		event1.bindToEvent(event2);
+		event1.subscribe(() => {
+			called++;
+		});
+		event2.dispatch('sender', 'data');
+		assert.equal(called, 1);
+		event2.dispatch('sender', 'data');
+		assert.equal(called, 2);
+		event1.unbindFromEvent(event2);
+		event2.dispatch('sender', 'data');
+		assert.equal(called, 2);
+	});
 });
