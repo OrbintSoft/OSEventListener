@@ -35,6 +35,10 @@ Browser / IIFE Bundle: https://github.com/OrbintSoft/OSEventListener/blob/master
 
 ES6: https://github.com/OrbintSoft/OSEventListener/blob/master/sample/es.html
 
+NodeJs / CommonJS: https://github.com/OrbintSoft/OSEventListener/blob/master/sample/node_sample.cjs
+
+NodeJs / ES module: https://github.com/OrbintSoft/OSEventListener/blob/master/sample/node_sample.mjs
+
 ## How to use:
 
 **Create an Event**
