@@ -52,6 +52,37 @@ Who is dispatching the event, usually you need to pass **this**, in fact you can
 - **data: unknown**
 Any kind of data you want to pass to the listener function. 
 
+- **options: Partial\<DispatchOptions\>** *(optional)* Option settings.
+
+## subscribeWithKey(fn, key, options?)
+
+It allows to subscribe a function using a key as reference, so you don't need to keep a reference to the function.
+
+### Parameters
+
+- **fn: ListenerFunction** The function listener you want to subscribe.
+- **key: string** The key you want use as reference for this subscribe.
+- **options:Partial\<SubscribeWithKeyOptions\>**
+*(optional)* Option settings.
+
+### Return: boolean
+
+True if the subscribe had success, false otherwise.
+
+## unsubscribeWithKey(key, options)
+
+It allows to unsubscribe a set of function listeners using a key as reference.
+
+### Parameters
+
+- **key:string** The key you want to use as reference for this unsubscribe.
+- **options:Partial\<UnubscribeWithKeyOptions\>**
+*(optional)* Option settings.
+
+### Return: boolean
+
+True if the unsubscribe had success, false otherwise.
+
 # ListenerFunction(sender, data) => void
 This is the type signature of a function listener that can be used to subscribe to an event as callback.
 
@@ -97,8 +128,38 @@ The interface for a JSON object used to pass the configuration to unsubscribe.
 
 The interface for a JSON object used to pass the configuration to dispatch.
 
+## Properties
+
 |Name|Type|Default|Description|
 |---|---|---|---|
 |shouldThrowErrors|boolean|false|If set to true, in case one of the listeners throws an exeception, will not be catched, so it will stop the execution of all subsequent listeners.<br />The usage is discouraged.|
 |defer|boolean|false|By default all listeners are executed immediately after dispatch, blocking the execution subsequent code until all listeners are executed.<br />If set to true the execution of listeners will be demanded to javascript event manager and executed as soon as the execution of current task code terminates.<br />Useful if the execution of listeners is particularly slow, in any case the code will be executed on same thread.|
 |storeData|boolean|false|If set to true, last dispatched data will be stored, to be used and returned by **waitUntilFirstDispatchAsync**.
+
+# SubscribeWithKeyOptions
+
+The interface for a JSON object used to pass the configuration to subscribeWithkey.
+
+### Extends 
+SubscribeOptions
+
+## Properties
+
+Same as **SubscribeOptions** plus:
+
+|Name|Type|Default|Description|
+|---|---|---|---|
+|allowMultipleListernersPerKey|boolean|true|It allows to subscribe multiple functions with same key.|
+
+# UnsubscribeWithKeyOptions
+
+The interface for a JSON object used to pass the configuration to unsubscribeWithkey.
+
+### Extends 
+UnsubscribeOptions
+
+Same as **UnsubscribeOptions** plus:
+
+|Name|Type|Default|Description|
+|---|---|---|---|
+|removeOnlyFirstKeyedListener|boolean|false|It will remove only the first function listener found, when multiple listeners are subscribed with same key.<br />The usage is discouraged because it is not predictable whan listener will be removed. <br />If you want to unsubscribe just one function you can use **unsubscribe** passing the function reference.| 
