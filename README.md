@@ -75,3 +75,7 @@ event.unsubscribeWithKey('logdata');
 ```
 event.dispatch(this, 'my data');
 ```
+
+## Documentation
+
+For detailed doc, check [here](https://github.com/OrbintSoft/OSEventListener/blob/master/ApiDoc.md): 
