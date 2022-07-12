@@ -294,10 +294,9 @@ export default class EventListener {
 					original: sender
 				}, data);
 			};
-			event.subscribe(fn);
 			this.#bindedEvents.set(event, fn);
+			return event.subscribe(fn);
 		}
-		return true;
 	}
 
 	/**
@@ -307,9 +306,9 @@ export default class EventListener {
 	unbindFromEvent(event: EventListener) {
 		const fn = this.#bindedEvents.get(event);
 		if (fn) {
-			event.unsubscribe(fn);
-			this.#bindedEvents.delete(event);
-			return true;
+			let result = event.unsubscribe(fn);
+			result &&= this.#bindedEvents.delete(event);
+			return result;
 		} else {
 			return false;
 		}

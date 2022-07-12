@@ -69,7 +69,7 @@ It allows to subscribe a function using a key as reference, so you don't need to
 
 True if the subscribe had success, false otherwise.
 
-## unsubscribeWithKey(key, options)
+## unsubscribeWithKey(key, options?)
 
 It allows to unsubscribe a set of function listeners using a key as reference.
 
@@ -82,6 +82,20 @@ It allows to unsubscribe a set of function listeners using a key as reference.
 ### Return: boolean
 
 True if the unsubscribe had success, false otherwise.
+
+## waitUntilFirstDispatchAsync(options?)
+
+If the event has never dispatched before, it waits until the first dispatch occurs, otherwise it will complete without waiting.
+
+The beaviour can be modified to wait next dispatch in any case.
+
+### Parameters
+
+- **options:Partial\<WaitUntilFirstDispatchOptions\>** *(optional)* Option settings.
+
+### Return: unknown
+
+Per default it returs undefined, but if the dispatch is configured to store data, it will return the latest data passed to the dispatch.
 
 # ListenerFunction(sender, data) => void
 This is the type signature of a function listener that can be used to subscribe to an event as callback.
@@ -162,4 +176,13 @@ Same as **UnsubscribeOptions** plus:
 
 |Name|Type|Default|Description|
 |---|---|---|---|
-|removeOnlyFirstKeyedListener|boolean|false|It will remove only the first function listener found, when multiple listeners are subscribed with same key.<br />The usage is discouraged because it is not predictable whan listener will be removed. <br />If you want to unsubscribe just one function you can use **unsubscribe** passing the function reference.| 
+|removeOnlyFirstKeyedListener|boolean|false|If set to true it will remove only the first function listener found, when multiple listeners are subscribed with same key.<br />The usage is discouraged because it is not predictable whan listener will be removed. <br />If you want to unsubscribe just one function you can use **unsubscribe** passing the function reference.|
+
+# WaitUntilFirstDispatchOptions
+
+The interface for a JSON object used to pass the configuration to waitUntilFirstDispatch.
+
+|Name|Type|Default|Description|
+|---|---|---|---|
+|resetFirstDispatchBefore|boolean|false|If set to true, it will wait for next dispatch in any case. The status will be reset before checking if dispatched occurred|
+|resetFirstDispatchAfter|boolean|false|If set to true, after the promise is resolved it will reset the status. If dispatch already occured it will not wait it, but it will wait at next call.
