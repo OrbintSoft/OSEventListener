@@ -17,6 +17,8 @@ import WaitUntilFirstDispatchOptions from './options/WaitUntilFirstDispatchOptio
 import DefaultWaitUntilFirstDispatchOptions from './options/DefaultWaitUntilFirstDispatchOptions';
 import DispatchOptions from './options/DispatchOptions';
 import ListenerWrapper from './ListenerWrapper';
+import DefaultBindToEventOptions from './options/DefaultBindToEventOptions';
+import BindToEventOptions from './options/BindToEventOptions';
 
 /**
  * @author Stefano Balzarotti
@@ -64,8 +66,9 @@ export default class EventListener {
 	#subscribe(wrapper: ListenerWrapper, options: SubscribeOptions): boolean {
 		const newOptions = OptionsMapper.map(options, DefaultSubscribeOptions);
 		if (!this.#listeners.some((w) => w.fn === wrapper.fn) || newOptions.allowMultipleSubscribeSameFunction) {
+			const last = this.#listeners.length > 0 ? this.#listeners[this.#listeners.length - 1] : wrapper;
 			this.#listeners.push(wrapper);
-			if (this.#listeners[0].priority !== null || this.#listeners[this.#listeners.length - 1].priority !== null) {
+			if (this.#listeners[0].priority !== null || last.priority !== null || wrapper.priority !== null) {
 				this.#listeners.sort((a, b) => (b.priority === null ? 0 : b.priority) - (a.priority === null ? 0 : a.priority));
 			}
 			return true;
@@ -87,7 +90,7 @@ export default class EventListener {
 	 */
 	subscribe(fn: ListenerFunction, options: Partial<SubscribeOptions> = DefaultSubscribeOptions): boolean {
 		const newOptions = OptionsMapper.map(options, DefaultSubscribeOptions);
-		const wrapper = new ListenerWrapper(fn, null, options.priority);
+		const wrapper = new ListenerWrapper(fn, null, newOptions.priority);
 		return this.#subscribe(wrapper, newOptions);
 	}
 
@@ -282,20 +285,34 @@ export default class EventListener {
 
 	/**
 	 * @param {EventListener} event the event you want to bind.
+	 * @param {Partial<BindToEventOptions>} options option settings.
 	 * @returns {boolean} true if binded successfully.
 	 */
-	bindToEvent(event: EventListener): boolean {
+	bindToEvent(event: EventListener, options: Partial<BindToEventOptions> = DefaultBindToEventOptions): boolean {
+		const newOptions = OptionsMapper.map(options, DefaultBindToEventOptions);
 		if (this.#bindedEvents.has(event)) {
+			const errorMessage = `The event ${this.name} is already binded to the event ${event.name}`;
+			if (newOptions.shouldThrowErrors) {
+				throw Error(errorMessage);
+			}
+			this.#logger.error(errorMessage);
 			return false;
 		} else {
 			const fn = (sender: unknown, data: unknown) => {
 				this.dispatch({
 					actual: this,
 					original: sender
-				}, data);
+				}, data, {
+					defer: newOptions.defer,
+					shouldThrowErrors: newOptions.shouldThrowErrors,
+					storeData: newOptions.storeData
+				});
 			};
 			this.#bindedEvents.set(event, fn);
-			return event.subscribe(fn);
+			return event.subscribe(fn, {
+				priority: newOptions.priority,
+				shouldThrowErrors: newOptions.shouldThrowErrors
+			});
 		}
 	}
 
