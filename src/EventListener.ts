@@ -339,11 +339,10 @@ export default class EventListener {
 			result &&= this.#bindedEvents.delete(event);
 			return result;
 		} else {
-			const warningMessage = 'No binded event found';
+			const warningMessage = `No binded event ${event.name} found`;
 			if (newOptions.shouldThrowErrors) {
 				throw Error(warningMessage);
 			} else {
-
 				this.#logger.warn(warningMessage);
 				return false;
 			}
