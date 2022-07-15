@@ -19,6 +19,8 @@ import DispatchOptions from './options/DispatchOptions';
 import ListenerWrapper from './ListenerWrapper';
 import DefaultBindToEventOptions from './options/DefaultBindToEventOptions';
 import BindToEventOptions from './options/BindToEventOptions';
+import UnbindFromEventOptions from './options/UnbindFromEventOptions';
+import DefaultUnbindToEventOptions from './options/DefaultUnbindFromEventOptions';
 
 /**
  * @author Stefano Balzarotti
@@ -326,16 +328,25 @@ export default class EventListener {
 
 	/**
 	 * @param {EventListener} event the event you want to unbind.
+	 * @param {Partial<UnbindFromEventOptions>} options option settings.
 	 * @returns {boolean} true if unbinded successfully.
 	 */
-	unbindFromEvent(event: EventListener) {
+	unbindFromEvent(event: EventListener, options: Partial<UnbindFromEventOptions> = DefaultUnsubscribeOptions): boolean {
+		const newOptions = OptionsMapper.map<UnbindFromEventOptions>(options, DefaultUnbindToEventOptions);
 		const fn = this.#bindedEvents.get(event);
 		if (fn) {
-			let result = event.unsubscribe(fn);
+			let result = event.unsubscribe(fn, newOptions);
 			result &&= this.#bindedEvents.delete(event);
 			return result;
 		} else {
-			return false;
+			const warningMessage = 'No binded event found';
+			if (newOptions.shouldThrowErrors) {
+				throw Error(warningMessage);
+			} else {
+
+				this.#logger.warn(warningMessage);
+				return false;
+			}
 		}
 	}
 }
