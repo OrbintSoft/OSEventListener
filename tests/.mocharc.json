@@ -5,8 +5,8 @@
 	"spec": [
 	  "**/*.spec.*"
 	],
-	"reporter": "mochawesome",
-	"reporter-option": [
-		"reportFilename=./TEST-RESULT"
-	]
+	"reporter": "mocha-multi-reporters",
+	"reporterOptions": {
+		"reporterEnabled": "mocha-junit-reporter, mochawesome"
+	}
   }

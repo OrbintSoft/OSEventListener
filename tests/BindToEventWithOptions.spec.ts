@@ -108,4 +108,66 @@ describe('EventListener test bind to event with options', function() {
 
 		assert.equal(result, true);
 	});
+
+	it('should not be deferred', () => {
+		const logger = new MemoryLogger();
+		const event1 = new EventListener('event1', { logger: logger });
+		const event2 = new EventListener('event2', { logger: logger });
+		let count = 0;
+		let ok = true;
+		ok &&= event1.subscribe(() => {
+			count++;
+		});
+		ok &&= event1.bindToEvent(event2, { defer: false });
+		assert.equal(ok, true);
+		assert.equal(count, 0);
+		event2.dispatch('s', 'd');
+		assert.equal(count, 1);
+	});
+
+	it('should be deferred', (resolve) => {
+		const logger = new MemoryLogger();
+		const event1 = new EventListener('event1', { logger: logger });
+		const event2 = new EventListener('event2', { logger: logger });
+		let count = 0;
+		let ok = true;
+		ok &&= event1.subscribe(() => {
+			count++;
+		});
+		ok &&= event1.bindToEvent(event2, { defer: true });
+		assert.equal(ok, true);
+		assert.equal(count, 0);
+		event2.dispatch('s', 'd');
+		assert.equal(count, 0);
+		setTimeout(() => {
+			assert.equal(count, 1);
+			resolve();
+		}, 0);
+	});
+
+	it('should not store data', async () => {
+		const logger = new MemoryLogger();
+		const event1 = new EventListener('event1', { logger: logger });
+		const event2 = new EventListener('event2', { logger: logger });
+		let ok = true;
+		ok &&= event1.bindToEvent(event2, { storeData: false });
+		assert.equal(ok, true);
+		event2.dispatch('s', 'd');
+		const data = await event1.waitUntilFirstDispatchAsync();
+		assert.equal(data, undefined);
+	});
+
+	it('should store data', async () => {
+		const logger = new MemoryLogger();
+		const event1 = new EventListener('event1', { logger: logger });
+		const event2 = new EventListener('event2', { logger: logger });
+		let ok = true;
+		ok &&= event1.bindToEvent(event2, { storeData: true });
+		assert.equal(ok, true);
+		event2.dispatch('s', 'd');
+		const data1 = await event1.waitUntilFirstDispatchAsync();
+		assert.equal(data1, 'd');
+		const data2 = await event1.waitUntilFirstDispatchAsync();
+		assert.equal(data2, 'd');
+	});
 });

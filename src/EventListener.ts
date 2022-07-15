@@ -290,6 +290,14 @@ export default class EventListener {
 	 */
 	bindToEvent(event: EventListener, options: Partial<BindToEventOptions> = DefaultBindToEventOptions): boolean {
 		const newOptions = OptionsMapper.map(options, DefaultBindToEventOptions);
+		if (event === this) {
+			const errorMessage = 'Cannot bind event with itself!';
+			if (newOptions.shouldThrowErrors) {
+				throw Error(errorMessage);
+			}
+			this.#logger.error(errorMessage);
+			return false;
+		}
 		if (this.#bindedEvents.has(event)) {
 			const errorMessage = `The event ${this.name} is already binded to the event ${event.name}`;
 			if (newOptions.shouldThrowErrors) {
