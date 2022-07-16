@@ -323,4 +323,35 @@ describe('EventListener basic tests', function() {
 		event2.dispatch('sender', 'data');
 		assert.equal(called, 2);
 	});
+
+	it('it attachs an event', function() {
+		let called = false;
+		const event1 = new EventListener('A');
+		const event2 = new EventListener('B');
+		event1.attachEvent(event2);
+		event2.subscribe((sender, data) => {
+			assert.deepEqual(sender, { original: 'sender', actual: event2 });
+			assert.equal(data, 'data');
+			called = true;
+		});
+		event1.dispatch('sender', 'data');
+		assert.equal(called, true);
+	});
+
+	it('it detaches an event', function() {
+		let called = 0;
+		const event1 = new EventListener('A');
+		const event2 = new EventListener('B');
+		event1.attachEvent(event2);
+		event2.subscribe(() => {
+			called++;
+		});
+		event1.dispatch('sender', 'data');
+		assert.equal(called, 1);
+		event1.dispatch('sender', 'data');
+		assert.equal(called, 2);
+		event1.detachEvent(event2);
+		event1.dispatch('sender', 'data');
+		assert.equal(called, 2);
+	});
 });

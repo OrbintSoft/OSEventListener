@@ -35,6 +35,7 @@ export default class EventListener {
 	#keyMappedListeners: Map<string, ListenerWrapper[]> = new Map();
 	#latestData: unknown = null;
 	#bindedEvents: Map<EventListener, ListenerFunction> = new Map();
+	#attachedEvents: EventListener[] = [];
 
 	/**
 	 * @returns {string} The event name
@@ -192,6 +193,23 @@ export default class EventListener {
 				}
 			}
 		}
+		this.#dispatchAttachedEvents(sender, data, newOptions);
+	}
+
+	/**
+	 * Internal method to dispatch the event to attached events.
+	 *
+	 * @param {unknown} sender the original sender.
+	 * @param {unknown} data the data to propagate.
+	 * @param {DispatchOptions} options option settings.
+	 */
+	#dispatchAttachedEvents(sender: unknown, data: unknown, options: DispatchOptions) {
+		for (const e of this.#attachedEvents) {
+			e.dispatch({
+				actual: this,
+				original: sender
+			}, data, options);
+		}
 	}
 
 	/**
@@ -346,6 +364,46 @@ export default class EventListener {
 				this.#logger.warn(warningMessage);
 				return false;
 			}
+		}
+	}
+
+	/**
+	 * You can attach an event, so everytime you dispatch an event it will also dispatch to the attached event.
+	 * Attached event are always dispatched after this event.
+	 *
+	 * @param {EventListener} event the event you want to attach
+	 * @returns {boolean} true if attached successfully
+	 */
+	attachEvent(event: EventListener): boolean {
+		if (event !== this) {
+			if (!this.#attachedEvents.includes(event)) {
+				this.#attachedEvents.push(event);
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Detaches an attached event.
+	 *
+	 * @param {EventListener} event the event you want to attach
+	 * @returns {boolean} true if detached successfully
+	 */
+	detachEvent(event: EventListener): boolean {
+		if (event !== this) {
+			const i = this.#attachedEvents.indexOf(event);
+			if (i >= 0) {
+				this.#attachedEvents.splice(i, 1);
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
 		}
 	}
 }

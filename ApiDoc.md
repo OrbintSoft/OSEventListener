@@ -97,6 +97,32 @@ The beaviour can be modified to wait next dispatch in any case.
 
 Per default it returs undefined, but if the dispatch is configured to store data, it will return the latest data passed to the dispatch.
 
+## bindToEvent(event, options?)
+
+It binds this event A to another event B, when event B is dispatched, also event A will be dispatched. 
+Internally event A subscribes to event B and propagates the dispatch.
+
+### Parameters
+
+- **options:\<EventListener\>** *The event you want to bind to.
+- **options:Partial\<BindToEventOptions\>** *(optional)* Option settings.
+
+### Return: boolen
+
+True if it has binded successfully, otherwise false.
+
+## unbindFromEvent(event, options?)
+It unbinds this event from another binded event.
+
+### Parameters
+
+- **options:\<EventListener\>** *The event you want to unbind from.
+- **options:Partial\<UnbindFromEventOptions\>** *(optional)* Option settings.
+
+### Return: boolen
+
+True if it has unbinded successfully, otherwise false.
+
 # ListenerFunction(sender, data) => void
 This is the type signature of a function listener that can be used to subscribe to an event as callback.
 
@@ -186,3 +212,28 @@ The interface for a JSON object used to pass the configuration to waitUntilFirst
 |---|---|---|---|
 |resetFirstDispatchBefore|boolean|false|If set to true, it will wait for next dispatch in any case. The status will be reset before checking if dispatched occurred|
 |resetFirstDispatchAfter|boolean|false|If set to true, after the promise is resolved it will reset the status. If dispatch already occured it will not wait it, but it will wait at next call.
+
+# BindToEventOptions
+
+The interface for a JSON object used to pass the configuration to bindToEvent.
+
+### Extends 
+DispatchOptions
+
+## Properties
+
+Same as **DispatchOptions** plus:
+
+|Name|Type|Default|Description|
+|---|---|---|---|
+|priority|Number|null|If set to a positive values it gives an higher priority to the listener function, if negative a lower priority.
+
+# UnbindFromEventOptions
+
+The interface for a JSON object used to pass the configuration to unbindFromEvent.
+
+## Properties
+
+|Name|Type|Default|Description|
+|---|---|---|---|
+|shouldThrowErrors|boolean|false|If set to true, in case unbind fails (event is not binded) it will throw error.
