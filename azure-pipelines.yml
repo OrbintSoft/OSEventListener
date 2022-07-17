@@ -44,7 +44,7 @@ steps:
   condition: succeededOrFailed()
   inputs:
       testResultsFormat: 'JUnit'
-      testResultsFiles: 'tests/mochawesome-report/TEST-RESULT.json'
+      testResultsFiles: 'tests/report-results/results.xml'
       mergeTestResults: true
       failTaskOnFailedTests: true
       testRunTitle: 'Unit tests'

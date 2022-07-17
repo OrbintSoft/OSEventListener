@@ -6,7 +6,12 @@
 	  "**/*.spec.*"
 	],
 	"reporter": "mocha-multi-reporters",
-	"reporterOptions": {
-		"reporterEnabled": "mocha-junit-reporter, mochawesome"
+	"reporterOptions": "configFile=.mocharc.json",	
+	"reporterEnabled": "mocha-junit-reporter, mochawesome",
+	"mochaJunitReporterReporterOptions": {
+		"mochaFile": "./report-results/results.xml"
+	},
+	"mochawesomeReporterOptions": {
+		"reportDir": "./report-results"
 	}
   }
