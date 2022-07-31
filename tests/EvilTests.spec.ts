@@ -34,10 +34,10 @@ describe('It tests evil situtations that should not naturally occurs', () => {
 		Object.prototype.hasOwnProperty = function(property: string) {
 			return property in this && property !== 'b';
 		};
-		const options = {};
+		const options = { a: 'newA', b: 'newB' };
 		const defaultOptions = { a: 'a2', b: 'b2', c: 'c2' };
 		const resultOptions = OptionsMapper.map(options, defaultOptions);
-		assert.deepEqual<unknown>(resultOptions, { a: 'a2', c: 'c2' });
+		assert.deepEqual<unknown>(resultOptions, { a: 'newA', b: 'b2', c: 'c2' });
 		Object.prototype.hasOwnProperty = hasOwnProperty;
 	});
 

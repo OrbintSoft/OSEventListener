@@ -172,7 +172,15 @@ describe('EventListener test bind to event with options', function() {
 	});
 
 	it('cannot bind an event with itself', () => {
-
-
+		const logger = new MemoryLogger();
+		const event1 = new EventListener('event1', { logger: logger });
+		const result1 = event1.bindToEvent(event1, { shouldThrowErrors: false });
+		assert.equal(result1, false);
+		assert.equal(logger.errorMessages.length, 1);
+		const error = logger.errorMessages[0] as string[];
+		assert.equal(error.length, 1);
+		const message = 'Cannot bind event with itself!';
+		assert.equal(error[0], message);
+		assert.throw(() => event1.bindToEvent(event1, { shouldThrowErrors: true }), message);
 	});
 });

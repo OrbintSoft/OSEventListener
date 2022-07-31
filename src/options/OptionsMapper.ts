@@ -11,16 +11,16 @@ export default class OptionsMapper {
 	 * @returns {T} the merged options
 	 */
 	static map<T>(options: Partial<T> & object, defaultOptions: (T & object)): T {
+		const newOptions: Partial<T> & object = { ...defaultOptions };
 		if (defaultOptions === options) {
-			return defaultOptions;
+			return newOptions as T;
 		}
-		for (const p in defaultOptions) {
-			if (Object.prototype.hasOwnProperty.call(defaultOptions, p)) {
-				if (!Object.prototype.hasOwnProperty.call(options, p)) {
-					options[p] = defaultOptions[p];
-				}
+
+		for (const p in options) {
+			if (Object.prototype.hasOwnProperty.call(newOptions, p) && Object.prototype.hasOwnProperty.call(options, p)) {
+				newOptions[p] = options[p];
 			}
 		}
-		return options as T;
+		return newOptions as T;
 	}
 }
