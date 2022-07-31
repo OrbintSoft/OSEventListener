@@ -187,23 +187,6 @@ export default class EventListener {
 				}
 			}
 		}
-		this.#dispatchAttachedEvents(sender, data, newOptions);
-	}
-
-	/**
-	 * Internal method to dispatch the event to attached events.
-	 *
-	 * @param {unknown} sender the original sender.
-	 * @param {unknown} data the data to propagate.
-	 * @param {DispatchOptions} options option settings.
-	 */
-	#dispatchAttachedEvents(sender: unknown, data: unknown, options: DispatchOptions) {
-		for (const e of this.#attachedEvents) {
-			e.dispatch({
-				actual: this,
-				original: sender
-			}, data, options);
-		}
 	}
 
 	/**
@@ -370,16 +353,7 @@ export default class EventListener {
 	 * @returns {boolean} true if attached successfully
 	 */
 	attachEvent(event: EventListener): boolean {
-		if (event !== this) {
-			if (!this.#attachedEvents.includes(event)) {
-				this.#attachedEvents.push(event);
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
+		return event.bindToEvent(this);
 	}
 
 	/**
@@ -389,16 +363,6 @@ export default class EventListener {
 	 * @returns {boolean} true if detached successfully
 	 */
 	detachEvent(event: EventListener): boolean {
-		if (event !== this) {
-			const i = this.#attachedEvents.indexOf(event);
-			if (i >= 0) {
-				this.#attachedEvents.splice(i, 1);
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
+		return event.unbindFromEvent(this);
 	}
 }
