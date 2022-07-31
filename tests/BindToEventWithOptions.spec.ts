@@ -173,6 +173,6 @@ describe('EventListener test bind to event with options', function() {
 
 	it('cannot bind an event with itself', () => {
 
-		
+
 	});
 });

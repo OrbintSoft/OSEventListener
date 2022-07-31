@@ -277,10 +277,11 @@ export default class EventListener {
 		let found = false;
 		while (mappedListeners.length > 0) {
 			const w = mappedListeners.pop() as ListenerWrapper;
-			if (!this.unsubscribe(w.fn, newOptions)) {
+			if (this.unsubscribe(w.fn, newOptions)) {
+				found = true;
+			} else {
 				this.#logger.warn('Failed to unsubscribe a registered function, probably it was already unsubscribed');
 			}
-			found = true;
 			if (newOptions.removeOnlyFirstKeyedListener) {
 				break;
 			}

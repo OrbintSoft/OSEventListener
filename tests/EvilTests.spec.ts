@@ -2,6 +2,7 @@ import { assert } from 'chai';
 import EventListener from '../src/EventListener';
 import OptionsMapper from '../src/options/OptionsMapper';
 import EventListenerWithBadSubscribe from './mocks/EventListenerWithBadSubscribe';
+import EventListenerWithBadUnsubscribe from './mocks/EventListenerWithBadUnsubscribe';
 import MemoryLogger from './mocks/MemoryLogger';
 
 describe('It tests evil situtations that should not naturally occurs', () => {
@@ -45,5 +46,17 @@ describe('It tests evil situtations that should not naturally occurs', () => {
 		eventListener.waitUntilFirstDispatchAsync().catch(() => {
 			done();
 		});
+	});
+
+	it('unsubscribeWithKey fails if unsubsrcribe fails', () => {
+		const memoryLogger =  new MemoryLogger() ;
+		const eventListener = new EventListenerWithBadUnsubscribe('bad', { logger: memoryLogger });
+		eventListener.subscribeWithKey(() => {}, 'key1');
+		const result = eventListener.unsubscribeWithKey('key1');
+		assert.equal(result, false);
+		assert.equal(memoryLogger.warnMessages.length, 2);
+		const warnings = memoryLogger.warnMessages[0] as string[];
+		assert.equal(warnings.length, 1);
+		assert.equal(warnings[0], 'Failed to unsubscribe a registered function, probably it was already unsubscribed');
 	});
 });
