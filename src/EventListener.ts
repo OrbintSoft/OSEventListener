@@ -45,13 +45,6 @@ export default class EventListener {
 	}
 
 	/**
-	 * @returns {Logger} The internal logger
-	 */
-	protected get logger(): Logger {
-		return this.#logger;
-	}
-
-	/**
 	 * @param {string} name the name of the event
 	 * @param {Partial<EventListenerOptions>} [options=DefaultEventListenerOptions] settings
 	 */
