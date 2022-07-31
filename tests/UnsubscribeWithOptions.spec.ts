@@ -95,4 +95,25 @@ describe('EventListener test unsubscribe with options', function() {
 		assert.throw(() => event.unsubscribe(fn, { shouldThrowErrors: true }));
 		assert.throw(() => event.unsubscribe(() => {}, { shouldThrowErrors: true }), errorMessage);
 	});
+
+	it('unsubscribe if subscribed with keys', function() {
+		const logger = new MemoryLogger();
+		const event = new EventListener('myevent', { logger: logger });
+		let count = 0;
+		const fn = (s: unknown, d: unknown) => {
+			assert.equal(s, 'sender');
+			assert.equal(d, 'data');
+			count++;
+		};
+
+		const ok1 = event.subscribeWithKey(fn, 'kqy1');
+		assert.equal(ok1, true);
+		assert.equal(count, 0);
+		event.dispatch('sender', 'data');
+		assert.equal(count, 1);
+		const ok2 = event.unsubscribe(fn);
+		assert.equal(ok2, true);
+		event.dispatch('sender', 'data');
+		assert.equal(count, 1);
+	});
 });

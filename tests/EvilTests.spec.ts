@@ -1,6 +1,7 @@
 import { assert } from 'chai';
 import EventListener from '../src/EventListener';
 import OptionsMapper from '../src/options/OptionsMapper';
+import EventListenerWithBadSubscribe from './mocks/EventListenerWithBadSubscribe';
 import MemoryLogger from './mocks/MemoryLogger';
 
 describe('It tests evil situtations that should not naturally occurs', () => {
@@ -37,5 +38,12 @@ describe('It tests evil situtations that should not naturally occurs', () => {
 		const resultOptions = OptionsMapper.map(options, defaultOptions);
 		assert.deepEqual<unknown>(resultOptions, { a: 'a2', c: 'c2' });
 		Object.prototype.hasOwnProperty = hasOwnProperty;
+	});
+
+	it('waitUntilFirstDispatchAsync fails if subsrcribe fails', (done) => {
+		const eventListener = new EventListenerWithBadSubscribe('bad');
+		eventListener.waitUntilFirstDispatchAsync().catch(() => {
+			done();
+		});
 	});
 });

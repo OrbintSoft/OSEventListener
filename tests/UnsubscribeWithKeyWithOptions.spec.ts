@@ -110,7 +110,7 @@ describe('EventListener test unsubscribe with key with options', function() {
 		event.dispatch('sender', 'data');
 		assert.equal(count, 2);
 		const ok4 = event.unsubscribeWithKey('key2', { removeOnlyFirstOccurrence: false });
-		assert.equal(ok4, true);
+		assert.equal(ok4, false);
 		event.dispatch('sender', 'data');
 		assert.equal(count, 2);
 	});

@@ -124,10 +124,11 @@ export default class EventListener {
 		const newOptions = OptionsMapper.map(options, DefaultUnsubscribeOptions);
 		let i = -1;
 		let found = false;
+		let wrapper: ListenerWrapper | null = null;
 		do {
 			i = this.#listeners.findIndex(w => w.fn === fn);
 			if (i !== -1) {
-				this.#listeners.splice(i, 1);
+				wrapper = this.#listeners.splice(i, 1)[0];
 				found = true;
 			}
 			if (newOptions.removeOnlyFirstOccurrence) {
@@ -135,7 +136,7 @@ export default class EventListener {
 			}
 		} while (i !== -1);
 		if (found) {
-			this.#removeFunctionFromKeyMap(new ListenerWrapper(fn), newOptions);
+			this.#removeFunctionFromKeyMap(wrapper as ListenerWrapper, newOptions);
 			return true;
 		} else {
 			const errorMessage = 'An attempt to unsubscribe a non subscribed function occurred';
@@ -250,7 +251,10 @@ export default class EventListener {
 		const newOptions = OptionsMapper.map(options, DefaultSubscribeWithKeyOptions);
 		const mappedListeners = this.#keyMappedListeners.get(key) || [];
 		if (mappedListeners.length === 0 || newOptions.allowMultipleListernersPerKey) {
-			mappedListeners.push(new ListenerWrapper(fn, key, options.priority));
+			const wrapper = new ListenerWrapper(fn, key, options.priority);
+			mappedListeners.push(wrapper);
+			this.#keyMappedListeners.set(key, mappedListeners);
+			return this.#subscribe(wrapper, newOptions);
 		} else {
 			const errorMessage = 'An attempt to add a listener with same key occurred';
 			if (newOptions.shouldThrowErrors) {
@@ -260,9 +264,6 @@ export default class EventListener {
 				return false;
 			}
 		}
-
-		this.#keyMappedListeners.set(key, mappedListeners);
-		return this.subscribe(fn, newOptions);
 	}
 
 	/**

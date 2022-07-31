@@ -170,4 +170,9 @@ describe('EventListener test bind to event with options', function() {
 		const data2 = await event1.waitUntilFirstDispatchAsync();
 		assert.equal(data2, 'd');
 	});
+
+	it('cannot bind an event with itself', () => {
+
+		
+	});
 });

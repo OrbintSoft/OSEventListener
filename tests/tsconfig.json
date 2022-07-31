@@ -4,7 +4,7 @@
         "incremental": true
     },
     "compilerOptions": {
-        "target":"ES2022",
+        "target":"ESNext",
         "alwaysStrict": true,
         "module": "CommonJS",
         "strict": true,
