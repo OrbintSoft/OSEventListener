@@ -35,7 +35,6 @@ export default class EventListener {
 	#keyMappedListeners: Map<string, ListenerWrapper[]> = new Map();
 	#latestData: unknown = null;
 	#bindedEvents: Map<EventListener, ListenerFunction> = new Map();
-	#attachedEvents: EventListener[] = [];
 
 	/**
 	 * @returns {string} The event name
@@ -190,7 +189,7 @@ export default class EventListener {
 	}
 
 	/**
-	 * @param {WaitUntilFirstDispatchOptions} options settings
+	 * @param {WaitUntilFirstDispatchOptions} [options=DefaultWaitUntilFirstDispatchOptions] settings
 	 * @returns {Promise<unknown>} payload data
 	 */
 	waitUntilFirstDispatchAsync(options: WaitUntilFirstDispatchOptions = DefaultWaitUntilFirstDispatchOptions): Promise<unknown> {
@@ -227,7 +226,7 @@ export default class EventListener {
 	/**
 	 * @param {ListenerFunction} fn the function to subscribe
 	 * @param {string} key the key to be used fir subscribe
-	 * @param {SubscribeWithKeyOptions} [options = DefaultSubscribeWithKeyOptions] settings
+	 * @param {SubscribeWithKeyOptions} [options=DefaultSubscribeWithKeyOptions] settings
 	 * @returns {boolean} if subscribed successfully
 	 */
 	subscribeWithKey(fn: ListenerFunction, key: string, options: Partial<SubscribeWithKeyOptions> = DefaultSubscribeWithKeyOptions): boolean {
@@ -251,7 +250,7 @@ export default class EventListener {
 
 	/**
 	 * @param {string} key the key to use for unsubscribe
-	 * @param {UnsubscribeWithKeyOptions} [options = DefaultUnsubscribeWithKeyOptions] settings
+	 * @param {UnsubscribeWithKeyOptions} [options=DefaultUnsubscribeWithKeyOptions] settings
 	 * @returns {boolean} if unsubscribed successfully
 	 */
 	unsubscribeWithKey(key: string, options: Partial<UnsubscribeWithKeyOptions> = DefaultUnsubscribeWithKeyOptions): boolean {
@@ -283,7 +282,7 @@ export default class EventListener {
 
 	/**
 	 * @param {EventListener} event the event you want to bind.
-	 * @param {Partial<BindToEventOptions>} options option settings.
+	 * @param {Partial<BindToEventOptions>} [options=DefaultBindToEventOptions] option settings.
 	 * @returns {boolean} true if binded successfully.
 	 */
 	bindToEvent(event: EventListener, options: Partial<BindToEventOptions> = DefaultBindToEventOptions): boolean {
@@ -324,10 +323,10 @@ export default class EventListener {
 
 	/**
 	 * @param {EventListener} event the event you want to unbind.
-	 * @param {Partial<UnbindFromEventOptions>} options option settings.
+	 * @param {Partial<UnbindFromEventOptions>} [options=DefaultUnbindToEventOptions] option settings.
 	 * @returns {boolean} true if unbinded successfully.
 	 */
-	unbindFromEvent(event: EventListener, options: Partial<UnbindFromEventOptions> = DefaultUnsubscribeOptions): boolean {
+	unbindFromEvent(event: EventListener, options: Partial<UnbindFromEventOptions> = DefaultUnbindToEventOptions): boolean {
 		const newOptions = OptionsMapper.map<UnbindFromEventOptions>(options, DefaultUnbindToEventOptions);
 		const fn = this.#bindedEvents.get(event);
 		if (fn) {
@@ -350,19 +349,21 @@ export default class EventListener {
 	 * Attached event are always dispatched after this event.
 	 *
 	 * @param {EventListener} event the event you want to attach
+	 * @param {Partial<BindToEventOptions>} [options=DefaultBindToEventOptions] option settings.
 	 * @returns {boolean} true if attached successfully
 	 */
-	attachEvent(event: EventListener): boolean {
-		return event.bindToEvent(this);
+	attachEvent(event: EventListener,  options: Partial<BindToEventOptions> = DefaultBindToEventOptions): boolean {
+		return event.bindToEvent(this, options);
 	}
 
 	/**
 	 * Detaches an attached event.
 	 *
 	 * @param {EventListener} event the event you want to attach
+	 *  @param {Partial<UnbindFromEventOptions>} [options=DefaultUnbindToEventOptions] option settings.
 	 * @returns {boolean} true if detached successfully
 	 */
-	detachEvent(event: EventListener): boolean {
-		return event.unbindFromEvent(this);
+	detachEvent(event: EventListener, options: Partial<UnbindFromEventOptions> = DefaultUnbindToEventOptions): boolean {
+		return event.unbindFromEvent(this, options);
 	}
 }
