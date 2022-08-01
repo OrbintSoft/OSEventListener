@@ -99,7 +99,7 @@ export default class EventListener {
 	#removeFunctionFromKeyMap(wrapper: ListenerWrapper, options: UnsubscribeOptions) {
 		if (wrapper.keyedEvent !== null) {
 			const possibleFns = this.#keyMappedListeners.get(wrapper.keyedEvent);
-			if (possibleFns) {
+			if (possibleFns && possibleFns.length > 0) {
 				let i = -1;
 				do {
 					i = possibleFns.findIndex(w => w.fn === wrapper.fn);

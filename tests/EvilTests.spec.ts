@@ -60,4 +60,14 @@ describe('It tests evil situtations that should not naturally occurs', () => {
 		assert.equal(warnings.length, 1);
 		assert.equal(warnings[0], 'Failed to unsubscribe a registered function, probably it was already unsubscribed');
 	});
+
+	it('mixed bad usage of subscribe and unsubscribe with and without key', () => {
+		const fn = () => {};
+		const eventListener = new EventListener('event');
+		let ok = eventListener.subscribe(fn, { allowMultipleSubscribeSameFunction: true });
+		ok &&= eventListener.subscribeWithKey(fn, 'KEY', { allowMultipleSubscribeSameFunction: true });
+		ok &&= eventListener.unsubscribeWithKey('KEY', { removeOnlyFirstKeyedListener: true, removeOnlyFirstOccurrence: true });
+		ok &&= eventListener.unsubscribe(fn);
+		assert.equal(ok, true);
+	});
 });
