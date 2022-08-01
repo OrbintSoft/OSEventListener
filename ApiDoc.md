@@ -114,14 +114,31 @@ True if it has binded successfully, otherwise false.
 ## unbindFromEvent(event, options?)
 It unbinds this event from another binded event.
 
+## attachEvent(event, options?)
+
+It attachs an event B to this event A, when event A is dispatched, also event B will be dispatched. 
+It works like binding but in reverse way-.
+
 ### Parameters
 
-- **options:\<EventListener\>** *The event you want to unbind from.
+- **options:\<EventListener\>** *The event you want to attach to.
+- **options:Partial\<BindToEventOptions\>** *(optional)* Option settings.
+
+### Return: boolen
+
+True if it has been attached successfully, otherwise false.
+
+## detachEvent(event, options?)
+It detachs the even, it works like unbind but in reverse way.
+
+### Parameters
+
+- **options:\<EventListener\>** *The event you want to detach.
 - **options:Partial\<UnbindFromEventOptions\>** *(optional)* Option settings.
 
 ### Return: boolen
 
-True if it has unbinded successfully, otherwise false.
+True if it has detached successfully, otherwise false.
 
 # ListenerFunction(sender, data) => void
 This is the type signature of a function listener that can be used to subscribe to an event as callback.
