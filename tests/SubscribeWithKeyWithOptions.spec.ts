@@ -1,4 +1,5 @@
 import { assert } from 'chai';
+import { describe, it } from 'mocha';
 import EventListener from '../src/EventListener';
 import MemoryLogger from './mocks/MemoryLogger';
 

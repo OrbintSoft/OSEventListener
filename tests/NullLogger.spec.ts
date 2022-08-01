@@ -1,4 +1,5 @@
 import { assert } from 'chai';
+import { describe, it } from 'mocha';
 import NullLogger from '../src/utilities/NullLogger';
 
 describe('tests null logger', () => {
