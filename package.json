@@ -6,15 +6,29 @@
         "email": "stefano.balzarotti@orbintsoft.net"
     },
     "license": "BSD-3-Clause",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/OrbintSoft/OSEventListener.git"
     },
+    "bugs": {
+        "email": "stefano.balzarotti@orbintsoft.net",
+        "url": "https://github.com/OrbintSoft/OSEventListener/issues"
+    },
     "type": "commonjs",
     "types": "./main/index.d.ts",
     "main": "./main/index.cjs",
-    "keywords": ["event", "listener", "simple", "dispatch", "events", "emitter", "dispatcher", "subscribe", "priority"],
+    "keywords": [
+        "event",
+        "listener",
+        "simple",
+        "dispatch",
+        "events",
+        "emitter",
+        "dispatcher",
+        "subscribe",
+        "priority"
+    ],
     "scripts": {
         "lint": "gulp lint",
         "clean": "gulp clean",
@@ -38,11 +52,11 @@
         "gulp-cli": "^2.3.0",
         "gulp-eslint": "^6.0.0",
         "gulp-if": "^3.0.0",
-        "http-server": "^14.1.1",        
+        "http-server": "^14.1.1",
         "mocha": "^10.0.0",
-        "mochawesome": "^7.1.3",
         "mocha-junit-reporter": "^2.0.2",
         "mocha-multi-reporters": "^1.5.1",
+        "mochawesome": "^7.1.3",
         "nyc": "^15.1.0",
         "rollup": "^2.75.7",
         "rollup-plugin-sourcemaps": "^0.6.3",
@@ -55,5 +69,4 @@
         "import": "./main/index.mjs",
         "require": "./main/index.cjs"
     }
-
 }
