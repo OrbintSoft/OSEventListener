@@ -6,7 +6,7 @@
         "email": "stefano.balzarotti@orbintsoft.net"
     },
     "license": "BSD-3-Clause",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/OrbintSoft/OSEventListener.git"
@@ -35,7 +35,8 @@
         "compile": "gulp compile",
         "server": "gulp startSampleServer",
         "test": "gulp test",
-        "coverage": "nyc npm run test"
+        "coverage": "nyc npm run test",
+        "coveralls":  "nyc report --reporter=text-lcov | coveralls"
     },
     "devDependencies": {
         "@istanbuljs/nyc-config-typescript": "^1.0.2",
@@ -44,6 +45,7 @@
         "@typescript-eslint/eslint-plugin": "^5.29.0",
         "@typescript-eslint/parser": "^5.29.0",
         "chai": "^4.3.6",
+        "coveralls": "^3.1.1",
         "eslint": "^8.18.0",
         "eslint-plugin-jsdoc": "^39.3.3",
         "fs-extra": "^10.1.0",

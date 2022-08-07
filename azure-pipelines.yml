@@ -49,3 +49,10 @@ steps:
       failTaskOnFailedTests: true
       testRunTitle: 'Unit tests'
 
+- script: |
+    npm run coverage
+  displayName: 'Coverage'
+
+- script: |
+    npm run coveralls
+  displayName: 'Coverage'
