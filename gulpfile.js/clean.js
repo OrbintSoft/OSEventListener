@@ -13,7 +13,7 @@ async function cleanPacks() {
 
 
 async function cleanTestResults() {
-	fse.remove('tests/TEST-RESULT.xml');
+	fse.emptyDir('tests/report-results');
 }
 
 exports.dist = cleanDist;

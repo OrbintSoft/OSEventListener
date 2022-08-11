@@ -1,20 +1,11 @@
 
-const { spawn } = require('child_process');
 const fse = require('fs-extra');
 const glob = require('glob-promise');
 const { dirname, basename } = require('path');
+const { executeProcess } = require('./helpers');
 
 function compileTypescript(tsconfig) {
-	const promise = new Promise((resolve, reject) => {
-		const process = spawn('npx', ['tsc', '-b', '-f', tsconfig],  {stdio: 'inherit'});
-		process.on('close', (status) => {
-			resolve(status);
-		});
-		process.on('error', (error) => {
-			reject(error);
-		});
-	});
-	return promise;
+	return executeProcess('npx', ['tsc', '-b', '-f', tsconfig]);
 }
 
 async function addExtensionToEsModules() {
@@ -76,30 +67,12 @@ async function minify(type) {
 			await fse.mkdirp(folder);
 		}
 		const sourceMap = input.substring(0, input.length - 3) + '.js.map';
-		const promise = new Promise((resolve, reject) => {
-			const process = spawn('npx', ['terser', input, '--output', dest, '--source-map', `includeSources,url='${sourceMapName}',content='${sourceMap}'`],  {stdio: 'inherit'});
-			process.on('close', (status) => {
-				resolve(status);
-			});
-			process.on('error', (error) => {
-				reject(error);
-			});
-		});
-		await promise;
+		await executeProcess('npx', ['terser', input, '--output', dest, '--source-map', `includeSources,url='${sourceMapName}',content='${sourceMap}'`]);
 	}
 }
 
-async function createBundle() {
-	const promise = new Promise((resolve, reject) => {
-		const process = spawn('rollup', ['-c'],  {stdio: 'inherit', cwd: './rollup'});
-		process.on('close', (status) => {
-			resolve(status);
-		});
-		process.on('error', (error) => {
-			reject(error);
-		});
-	});
-	return promise;
+function createBundle() {
+	return executeProcess('npx', ['rollup', '-c'], './rollup');
 }
 
 exports.compileEs = compileEs;
