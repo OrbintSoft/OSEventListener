@@ -17,7 +17,7 @@ async function addExtensionToEsModules() {
 		await fse.remove(f);
 		await fse.writeFile(f, newContent);
 	}
-	await fse.writeFile('dist/es/package.json', JSON.stringify({ type: 'module'}));
+	await fse.writeFile('dist/es/package.json', JSON.stringify({ type: 'module' }));
 }
 
 

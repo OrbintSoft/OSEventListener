@@ -5,7 +5,7 @@ const src = gulp.src;
 
 function lint(paths) {
 	return src(paths)
-		.pipe(eslint({fix: true}))
+		.pipe(eslint({ fix: true }))
 		.pipe(eslint.format())
 		.pipe(gulpIf(file => file.eslint !== null && file.eslint.fixed, gulp.dest(file => file.base)))
 		.pipe(eslint.failAfterError());

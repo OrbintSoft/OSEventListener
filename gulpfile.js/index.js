@@ -19,3 +19,4 @@ exports.bundle = compile.createBundle;
 exports.compile = gulp.series(exports.compileTypescript, exports.bundle);
 exports.startSampleServer = test.startSampleServer;
 exports.test = test.runTests;
+exports.coverage = test.runCoverage;

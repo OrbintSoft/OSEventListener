@@ -16,7 +16,7 @@
         "quotes": ["error", "single"],
         "semi": ["error", "always"],                              
         "brace-style": ["warn", "1tbs"],
-        "object-curly-spacing": ["off", "always"], 
+        "object-curly-spacing": ["warn", "always"], 
         "space-before-blocks": ["warn", "always"],
         "space-before-function-paren": ["error", {
             "anonymous": "never",

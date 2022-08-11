@@ -1,8 +1,8 @@
 
 const { spawn } = require('child_process');
-function executeProcess(executable, parameters, directory = '.') {
+function executeProcess(executable, parameters, directory = '.', stdio = 'inherit') {
 	const promise = new Promise((resolve, reject) => {
-		const process = spawn(executable, parameters, {stdio: 'inherit', cwd: directory});
+		const process = spawn(executable, parameters, { stdio: stdio, cwd: directory });
 		process.on('close', (status) => {
 			if (status === 0) {
 				resolve(status);

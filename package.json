@@ -35,7 +35,7 @@
         "compile": "gulp compile",
         "server": "gulp startSampleServer",
         "test": "gulp test",
-        "coverage": "nyc --cache --relative=true npm run test",
+        "coverage": "gulp coverage",
         "coveralls":  "nyc npm test && nyc report --reporter=text-lcov"
     },
     "devDependencies": {

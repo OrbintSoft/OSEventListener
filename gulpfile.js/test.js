@@ -25,5 +25,11 @@ async function fixMochaAwesomePaths() {
 	await fse.writeFile('./tests/report-results/mochawesome.html', htmlContentBuffer);
 }
 
+async function runCoverage() {
+	await executeProcess('npx', ['nyc', 'npm', 'run', 'test']);
+	//await executeProcess('npx', ['nyc', 'report', '--reporter=text-lcov');
+}
+
 exports.startSampleServer = startSampleServer;
 exports.runTests = runTests;
+exports.runCoverage = runCoverage;
