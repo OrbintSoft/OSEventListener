@@ -52,7 +52,3 @@ steps:
 - script: |
     npm run coverage
   displayName: 'Coverage'
-
-- script: |
-    npm run coveralls
-  displayName: 'Coverage'
