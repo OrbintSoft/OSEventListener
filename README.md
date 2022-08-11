@@ -1,5 +1,6 @@
 [![Build Status](https://dev.azure.com/orbintsoft/OSEventListener/_apis/build/status/OrbintSoft.OSEventListener?branchName=master)](https://dev.azure.com/orbintsoft/OSEventListener/_build/latest?definitionId=6&branchName=master)
 [![npm version](https://badge.fury.io/js/oseventlistener.svg)](https://badge.fury.io/js/oseventlistener)
+[![Coverage Status](https://coveralls.io/repos/github/OrbintSoft/OSEventListener/badge.svg?branch=master)](https://coveralls.io/github/OrbintSoft/OSEventListener?branch=master)
 [![Donations via PayPal](https://img.shields.io/badge/Donations-via%20Paypal-blue.svg)](https://www.paypal.me/OrbintSoft)
 
 # OSEventListener
