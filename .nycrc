@@ -1,8 +1,10 @@
 {
 	"extends": "@istanbuljs/nyc-config-typescript",
 	"exclude": ["gulpfile.js/**/*.js", "tests/**/*.ts"],
-	"report-dir": "tests/report-results",
-	"temp-dir": "tests/report-results/tmp",
+	"report-dir": "tests/report-results/coverage",
+	"temp-dir": "tests/report-results/tmpc",
+	"cache-dir": "tests/report-results/cache",
 	"produce-source-map": true,
-	"reporter": ["text-lcov", "text"]
+	"reporter": ["text", "lcov"]
+	
 }

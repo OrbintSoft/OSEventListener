@@ -4,12 +4,14 @@
         "incremental": true
     },
     "compilerOptions": {
-        "target":"ESNext",
+        "target":"ES2022",
         "alwaysStrict": true,
         "module": "CommonJS",
         "strict": true,
         "sourceMap": true, 
         "moduleResolution": "node",
-		"esModuleInterop": true
+		"esModuleInterop": true,
+        "inlineSourceMap": true,
+        "inlineSources": true
     }
 }
