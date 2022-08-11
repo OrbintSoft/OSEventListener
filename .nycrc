@@ -4,5 +4,5 @@
 	"report-dir": "tests/report-results",
 	"temp-dir": "tests/report-results/tmp",
 	"produce-source-map": true,
-	"reporter": "text-lcov"
+	"reporter": ["text-lcov", "text"]
 }
