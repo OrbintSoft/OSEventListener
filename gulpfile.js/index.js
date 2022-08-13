@@ -3,6 +3,7 @@ const gulp = require('gulp');
 const lint = require('./lint');
 const compile = require('./compile');
 const test = require('./test');
+const deploy = require('./deploy');
 
 exports.clean = gulp.parallel(clean.dist, clean.packs, clean.testResults);
 exports.lintSsrc = lint.src;
@@ -18,5 +19,6 @@ exports.compileTypescript = gulp.parallel(compile.compileEs, compile.compileUmd,
 exports.bundle = compile.createBundle;
 exports.compile = gulp.series(exports.compileTypescript, exports.bundle);
 exports.startSampleServer = test.startSampleServer;
-exports.test = test.runTests;
+exports.test =  gulp.series(test.runTests, test.checkDistBuild);
 exports.coverage = test.runCoverage;
+exports.deploy = deploy.publish;

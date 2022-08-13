@@ -1,7 +1,17 @@
 const fse = require('fs-extra');
+const glob = require('glob-promise');
 const { executeProcess } = require('./helpers');
 function startSampleServer() {
 	return executeProcess('npx', ['http-server', './', '-p', '38541', '--mimetypes', 'mime.types', '-e', 'js']);
+}
+
+async function checkDistBuild() {
+	const files = await glob('./dist/**/*.js');
+	if (files.length === 0) {
+		throw Error('dist build not generated');
+	} else if (files.length !== 235) {
+		throw Error('files count differs from latest succesfull build');
+	}
 }
 
 async function runTests() {
@@ -36,3 +46,4 @@ async function runCoverage() {
 exports.startSampleServer = startSampleServer;
 exports.runTests = runTests;
 exports.runCoverage = runCoverage;
+exports.checkDistBuild = checkDistBuild;
