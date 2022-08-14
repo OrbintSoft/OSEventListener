@@ -24,10 +24,11 @@ async function publish() {
 		throw Error(`currentVersion ${currentVersion.raw} <= deployedVersion ${deployedVersion}`);
 	}
 	if (deployedVersion.prerelease[0] === 'rc' || currentVersion.prerelease[0] === 'rc') {
-		const npmToken = process.env.NPM_TOKEN;
+		const npmToken = process.env.NPM_AUTH_TOKEN;
 		await executeProcess('npm', [ 'pack' ]);
-		await executeProcess('npx', [ 'npm-cli-login' ]);
-		await executeProcess('npm', [ 'publish', '--registry', `https://registry.npmjs.org/:_authToken=${npmToken}`]);
+		await executeProcess('npm', [ 'set', '//registry.npmjs.org/:_authToken', npmToken ]);
+		await executeProcess('npm', [ 'login']);
+		await executeProcess('npm', [ 'publish']);
 	} else {
 		throw Error('Before releasing a stable version, an rc must be published and manually tested.');
 	}

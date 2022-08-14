@@ -53,7 +53,7 @@ steps:
     npm run deploy
   displayName: 'Deploy'
   env:
-    NPM_TOKEN: $(NPM_TOKEN)
+    NPM_AUTH_TOKEN: $(NPM_TOKEN)
     NPM_USER: $(NPM_USER)
     NPM_PASS: $(NPM_PASS)
     NPM_EMAIL: $(NPM_EMAIL)
