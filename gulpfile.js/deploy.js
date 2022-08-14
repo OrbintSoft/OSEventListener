@@ -27,7 +27,6 @@ async function publish() {
 		const npmToken = process.env.NPM_AUTH_TOKEN;
 		await executeProcess('npm', [ 'pack' ]);
 		await executeProcess('npm', [ 'set', '//registry.npmjs.org/:_authToken', npmToken ]);
-		await executeProcess('npm', [ 'login']);
 		await executeProcess('npm', [ 'publish']);
 	} else {
 		throw Error('Before releasing a stable version, an rc must be published and manually tested.');
