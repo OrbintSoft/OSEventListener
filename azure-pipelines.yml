@@ -54,3 +54,7 @@ steps:
   displayName: 'Deploy'
   env:
     NPM_TOKEN: $(NPM_TOKEN)
+    NPM_USER: $(NPM_USER)
+    NPM_PASS: $(NPM_PASS)
+    NPM_EMAIL: $(NPM_EMAIL)
+    NPM_REGISTRY: $(NPM_REGISTRY)
