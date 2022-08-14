@@ -23,9 +23,12 @@ async function publish() {
 	if (semver.gte(deployedVersion, currentVersion)) {
 		throw Error(`currentVersion ${currentVersion.raw} <= deployedVersion ${deployedVersion}`);
 	}
-	const npmToken = process.env.NPM_TOKEN;
-	console.log(npmToken);
-	await executeProcess('npm', [ 'pack' ]);
+	if (deployedVersion.prerelease[0] === 'rc' || currentVersion.prerelease[0] === 'rc') {
+		await executeProcess('npm', [ 'pack' ]);
+		await executeProcess('npm', [ 'publish' ]);
+	} else {
+		throw Error('Before releasing a stable version, an rc must be published and manually tested.');
+	}
 }
 
 exports.publish = publish;
