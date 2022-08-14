@@ -52,3 +52,5 @@ steps:
 - script: |
     npm run deploy
   displayName: 'Deploy'
+  env:
+    NPM_TOKEN: $(NPM_TOKEN)
