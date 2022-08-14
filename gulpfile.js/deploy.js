@@ -25,7 +25,7 @@ async function publish() {
 	}
 	if (deployedVersion.prerelease[0] === 'rc' || currentVersion.prerelease[0] === 'rc') {
 		const npmToken = process.env.NPM_TOKEN;
-		await executeProcess('npm', [ 'config', 'set', `//registry.npmjs.org/:_authToken=${npmToken}`] );
+		await fse.writeFile('.npmrc', `//registry.npmjs.org/:_authToken=${npmToken}`);
 		await executeProcess('npm', [ 'pack' ]);
 		await executeProcess('npm', [ 'publish' ]);
 	} else {

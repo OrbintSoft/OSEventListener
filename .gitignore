@@ -5,3 +5,4 @@ tests/TEST-RESULT.xml
 oseventlistener*.tgz
 mochawesome-report
 report-results
+.npmrc

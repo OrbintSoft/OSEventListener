@@ -10,3 +10,4 @@ azure-pipelines.yml
 mime.types
 oseventlistener*.tgz
 launch.json
+.npmrc
